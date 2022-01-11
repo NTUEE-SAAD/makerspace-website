@@ -1,20 +1,15 @@
-import { Tabs, Typography } from "antd";
+import { Menu, Space } from "antd";
+import { Text } from "../components";
 
 export const Header = () => {
   return (
-    <Tabs
-      defaultActiveKey="1"
-      styles={{ width: "100%" }}
-      tabBarExtraContent={{
-        left: <Typography.Text>NTUEEMakerSpace</Typography.Text>,
-      }}
-    >
-      <Tabs.TabPane
-        tab={<Typography.Text type="secondary" style={{color: "white"}}>Tab 1</Typography.Text>}
-        key="1"
-      ></Tabs.TabPane>
-      <Tabs.TabPane tab="Tab 2" key="2"></Tabs.TabPane>
-      <Tabs.TabPane tab="Tab 3" key="3"></Tabs.TabPane>
-    </Tabs>
+    <Space align="center">
+      <Text.White>NTUEE MakerSpace</Text.White>
+      <Menu mode="horizontal" theme="dark">
+        <Menu.Item key="1">Option 1</Menu.Item>
+        <Menu.Item key="2">Option 1</Menu.Item>
+        <Menu.Item key="3">Option 1</Menu.Item>
+      </Menu>
+    </Space>
   );
 };
