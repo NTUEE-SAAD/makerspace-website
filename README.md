@@ -3,9 +3,9 @@
 ## [WP1101 ReadMe](https://hackmd.io/@dSpEyyWWQYaN4gOKsy7saw/BJiOHiIvK)
 
 ## 前端 
-- [name= 勞志毅 莊加旭 江秉城 周柏融]
+- 勞志毅 莊加旭 江秉城 周柏融
 ## 後端 
-- [name= 莊詠翔 黃柏穎 周柏融]
+- 莊詠翔 黃柏穎 周柏融
 
 
 ## 功能列表
