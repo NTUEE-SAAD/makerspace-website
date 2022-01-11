@@ -1,11 +1,15 @@
+import { Layout } from "antd";
 import { Header } from "./containers/Header";
-import { WebNav } from "./containers/WebNav";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-    </div>
+    <Layout>
+      <Layout.Header style={{bgcolor: "white"}}>
+        <Header />
+      </Layout.Header>
+      <Layout.Content>Content</Layout.Content>
+      <Layout.Footer>Footer</Layout.Footer>
+    </Layout>
   );
 }
 
