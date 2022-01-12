@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { HomePage, Staff } from "./containers";
+import { HomePage, Staff, About } from "./containers";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/home/about" element={<About />} />
         <Route path="/staff" element={<Staff />} />
       </Routes>
     </Router>
