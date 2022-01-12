@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose"
 
 const Schema = mongoose.Schema;
 
@@ -14,9 +14,16 @@ const InstrumentSchema = Schema(
             lowercase: true,
             required: [true, "Name is required"]
         },
-        finishTime: {
+        busyUntil: {
             type: Date,
-            required: [false]
+            required: false
+        },
+        healthy: {
+            type: Boolean
+        },
+        reservation: {
+            type: [String],
+            required: false
         }
     }
 )
