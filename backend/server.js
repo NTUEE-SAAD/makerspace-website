@@ -1,8 +1,9 @@
 import express from "express";
 import postRoute from "./routes/staff";
+import instrumentRoute from "./routes/instrument";
 import mongoose from "mongoose";
 import { dataFind, dataInit } from "./upload";
-import { init } from "./utility/insturment"
+import { init, getStatus } from "./utility/insturment";
 require("dotenv").config();
 const app = express();
 
@@ -25,7 +26,7 @@ const dboptions = {
 };
 
 app.use("/staff", postRoute);
-
+app.use("/instrument", instrumentRoute);
 app.listen(port, () => {
   console.log(`Server is up on port ${port}.`);
 });
@@ -42,4 +43,10 @@ if (process.env.MODE === "EXAM") {
 
   //dataFind();
 }
-init().then(console.log("instruments initiallized"));
+
+(async () => {
+  await init();
+  getStatus().then((e) => {
+    console.log(e);
+  });
+})();
