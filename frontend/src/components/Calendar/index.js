@@ -13,5 +13,15 @@ export const Calendar = () => {
       console.log(calendarRef.current);
     }, 2000);
   });
-  return <AwesomeCalendar ref={calendarRef} />;
+  return (
+    <div
+      style={{
+        backgroundColor: "#ffffff",
+        padding: "1vh 1vw 1vh 1vw",
+        borderRadius: "2px",
+      }}
+    >
+      <AwesomeCalendar ref={calendarRef} />
+    </div>
+  );
 };

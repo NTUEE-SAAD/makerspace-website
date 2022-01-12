@@ -1,7 +1,5 @@
 import { Row, Col } from "antd";
-import { Calendar } from "../../components/Calendar";
-import { Gallery } from "../../components/Gallery";
-import { Progress } from "../Progress";
+import { PostList, Calendar, Gallery, Progress } from "../../components";
 
 export const Content = () => {
   return (
@@ -16,15 +14,13 @@ export const Content = () => {
           <Progress />
         </Col>
         <Col span={12}>
-          <div
-            style={{
-              backgroundColor: "#ffffff",
-              padding: "1vh 1vw 1vh 1vw",
-              borderRadius: "2px",
-            }}
-          >
-            <Calendar />
-          </div>
+          <Calendar />
+        </Col>
+      </Row>
+      <Row gutter={[16, 24]} style={{ marginTop: "3vh" }}>
+        <Col span={3} />
+        <Col span={18}>
+          <PostList />
         </Col>
       </Row>
     </>
