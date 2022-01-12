@@ -1,5 +1,5 @@
 import { Menu, Space } from "antd";
-import { Text } from "../components";
+import { Text } from "../../components";
 
 export const Header = () => {
   return (

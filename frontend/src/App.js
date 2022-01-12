@@ -1,17 +1,14 @@
-import { Layout } from "antd";
-import { Header, Content } from "./containers";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HomePage, Staff } from "./containers";
 
 function App() {
   return (
-    <Layout>
-      <Layout.Header>
-        <Header />
-      </Layout.Header>
-      <Layout.Content style={{ width: "70%", margin: "auto" }}>
-        <Content />
-      </Layout.Content>
-      <Layout.Footer>Footer</Layout.Footer>
-    </Layout>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/staff" element={<Staff />} />
+      </Routes>
+    </Router>
   );
 }
 

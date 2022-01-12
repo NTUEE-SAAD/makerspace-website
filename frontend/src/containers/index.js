@@ -1,2 +1,2 @@
-export * from "./Header";
-export * from "./Content";
+export * from "./HomePage";
+export * from "./Staff";

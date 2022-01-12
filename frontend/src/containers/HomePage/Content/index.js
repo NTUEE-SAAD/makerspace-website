@@ -16,7 +16,15 @@ export const Content = () => {
           <Progress />
         </Col>
         <Col span={12}>
-          <Calendar />
+          <div
+            style={{
+              backgroundColor: "#ffffff",
+              padding: "1vh 1vw 1vh 1vw",
+              borderRadius: "2px",
+            }}
+          >
+            <Calendar />
+          </div>
         </Col>
       </Row>
     </>
