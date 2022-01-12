@@ -9,6 +9,7 @@ export const Progress = () => {
     <>
       {desktopMode ? (
         <>
+          <h2>Instruments</h2>
           <Row gutter={[16, vgut]}>
             <Col span={24}>
               <Instrument />
@@ -32,6 +33,7 @@ export const Progress = () => {
         </>
       ) : (
         <>
+          <h2>Instruments</h2>
           <Row gutter={[16, vgut]}>
             <Col span={12}>
               <Instrument />
