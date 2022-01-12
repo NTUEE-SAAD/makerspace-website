@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
-import { Calendar as AntdCalendar } from "antd";
+import ReactCalendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 export const Calendar = () => {
   const calendarRef = useRef();
@@ -12,5 +13,5 @@ export const Calendar = () => {
       console.log(calendarRef.current);
     }, 2000);
   });
-  return <AntdCalendar ref={calendarRef} fullscreen={false} />;
+  return <ReactCalendar ref={calendarRef} style={{ width: "100%" }} />;
 };
