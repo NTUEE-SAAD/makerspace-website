@@ -40,13 +40,13 @@ export const SideMenu = () => {
   return (
     <>
       <Dropdown overlay={menu}>
-        <a
-          style={{ size: "large", color: "white" }}
+        <div
+          style={{ size: "large", color: "white", cursor: "pointer" }}
           className="ant-dropdown-link"
           onClick={(e) => e.preventDefault()}
         >
           <MenuOutlined style={{ fontSize: "24px", color: "white" }} />
-        </a>
+        </div>
       </Dropdown>
     </>
   );

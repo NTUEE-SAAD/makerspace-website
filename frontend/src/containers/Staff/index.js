@@ -5,7 +5,7 @@ import { message } from "antd";
 
 const LOCALSTORAGE_KEY = "save-me";
 
-export const Staff =() => {
+export const Staff = () => {
   const savedMe = localStorage.getItem(LOCALSTORAGE_KEY);
   const [signedIn, setSignedIn] = useState(false);
   const [me, setMe] = useState(savedMe || "");
@@ -41,13 +41,12 @@ export const Staff =() => {
     setSignedIn(true);
   };
 
-
   return (
     <div className="App">
       {signedIn ? (
-        <StaffPage/>
+        <StaffPage />
       ) : (
-        <StaffPage/>
+        <StaffPage />
         //<SignIn
         //  me={me}
         //  setMe={setMe}
@@ -59,4 +58,4 @@ export const Staff =() => {
       )}
     </div>
   );
-}
+};

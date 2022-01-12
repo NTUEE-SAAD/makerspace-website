@@ -1,5 +1,5 @@
 import { Menu, Row, Col } from "antd";
-import { Text, SideMenu } from "../../components";
+import { SideMenu, Logo } from "../../components";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
@@ -9,7 +9,7 @@ export const Header = () => {
         <SideMenu style={{ width: 20 }} />
       </Col>
       <Col span={11}>
-        <Text.White>NTUEE MakerSpace</Text.White>
+        <Logo />
       </Col>
       <Col span={12}>
         <Menu mode="horizontal" theme="dark" style={{ float: "right" }}>
