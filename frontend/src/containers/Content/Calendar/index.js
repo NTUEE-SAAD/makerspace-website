@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import ReactCalendar from "react-calendar";
+import AwesomeCalendar from "react-awesome-calendar";
 import "react-calendar/dist/Calendar.css";
 
 export const Calendar = () => {
@@ -13,5 +13,5 @@ export const Calendar = () => {
       console.log(calendarRef.current);
     }, 2000);
   });
-  return <ReactCalendar ref={calendarRef} style={{ width: "100%" }} />;
+  return <AwesomeCalendar ref={calendarRef} />;
 };

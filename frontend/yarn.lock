@@ -6261,6 +6261,7 @@ __metadata:
     graphql: ^16.2.0
     react: ^17.0.2
     react-apollo: ^3.1.5
+    react-awesome-calendar: ^1.0.14
     react-calendar: ^3.5.0
     react-dom: ^17.0.2
     react-scripts: 5.0.0
@@ -10139,7 +10140,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.0, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -10817,6 +10818,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-awesome-calendar@npm:^1.0.14":
+  version: 1.0.14
+  resolution: "react-awesome-calendar@npm:1.0.14"
+  dependencies:
+    classnames: ^2.2.6
+    react: ^16.13.1
+    react-dom: ^16.13.1
+  peerDependencies:
+    react: ^16.7.0
+    react-dom: ^16.7.0
+  checksum: a7a72c7909f56fd1dcaab86bac3934207a0e190565505a722b069751d2ef733d4c1f4ff1d885875d5e66a651d1af294a657aa213e5d202affc68f38d91e33214
+  languageName: node
+  linkType: hard
+
 "react-calendar@npm:^3.5.0":
   version: 3.5.0
   resolution: "react-calendar@npm:3.5.0"
@@ -10861,6 +10876,20 @@ __metadata:
     strip-ansi: ^6.0.1
     text-table: ^0.2.0
   checksum: d3be371c8e1e10877956ef8ceba77e8cb0c47440695d92ad3ca1734fdde77a1aa27a6c15dea9d82c873c7e6817e47d3d7410dfbeaff5c34508ffa9f5378dd1d1
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:^16.13.1":
+  version: 16.14.0
+  resolution: "react-dom@npm:16.14.0"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+    prop-types: ^15.6.2
+    scheduler: ^0.19.1
+  peerDependencies:
+    react: ^16.14.0
+  checksum: 5a5c49da0f106b2655a69f96c622c347febcd10532db391c262b26aec225b235357d9da1834103457683482ab1b229af7a50f6927a6b70e53150275e31785544
   languageName: node
   linkType: hard
 
@@ -10969,6 +10998,17 @@ __metadata:
   bin:
     react-scripts: bin/react-scripts.js
   checksum: 55ffad0d68ee6345326f5803c1925ae44b46cc33cb1cad9bcb68fd1784acfb3876bc12118b3079bc4d934834ae0197a9776baa0a06df0263831acc91ac42df29
+  languageName: node
+  linkType: hard
+
+"react@npm:^16.13.1":
+  version: 16.14.0
+  resolution: "react@npm:16.14.0"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+    prop-types: ^15.6.2
+  checksum: 8484f3ecb13414526f2a7412190575fc134da785c02695eb92bb6028c930bfe1c238d7be2a125088fec663cc7cda0a3623373c46807cf2c281f49c34b79881ac
   languageName: node
   linkType: hard
 
@@ -11401,6 +11441,16 @@ __metadata:
   dependencies:
     xmlchars: ^2.2.0
   checksum: 5636b55cf15f7cf0baa73f2797bf992bdcf75d1b39d82c0aa4608555c774368f6ac321cb641fd5f3d3ceb87805122cd47540da6a7b5960fe0dbdb8f8c263f000
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.19.1":
+  version: 0.19.1
+  resolution: "scheduler@npm:0.19.1"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: 73e185a59e2ff5aa3609f5b9cb97ddd376f89e1610579d29939d952411ca6eb7a24907a4ea4556569dacb931467a1a4a56d94fe809ef713aa76748642cd96a6c
   languageName: node
   linkType: hard
 
