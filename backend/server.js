@@ -2,7 +2,7 @@ import express from "express";
 import postRoute from "./routes/staff";
 import mongoose from "mongoose";
 import { dataFind, dataInit } from "./upload";
-
+import { init } from "./utility/insturment"
 require("dotenv").config();
 const app = express();
 
@@ -39,5 +39,7 @@ mongoose
 if (process.env.MODE === "EXAM") {
   dataInit();
   console.log("hehe");
+
   //dataFind();
 }
+init().then(console.log("instruments initiallized"));
