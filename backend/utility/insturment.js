@@ -46,6 +46,7 @@ const getStatus = async () => {
       available: value.busyUntil != undefined ? false : true,
       healthy: value.healthy,
       busyUntil: value.busyUntil != undefined ? value.busyUntil : undefined,
+      busyBegin: value.busyBegin != undefined ? value.busyBegin : undefined,
     };
   });
   return obj;
@@ -54,4 +55,15 @@ const getAll = async () => {
   const res = await instrument.find();
   return res;
 };
-export { init, getStatus, getAll };
+const setBusyTime = async ({ name, duration }) => {
+  const start = new Date();
+  const target = instrument.findOne({ name: name });
+  const until = new Date();
+
+  //until.setTime(start.getTime() + duration.getTime());
+  target.busyBegin = start;
+  target.busyUntil = until;
+  //await target.save();
+  return "success";
+};
+export { init, getStatus, getAll, setBusyTime };
