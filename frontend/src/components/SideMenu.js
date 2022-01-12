@@ -1,15 +1,6 @@
-import { Menu, Dropdown, Button } from "antd";
+import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import {
-  AppstoreOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import React from "react";
 
 const menu = (
@@ -54,7 +45,7 @@ export const SideMenu = () => {
           className="ant-dropdown-link"
           onClick={(e) => e.preventDefault()}
         >
-          <MenuOutlined />
+          <MenuOutlined style={{ fontSize: "24px", color: "white" }} />
         </a>
       </Dropdown>
     </>
