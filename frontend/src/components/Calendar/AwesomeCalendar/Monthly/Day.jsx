@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import Event from './Event';
 import { getElementHeight } from '../util/getElementHeight';
 import { getDate } from '../util/date';
+import { Tooltip, Button } from 'antd';
 
 export default class Day extends React.PureComponent {
   constructor(props) {
@@ -114,19 +115,27 @@ export default class Day extends React.PureComponent {
 
   render() {
     return (
-      <div
+      <Tooltip
         id="dayCell"
         className={styles.dayCell}
         onClick={this.props.onClickDay}
+        title="prompt text"
+        placement="topLeft"
+        arrowPointAtCenter
+        color='#66bac6'
       >
-        <div id="dayHeader" className={this.returnDayClassStyle()}>
+        <div id="dayHeader" className={this.returnDayClassStyle()} >
           <div className={this.returnDayTextClass()}>
-            <span>{this.props.date.getDate()}</span>
+            <span >{this.props.date.getDate()}</span>
           </div>
         </div>
+        {/* <Tooltip title="prompt text">
+          <span>Tooltip will show on mouse enter.</span>
+        </Tooltip> */}
         {this.returnEventList()}
         {this.returnEventRemainder()}
-      </div>
+      </Tooltip>
+
     );
   }
 }

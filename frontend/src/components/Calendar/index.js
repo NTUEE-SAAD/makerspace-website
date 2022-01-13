@@ -5,21 +5,13 @@ import { Text } from "..";
 
 export const Calendar = () => {
   const calendarRef = useRef();
-  useEffect(() => {
-    setTimeout(() => {
-      if (!calendarRef?.current) {
-        console.log("return");
-        return;
-      }
-      console.log(calendarRef.current);
-    }, 2000);
-  });
+  
   return (
     <>
       <Text.SectionTitle.Black>Calendar</Text.SectionTitle.Black>
       <div 
           style={{
-            backgroundColor: "#ffffff",
+            backgroundColor: "#f0f0f0",
             padding: "1vh 1vw 1vh 1vw",
             borderRadius: "2px",
         }}

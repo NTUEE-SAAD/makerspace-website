@@ -40,10 +40,10 @@ export default class Header extends React.PureComponent {
       <div className={styles.calendarHeader}>
         <h1>{this.returnTitle()}</h1>
         <div className={styles.calendarHeaderButtons}>
-          <button onClick={this.props.onClickPrev}>
+          <button onClick={this.props.onClickPrev} style={{color:"#66bac6"}}>
             {this.returnButtonText(prev)}
           </button>
-          <button onClick={this.props.onClickNext}>
+          <button onClick={this.props.onClickNext} style={{color:"#66bac6"}}>
             {this.returnButtonText(next)}
           </button>
         </div>

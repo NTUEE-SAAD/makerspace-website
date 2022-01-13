@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.styles.module.css';
 import Header from './Header';
 import Monthly from './Monthly';
-import { dailyMode, monthlyMode, yearlyMode } from './constants/index';
+import {monthlyMode} from './constants/index';
 import { formatEvents } from './util/calendar';
 import { calendarDetails } from './util/calendarDetails';
 
@@ -12,9 +12,7 @@ import { calendarDetails } from './util/calendarDetails';
 //be able to export Yearly, Monthly and Daily
 
 const modes = {
-  day: dailyMode,
   month: monthlyMode,
-  year: yearlyMode,
 };
 
 class Calendar extends React.PureComponent {
@@ -28,27 +26,15 @@ class Calendar extends React.PureComponent {
       year: currentDate.getFullYear(),
     };
     this.onClickDay = this.onClickDay.bind(this);
-    this.onClickTimeLine = this.onClickTimeLine.bind(this);
-    this.onClickMonth = this.onClickMonth.bind(this);
-    this.onClickMode = this.onClickMode.bind(this);
     this.onClickPrev = this.onClickPrev.bind(this);
     this.onClickNext = this.onClickNext.bind(this);
   }
 
-  getDetails() {
-    const { mode, year, month, day } = this.state;
-    return { mode, year, month, day };
-  }
 
-  returnDailyEvents() {
-    const events = formatEvents(this.props.events);
-    const { year, month, day } = this.state;
-    const date = new Date(year, month, day);
-    return events[date.getTime()];
-  }
-
+  // necessary
   returnCalendar() {
     const events = formatEvents(this.props.events);
+    console.log("function: returnCalendar")
     switch (this.state.mode) {
       case monthlyMode:
         return (
@@ -64,77 +50,53 @@ class Calendar extends React.PureComponent {
     }
   }
 
-  onClickTimeLine(hour) {
-    if (this.props.onClickTimeLine) {
-      const { year, month, day } = this.state;
-      this.props.onClickTimeLine({
-        year,
-        month,
-        day,
-        hour,
-      });
-    }
-  }
-
+  // needs modify
   onClickDay(date) {
+    console.log(date)
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
     this.setState({
-        mode: dailyMode,
+        mode: monthlyMode,
         day,
         month,
         year,
       },
       this.onChange,
     );
+    return (<div>hehehe</div>);
   }
 
-  onClickMonth(month) {
-    this.setState(
-      {
-        month,
-        mode: monthlyMode,
-      },
-      this.onChange,
-    );
-  }
+ 
 
+  // necessary
   onClickPrev() {
+    console.log("function: onClickPrev")
     const { mode, year, month, day } = this.state;
     const details = calendarDetails(mode, year, month, day);
     this.setState({ ...details.prev }, this.onChange);
   }
 
+  // necessary
   onClickNext() {
+    console.log("function: onClickNext")
     const { mode, year, month, day } = this.state;
     const details = calendarDetails(mode, year, month, day);
     this.setState({ ...details.next }, this.onChange);
   }
 
-  onClickMode(mode) {
-    let date = {};
-    if (mode === yearlyMode) {
-      date.year = this.state.year;
-      date.month = 0;
-      date.day = 1;
-    }
-    this.setState(
-      {
-        mode,
-        ...date,
-      },
-      this.onChange,
-    );
-  }
 
+  // necessary
   onChange() {
+    console.log("function: onChange")
     if (this.props.onChange) {
       this.props.onChange(this.getDetails());
     }
   }
 
+  // necessary
   returnHeader() {
+    console.log("function: returnHeader")
     const { mode, year, month, day } = this.state;
     const props = {
       ...calendarDetails(mode, year, month, day),
