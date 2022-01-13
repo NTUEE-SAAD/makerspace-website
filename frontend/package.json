@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/pro-list": "^1.20.15",
+    "@ant-design/pro-list": "1.20.13",
     "@apollo/client": "^3.5.7",
     "@apollo/react-hooks": "^4.0.0",
     "@testing-library/jest-dom": "^5.14.1",
