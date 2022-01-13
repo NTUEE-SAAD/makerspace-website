@@ -2,7 +2,7 @@ import { Row, Col } from "antd";
 import { Instrument } from "./Instrument";
 import { Text } from "../../components";
 
-const vgut = 16;
+const vgut = 10;
 
 export const Progress = () => {
   const desktopMode = true;
