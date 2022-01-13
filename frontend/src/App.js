@@ -4,7 +4,14 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { Staff, About, HomeRoot, HomeContent, Items } from "./containers";
+import {
+  Staff,
+  About,
+  HomeRoot,
+  HomeContent,
+  Items,
+  AdminRoot,
+} from "./containers";
 function App() {
   return (
     <Router>
@@ -14,8 +21,10 @@ function App() {
           <Route path="/home" element={<HomeContent />} />
           <Route path="/home/about" element={<About />} />
         </Route>
-        <Route path="/staff" element={<Staff />} />
-        <Route path="/items" element={<Items />} />
+        <Route path="/staff" element={<AdminRoot />}>
+          <Route path="/staff" element={<Staff />} />
+          <Route path="/staff/items" element={<Items />} />
+        </Route>
       </Routes>
     </Router>
   );
