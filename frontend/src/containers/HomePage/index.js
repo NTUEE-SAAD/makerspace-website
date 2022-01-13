@@ -1,6 +1,7 @@
 import { Layout } from "antd";
 import { Header } from "./Header";
 import { Content } from "./Content";
+import { Footer } from "./Footer";
 
 export const HomePage = () => {
   return (
@@ -11,7 +12,9 @@ export const HomePage = () => {
       <Layout.Content style={{ width: "70%", margin: "auto" }}>
         <Content />
       </Layout.Content>
-      <Layout.Footer>Footer</Layout.Footer>
+      <Layout.Footer>
+        <Footer />
+      </Layout.Footer>
     </Layout>
   );
 };
