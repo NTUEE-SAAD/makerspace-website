@@ -56,14 +56,28 @@ const getAll = async () => {
   return res;
 };
 const setBusyTime = async ({ name, duration }) => {
+  if (
+    isNaN(duration.days) ||
+    isNaN(duration.hours) ||
+    isNaN(duration.minutes) ||
+    duration.days < 0 ||
+    duration.hours < 0 ||
+    duration.minutes < 0
+  )
+    return "input error";
   const start = new Date();
-  const target = instrument.findOne({ name: name });
+  console.log(duration);
+  const d =
+    (duration.days | 0) * 24 * 60 +
+    (duration.hours | 0) * 60 +
+    (duration.minutes | 0);
+  const target = await instrument.findOne({ name: name });
   const until = new Date();
 
-  //until.setTime(start.getTime() + duration.getTime());
+  until.setTime(start.getTime() + d * 60 * 1000);
   target.busyBegin = start;
   target.busyUntil = until;
-  //await target.save();
+  await target.save();
   return "success";
 };
 export { init, getStatus, getAll, setBusyTime };

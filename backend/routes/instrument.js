@@ -23,9 +23,11 @@ router.post("/busy", (req, res) => {
   setBusyTime({ name: req.body.name, duration: req.body.duration }).then(
     (r) => {
       if (r === "success") {
-        res.status(500).send({ message: "timesetting success" });
+        res.status(200).send({ message: "timesetting success" });
+      } else if (r === "input error") {
+        res.status(406).send({ message: "input error" });
       } else {
-        res.status(400).send({ message: "something wrong during timesetting" });
+        res.status(500).send({ message: "something wrong during timesetting" });
       }
     }
   );

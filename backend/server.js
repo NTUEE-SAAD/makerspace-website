@@ -4,6 +4,7 @@ import instrumentRoute from "./routes/instrument";
 import mongoose from "mongoose";
 import { dataFind, dataInit } from "./upload";
 import { init, getStatus } from "./utility/insturment";
+import bodyParser from "body-parser";
 require("dotenv").config();
 const app = express();
 
@@ -24,7 +25,7 @@ const dboptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-
+app.use(bodyParser.json());
 app.use("/staff", postRoute);
 app.use("/instrument", instrumentRoute);
 app.listen(port, () => {
