@@ -2,7 +2,7 @@ import { Menu, Row, Col } from "antd";
 import { SideMenu, LogoLink } from ".";
 import { Link } from "react-router-dom";
 
-export const Header = () => {
+export const HomeHeader = () => {
   return (
     <Row justify="space-around" align="center">
       <Col span={1}>

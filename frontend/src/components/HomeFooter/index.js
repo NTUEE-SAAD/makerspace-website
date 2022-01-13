@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import styles from "./footer.module.css";
 
-export const Footer = () => {
+export const HomeFooter = () => {
   return (
     <>
       <Row justify="space-around">

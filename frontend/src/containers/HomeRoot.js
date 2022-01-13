@@ -1,18 +1,18 @@
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
-import { Header, Footer } from "../components";
+import { HomeHeader, HomeFooter } from "../components";
 
 export const HomeRoot = () => {
   return (
     <Layout>
       <Layout.Header>
-        <Header />
+        <HomeHeader />
       </Layout.Header>
       <Layout.Content>
         <Outlet />
       </Layout.Content>
       <Layout.Footer>
-        <Footer />
+        <HomeFooter />
       </Layout.Footer>
     </Layout>
   );

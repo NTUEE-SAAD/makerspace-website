@@ -12,6 +12,7 @@ export const Banner = () => {
           className={styles.logo}
           src="/mkslogo-white-clean.png"
           alt="logo"
+          key="logo"
         />
         <div className={styles.textWrapper}>{faker.lorem.paragraph()}</div>
       </QueueAnim>
