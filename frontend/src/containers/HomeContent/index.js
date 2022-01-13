@@ -3,7 +3,7 @@ import { PostList, Calendar, Gallery, Progress } from "../../components";
 
 export const HomeContent = () => {
   return (
-    <div style={{ width: "70%", margin: "auto" }}>
+    <>
       <Row gutter={[16, 24]}>
         <Col span={24}>
           <Gallery />
@@ -23,6 +23,6 @@ export const HomeContent = () => {
           <PostList />
         </Col>
       </Row>
-    </div>
+    </>
   );
 };

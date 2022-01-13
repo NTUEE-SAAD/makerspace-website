@@ -1,5 +1,4 @@
 import { Menu, Dropdown } from "antd";
-import { DownOutlined } from "@ant-design/icons";
 import { MenuOutlined } from "@ant-design/icons";
 import React from "react";
 import styled from "styled-components";
@@ -7,7 +6,7 @@ import styled from "styled-components";
 let Item = styled(Menu.Item)`
   width: 10vw;
   height: 7vh;
-`
+`;
 
 const menu = (
   <Menu>
@@ -38,24 +37,20 @@ const menu = (
         活動
       </a>
     </Item>
-    <Item>
-      管理員
-    </Item>
+    <Item>管理員</Item>
   </Menu>
 );
 
 export const SideMenu = () => {
   return (
-    <>
-      <Dropdown overlay={menu}>
-        <div
-          style={{ size: "large", color: "white", cursor: "pointer" }}
-          className="ant-dropdown-link"
-          onClick={(e) => e.preventDefault()}
-        >
-          <MenuOutlined style={{ fontSize: "24px", color: "white" }} />
-        </div>
-      </Dropdown>
-    </>
+    <Dropdown overlay={menu}>
+      <div
+        style={{ size: "large", color: "white", cursor: "pointer" }}
+        className="ant-dropdown-link"
+        onClick={(e) => e.preventDefault()}
+      >
+        <MenuOutlined style={{ fontSize: "24px", color: "white", transform: "translateY(4px)" }} />
+      </div>
+    </Dropdown>
   );
 };
