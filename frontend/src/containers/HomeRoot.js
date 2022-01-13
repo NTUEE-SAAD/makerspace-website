@@ -8,7 +8,7 @@ export const HomeRoot = () => {
       <Layout.Header>
         <Header />
       </Layout.Header>
-      <Layout.Content style={{ width: "70%", margin: "auto" }}>
+      <Layout.Content>
         <Outlet />
       </Layout.Content>
       <Layout.Footer>

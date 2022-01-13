@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Logo = () => {
+export const LogoLink = () => {
   return (
     <Link to="/home">
-      <LogoImage src="/mkslogo.png" />
+      <LogoImage src="/mkslogo-h.png" />
     </Link>
   );
 };

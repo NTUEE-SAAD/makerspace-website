@@ -1,5 +1,5 @@
 import { Menu, Row, Col } from "antd";
-import { SideMenu, Logo } from ".";
+import { SideMenu, LogoLink } from ".";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
@@ -9,7 +9,7 @@ export const Header = () => {
         <SideMenu style={{ width: 20 }} />
       </Col>
       <Col span={11}>
-        <Logo />
+        <LogoLink />
       </Col>
       <Col span={12}>
         <Menu mode="horizontal" theme="dark" style={{ float: "right" }}>
