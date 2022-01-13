@@ -2,7 +2,7 @@
 import { Typography } from "antd";
 
 const White = ({ children }) => (
-  <Typography style={{ color: "white" }}>{children}</Typography>
+  <Typography.Text style={{ color: "white" }}>{children}</Typography.Text>
 );
 
 const SectionTitle = {
