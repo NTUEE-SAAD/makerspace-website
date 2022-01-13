@@ -7,10 +7,10 @@ const White = ({ children }) => (
 
 const SectionTitle = {
   Black: ({ children }) => (
-    <Typography.Title level={2}>{children}</Typography.Title>
+    <Typography.Title level={3}>{children}</Typography.Title>
   ),
   White: ({ children }) => (
-    <Typography.Title level={2} style={{ color: "white" }}>
+    <Typography.Title level={3} style={{ color: "white" }}>
       {children}
     </Typography.Title>
   ),
