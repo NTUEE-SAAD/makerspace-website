@@ -30,14 +30,17 @@ const InstrumentList = {
 };
 const checkId = async (id) => {
   var data = await instrument.find();
-  data.forEach((instrument) => {
-    instrument.reservation.forEach((reservation) => {
-      if (reservation.uuid | ("" === id)) {
-        return false;
-      }
+  const ret = data.filter((instrument) => {
+    const ret = instrument.reservation.filter((reservation) => {
+      if (reservation.uuid == id) return true;
+      else return false;
     });
+    if (ret.length === 1) {
+      return true;
+    } else return false;
   });
-  return true;
+  if (ret.length === 1) return [false, ret[0]];
+  else return [true];
 };
 const init = async () => {
   await instrument.deleteMany({});
@@ -59,15 +62,24 @@ const getStatus = async () => {
     if (value.busyUntil !== undefined) {
       console.log(value.busyUntil.getTime(), d.getTime());
       if (d - value.busyUntil.getTime() >= 0) {
-        instrument.findOne({ name: value.name }).then((t) => {
-          const target = t;
-          target.available = true;
-          target.busyBegin = undefined;
-          target.busyUntil = undefined;
-          target.save();
-        });
+        value.available = true;
+        value.busyBegin = undefined;
+        value.busyUntil = undefined;
+        (async () => {
+          await value.save();
+        })();
       }
     }
+    value.reservation.forEach((reservation) => {
+      if (d - reservation.date.getTime() >= 0) {
+        console.log(value.reservation);
+        value.reservation = value.reservation.filter(
+          (r) => r.uuid !== reservation.uuid
+        );
+      }
+    });
+  });
+  res.forEach((value) => {
     obj[value.name] = {
       available: value.busyUntil !== undefined ? false : true,
       healthy: value.healthy,
@@ -118,11 +130,8 @@ const reserve = async ({ user, targetInstrument, date }) => {
   const target = await instrument.findOne({ name: targetInstrument });
   var reservationId;
   do {
-    reservationId = v4().slice(0, 6);
-  } while (!checkId(reservationId));
-  console.log(reservationId);
-  console.log(target);
-  console.log(date);
+    reservationId = v4().slice(0, 6).toLowerCase();
+  } while (!(await checkId(reservationId))[0]);
   target.reservation.push({
     name: user.name,
     id: user.id,
@@ -141,4 +150,29 @@ const reserve = async ({ user, targetInstrument, date }) => {
     },
   };
 };
-export { init, getStatus, getAll, setBusyTime, reserve };
+
+const reservationModify = async ({ uuid, date }) => {
+  console.log("PUT IN");
+  const check = await checkId(uuid);
+  console.log(date);
+  const d = new Date(date);
+  if (check[0]) {
+    console.log("uuid not found");
+    return "uuid not found";
+  } else {
+    check[1].reservation.forEach((r) => {
+      if (r.uuid === uuid) {
+        console.log(d);
+        r.date = d;
+      }
+    });
+    const model = await instrument.findOne({ name: check[1].name });
+    console.log(model.reservation, check[1].reservation);
+    model.reservation = check[1].reservation;
+    await model.save();
+    return "success";
+
+    //const target=await instrument.findOne({check[1]})
+  }
+};
+export { init, getStatus, getAll, setBusyTime, reserve, reservationModify };

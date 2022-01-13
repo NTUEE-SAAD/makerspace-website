@@ -47,7 +47,4 @@ if (process.env.MODE === "EXAM") {
 
 (async () => {
   await init();
-  getStatus().then((e) => {
-    console.log(e);
-  });
 })();

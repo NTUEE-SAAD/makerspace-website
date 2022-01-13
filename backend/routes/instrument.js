@@ -1,6 +1,11 @@
 import express from "express";
-import instrument from "../models/instrument";
-import { getAll, getStatus, setBusyTime, reserve } from "../utility/insturment";
+import {
+  getAll,
+  getStatus,
+  setBusyTime,
+  reserve,
+  reservationModify,
+} from "../utility/insturment";
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -33,7 +38,6 @@ router.post("/busy", (req, res) => {
   );
 });
 router.post("/reservation", (req, res) => {
-  console.log(req.body);
   reserve({
     user: req.body.user,
     targetInstrument: req.body.instrument,
@@ -45,6 +49,18 @@ router.post("/reservation", (req, res) => {
       res.status(500).send({ message: "reservation failed", data: {} });
     }
   });
+});
+router.put("/reservation", async (req, res) => {
+  console.log(req.body);
+  var ret = await reservationModify({ uuid: req.body.id, date: req.body.date });
+  console.log(ret);
+  if (ret === "success")
+    res.status(200).send({ message: "reservation modify success" });
+  else if (ret === "uuid not found")
+    res.status(406).send({
+      message: "uuid not found, the reservation has expired or wrong uuid",
+    });
+  else res.status(500).send({ message: "something wrong during modifing" });
 });
 
 export default router;
