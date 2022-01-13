@@ -9,7 +9,7 @@ export const Content = () => {
           <Gallery />
         </Col>
       </Row>
-      <Row gutter={[16, 24]} style={{ marginTop: "3vh" }}>
+      <Row gutter={[16, 16]} style={{ marginTop: "3vh" }}>
         <Col span={12}>
           <Progress />
         </Col>
@@ -17,7 +17,7 @@ export const Content = () => {
           <Calendar />
         </Col>
       </Row>
-      <Row gutter={[16, 24]} style={{ marginTop: "3vh" }}>
+      <Row gutter={[16, 16]} style={{ marginTop: "3vh" }}>
         <Col span={3} />
         <Col span={18}>
           <PostList />
