@@ -2,37 +2,45 @@ import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { MenuOutlined } from "@ant-design/icons";
 import React from "react";
+import styled from "styled-components";
+
+let Item = styled(Menu.Item)`
+  width: 10vw;
+  height: 7vh;
+`
 
 const menu = (
   <Menu>
-    <Menu.Item>
+    <Item>
       <a
         target="_blank"
         rel="noopener noreferrer"
         href="https://www.antgroup.com"
       >
-        1st menu item
+        預約
       </a>
-    </Menu.Item>
-    <Menu.Item icon={<DownOutlined />} disabled>
+    </Item>
+    <Item>
       <a
         target="_blank"
         rel="noopener noreferrer"
         href="https://www.aliyun.com"
       >
-        2nd menu item (disabled)
+        借用/查詢
       </a>
-    </Menu.Item>
-    <Menu.Item disabled>
+    </Item>
+    <Item>
       <a
         target="_blank"
         rel="noopener noreferrer"
         href="https://www.luohanacademy.com"
       >
-        3rd menu item (disabled)
+        活動
       </a>
-    </Menu.Item>
-    <Menu.Item danger>a danger item</Menu.Item>
+    </Item>
+    <Item>
+      管理員
+    </Item>
   </Menu>
 );
 
