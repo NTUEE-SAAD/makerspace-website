@@ -11,7 +11,7 @@ export const Calendar = () => {
       <Text.SectionTitle.Black>Calendar</Text.SectionTitle.Black>
       <div 
           style={{
-            backgroundColor: "#f0f0f0",
+            backgroundColor: "#fff",
             padding: "1vh 1vw 1vh 1vw",
             borderRadius: "2px",
         }}
