@@ -1,12 +1,12 @@
 import express from "express";
 import instrument from "../models/instrument";
-import { getAll, getStatus, setBusyTime } from "../utility/insturment";
+import { getAll, getStatus, setBusyTime, reserve } from "../utility/insturment";
 const router = express.Router();
 
 router.get("/", (req, res) => {
   getAll().then((r) => {
     if (r != undefined) {
-      res.status(500).send(r);
+      res.status(200).send(r);
     }
   });
 });
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 router.get("/status", (req, res) => {
   getStatus().then((r) => {
     if (r != undefined) {
-      res.status(500).send(r);
+      res.status(200).send(r);
     }
   });
 });
@@ -31,6 +31,20 @@ router.post("/busy", (req, res) => {
       }
     }
   );
+});
+router.post("/reservation", (req, res) => {
+  console.log(req.body);
+  reserve({
+    user: req.body.user,
+    targetInstrument: req.body.instrument,
+    date: req.body.date,
+  }).then((r) => {
+    if (r.message === "success") {
+      res.status(200).send({ message: "reservation success", data: r.data });
+    } else {
+      res.status(500).send({ message: "reservation failed", data: {} });
+    }
+  });
 });
 
 export default router;

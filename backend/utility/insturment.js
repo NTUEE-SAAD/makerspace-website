@@ -1,4 +1,6 @@
 import instrument from "../models/instrument";
+import { v4 } from "uuid";
+
 //[must] initialize data
 const InstrumentList = {
   "X1E-Plus": {
@@ -26,7 +28,17 @@ const InstrumentList = {
     healthy: true,
   },
 };
-
+const checkId = async (id) => {
+  var data = await instrument.find();
+  data.forEach((instrument) => {
+    instrument.reservation.forEach((reservation) => {
+      if (reservation.uuid | ("" === id)) {
+        return false;
+      }
+    });
+  });
+  return true;
+};
 const init = async () => {
   await instrument.deleteMany({});
   for (const [key, value] of Object.entries(InstrumentList)) {
@@ -34,6 +46,7 @@ const init = async () => {
       name: key,
       type: value.type,
       healthy: true,
+      reservation: [],
     });
     await obj.save();
   }
@@ -55,12 +68,17 @@ const getStatus = async () => {
         });
       }
     }
-
     obj[value.name] = {
-      available: value.busyUntil != undefined ? false : true,
+      available: value.busyUntil !== undefined ? false : true,
       healthy: value.healthy,
-      busyUntil: value.busyUntil != undefined ? value.busyUntil : undefined,
-      busyBegin: value.busyBegin != undefined ? value.busyBegin : undefined,
+      busyUntil: value.busyUntil !== undefined ? value.busyUntil : undefined,
+      busyBegin: value.busyBegin !== undefined ? value.busyBegin : undefined,
+      reservation: value.reservation.map((r) => {
+        return {
+          name: r.name,
+          date: r.date,
+        };
+      }),
     };
   });
   return obj;
@@ -96,4 +114,31 @@ const setBusyTime = async ({ name, duration }) => {
   await target.save();
   return "success";
 };
-export { init, getStatus, getAll, setBusyTime };
+const reserve = async ({ user, targetInstrument, date }) => {
+  const target = await instrument.findOne({ name: targetInstrument });
+  var reservationId;
+  do {
+    reservationId = v4().slice(0, 6);
+  } while (!checkId(reservationId));
+  console.log(reservationId);
+  console.log(target);
+  console.log(date);
+  target.reservation.push({
+    name: user.name,
+    id: user.id,
+    email: user.email,
+    uuid: reservationId,
+    date: new Date(date),
+  });
+  await target.save();
+  return {
+    message: "success",
+    data: {
+      name: user.name,
+      id: user.id,
+      uuid: reservationId,
+      date: new Date(date),
+    },
+  };
+};
+export { init, getStatus, getAll, setBusyTime, reserve };

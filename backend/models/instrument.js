@@ -1,7 +1,28 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
-
+const ReservationSchema = Schema({
+  name: {
+    type: String,
+    required: [true, "Name for reservation is required"],
+  },
+  email: {
+    type: String,
+    required: [true, "email is required"],
+  },
+  id: {
+    type: String,
+    required: [true, "studentId is required"],
+  },
+  date: {
+    type: Date,
+    required: [true, "date is required"],
+  },
+  uuid: {
+    type: String,
+    required: [true, "uuid is required"],
+  },
+});
 const InstrumentSchema = Schema({
   type: {
     type: String,
@@ -23,9 +44,10 @@ const InstrumentSchema = Schema({
   },
   healthy: {
     type: Boolean,
+    required: [true, "healthy is required"],
   },
   reservation: {
-    type: [String],
+    type: [ReservationSchema],
     required: false,
   },
 });
