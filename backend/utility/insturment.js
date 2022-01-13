@@ -41,7 +41,21 @@ const init = async () => {
 const getStatus = async () => {
   const res = await instrument.find();
   const obj = {};
+  const d = new Date();
   res.forEach((value) => {
+    if (value.busyUntil !== undefined) {
+      console.log(value.busyUntil.getTime(), d.getTime());
+      if (d - value.busyUntil.getTime() >= 0) {
+        instrument.findOne({ name: value.name }).then((t) => {
+          const target = t;
+          target.available = true;
+          target.busyBegin = undefined;
+          target.busyUntil = undefined;
+          target.save();
+        });
+      }
+    }
+
     obj[value.name] = {
       available: value.busyUntil != undefined ? false : true,
       healthy: value.healthy,
@@ -57,14 +71,17 @@ const getAll = async () => {
 };
 const setBusyTime = async ({ name, duration }) => {
   if (
-    isNaN(duration.days) ||
-    isNaN(duration.hours) ||
-    isNaN(duration.minutes) ||
-    duration.days < 0 ||
-    duration.hours < 0 ||
-    duration.minutes < 0
-  )
+    isNaN(duration.days | 0) ||
+    isNaN(duration.hours | 0) ||
+    isNaN(duration.minutes | 0) ||
+    (duration.days | 0) < 0 ||
+    (duration.hours | 0) < 0 ||
+    (duration.minutes | 0) < 0
+  ) {
+    console.log(isNaN(duration.days), (duration.days | 0) < 0);
     return "input error";
+  }
+
   const start = new Date();
   console.log(duration);
   const d =
@@ -72,9 +89,8 @@ const setBusyTime = async ({ name, duration }) => {
     (duration.hours | 0) * 60 +
     (duration.minutes | 0);
   const target = await instrument.findOne({ name: name });
-  const until = new Date();
+  const until = new Date(start.getTime() + d * 10 * 1000);
 
-  until.setTime(start.getTime() + d * 60 * 1000);
   target.busyBegin = start;
   target.busyUntil = until;
   await target.save();
