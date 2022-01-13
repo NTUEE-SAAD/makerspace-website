@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import AwesomeCalendar from "react-awesome-calendar";
+import ModAwesomeCalendar from "./MyCalendar";
 import "react-calendar/dist/Calendar.css";
 
 export const Calendar = () => {
@@ -21,7 +21,7 @@ export const Calendar = () => {
         borderRadius: "2px",
       }}
     >
-      <AwesomeCalendar ref={calendarRef} />
+      <ModAwesomeCalendar ref={calendarRef} />
     </div>
   );
 };
