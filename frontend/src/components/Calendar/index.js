@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import ModAwesomeCalendar from "./MyCalendar";
+import ModAwesomeCalendar from "./AwesomeCalendar";
 import "react-calendar/dist/Calendar.css";
 import { Text } from "..";
 
