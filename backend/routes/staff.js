@@ -40,21 +40,25 @@ const findAll = async (res) => {
 // };
 
 // TODO
-router.post(`/?notify=${Date()}`, (req, res) => {});
+router.post(`/notify`, (req, res) => {
+  const Time = req.body["Time"];
+  res.status(200).send({
+    data: "success",
+  });
+});
 
 router.post("/onduty", (req, res) => {
   const Name = req.body["Name"];
-  const time = staffOnDuty(Name);
+  staffOnDuty(Name, res);
+});
+
+const staffOnDuty = async (Name, res) => {
+  const d = new Date();
+  await Staff.findOneAndUpdate({ name: Name }, { $set: { onduty: d } });
   res.status(200).send({
     name: Name,
     time: time,
   });
-});
-
-const staffOnDuty = async (Name) => {
-  const d = new Date();
-  await Staff.findOneAndUpdate({ name: Name }, { $set: { onduty: d } });
-  return d;
 };
 const saltRounds = 10;
 const hashPassword = async (password) => {
@@ -70,8 +74,9 @@ router.post("/signin", (req, res) => {
 
 const handleSignIn = async (Name, Password, res) => {
   const user = await Staff.findOne({ name: Name });
+  const PW = await hashPassword(Password);
   if (user) {
-    if (user.password === hashPassword(Password)) {
+    if (user.password === PW) {
       res.status(200).send({
         data: "success",
       });
