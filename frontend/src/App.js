@@ -1,17 +1,10 @@
-<<<<<<< HEAD
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { HomePage, Staff, About, Items } from "./containers";
-=======
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
-import { Staff, About, HomeRoot } from "./containers";
-import { HomeContent } from "./containers";
->>>>>>> 0cc116c72ede613773ddb1c4182ef1cd3fa0d8fb
-
+import { Staff, About, HomeRoot, HomeContent, Items } from "./containers";
 function App() {
   return (
     <Router>
