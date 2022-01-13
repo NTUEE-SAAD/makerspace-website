@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { HomePage, Staff, About } from "./containers";
+import { Staff, About, HomeRoot } from "./containers";
+import { HomeContent } from "./containers";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/home/about" element={<About />} />
+        <Route path="/home" element={<HomeRoot />}>
+          <Route path="/home" element={<HomeContent />} />
+          <Route path="/home/about" element={<About />} />
+        </Route>
         <Route path="/staff" element={<Staff />} />
       </Routes>
     </Router>

@@ -5,3 +5,5 @@ export * from "./Gallery"
 export * from "./Progress";
 export * from "./SideMenu";
 export * from "./Logo"
+export * from "./Header"
+export * from "./Footer"

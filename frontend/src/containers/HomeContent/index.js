@@ -1,9 +1,9 @@
 import { Row, Col } from "antd";
 import { PostList, Calendar, Gallery, Progress } from "../../components";
 
-export const Content = () => {
+export const HomeContent = () => {
   return (
-    <>
+    <div style={{ width: "70%", margin: "auto" }}>
       <Row gutter={[16, 24]}>
         <Col span={24}>
           <Gallery />
@@ -23,6 +23,6 @@ export const Content = () => {
           <PostList />
         </Col>
       </Row>
-    </>
+    </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Menu, Row, Col } from "antd";
-import { SideMenu, Logo } from "../../components";
+import { SideMenu, Logo } from ".";
 import { Link } from "react-router-dom";
 
 export const Header = () => {

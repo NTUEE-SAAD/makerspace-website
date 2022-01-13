@@ -26,8 +26,8 @@ const HorseTitle = ({ children }) => (
 
 const HorseDetail = ({ children }) => (
   <div className={styles.horseDetailWrapper}>
-    <Typography.Text style={{ color: "white", fontSize: "16px" }}>
+    <Typography.Link style={{ color: "white", fontSize: "16px" }}>
       {children}
-    </Typography.Text>
+    </Typography.Link>
   </div>
 );
