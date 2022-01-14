@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { Input, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from "styled-components"
 const StyledSignIn = styled.div`
@@ -39,6 +39,7 @@ const SignIn = ({
   displayStatus,
   password,
   setPassword,
+  checkPassword
 }) => {
   return (
     <>
@@ -54,20 +55,25 @@ const SignIn = ({
         placeholder="Enter your name"
         size="large"
         sytle={{ width: 300, margin: 50 }}
-        onSearch={(name) => {
-          if (!name) {
+        onSearch={(me) => {
+          console.log(me)
+          if (!me || !password) {
             displayStatus({
               type: "error",
-              msg: "Missing user name",
+              msg: "Missing user name or password",
             });
-          } else if (!password) {
-            displayStatus({
-              type: "error",
-              msg: "Missing password",
-            });
-          } else {
-            setSignedIn(true);
-          }
+            setSignedIn(false)
+          } else  {
+            const message = checkPassword(password, me)
+            if (message === "success"){
+              setSignedIn(true)
+            }else{
+              displayStatus({
+                type: "error",
+                msg: "Wrong Password",
+              })
+            }
+          } 
         }}
       ></Input.Search>
       <Input.Password
