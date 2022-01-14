@@ -15,11 +15,11 @@ export default class Day extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.shouldShowRemainder();
+    // this.shouldShowRemainder();
   }
 
   componentDidUpdate() {
-    this.shouldShowRemainder();
+    // this.shouldShowRemainder();
   }
 
   isCurrentDate() {
@@ -115,7 +115,7 @@ export default class Day extends React.PureComponent {
 
   render() {
     return (
-      <Tooltip
+      <div
         id="dayCell"
         className={styles.dayCell}
         onClick={this.props.onClickDay}
@@ -134,7 +134,7 @@ export default class Day extends React.PureComponent {
         </Tooltip> */}
         {this.returnEventList()}
         {this.returnEventRemainder()}
-      </Tooltip>
+      </div>
 
     );
   }
