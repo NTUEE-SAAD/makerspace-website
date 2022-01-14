@@ -19,12 +19,12 @@ const StaffSchema = Schema(
         day: {
           type: String,
           enum: ["Mon", "Tue", "Wed", "Thu", "Fri"],
-          required: [true, "Day field is required."],
+          required: false,
         },
         time: {
           type: String,
           enum: ["A", "B", "C", "D"],
-          required: [true, "Time field is required."],
+          required: false,
         },
       },
     ],

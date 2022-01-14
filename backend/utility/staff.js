@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 const findAll = async (res) => {
   try {
-    const datas = await Staff.find();
+    const datas = await Staff.find({}, { name: 1, time: 1 });
     if (datas.length !== 0) {
       datas.sort();
       res.status(200).send({ message: "success", data: datas });
@@ -29,11 +29,11 @@ const staffOnDuty = async (Name, date, res) => {
     data: "success",
   });
 };
-const saltRounds = 10;
-const hashPassword = async (password) => {
-  const hash = await bcrypt.hash(password, saltRounds);
-  return hash;
-};
+// const saltRounds = 10;
+// const hashPassword = async (password) => {
+//   const hash = await bcrypt.hash(password, saltRounds);
+//   return hash;
+// };
 
 const handleSignIn = async (Name, Password, res, token) => {
   if (token) {
@@ -59,4 +59,24 @@ const handleSignIn = async (Name, Password, res, token) => {
   }
 };
 
-export { findAll, notifyReserve, staffOnDuty, hashPassword, handleSignIn };
+const handleSignUp = async (Name, Password, Time, res) => {
+  const user = await Staff.findOne({ name: Name });
+  if (!user) {
+    const newUser = new Staff({
+      name: Name,
+      password: bcrypt.hashSync(Password),
+      time: Time,
+    });
+    console.log("create ", newUser);
+    res.status(200).send({
+      data: "success",
+    });
+    return newUser.save();
+  } else {
+    res.status(403).send({
+      data: "user exist",
+    });
+  }
+};
+
+export { findAll, notifyReserve, staffOnDuty, handleSignIn, handleSignUp };

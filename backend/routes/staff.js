@@ -3,8 +3,8 @@ import {
   findAll,
   notifyReserve,
   staffOnDuty,
-  hashPassword,
   handleSignIn,
+  handleSignUp,
 } from "../utility/staff";
 const router = express.Router();
 router.get("/", (req, res) => {
@@ -52,11 +52,30 @@ router.post("/signin", (req, res) => {
       });
     });
 });
-router.post("/signout", (req, res) => {
-  req.session.destroy(() => {
-    console.log("session destroyed");
+router.delete("/signout", (req, res) => {
+  try {
+    req.session.destroy(() => {
+      console.log("session destroyed");
+    });
+    res.status(200).send({
+      data: "successfully signout",
+    });
+  } catch {
+    res.status(403).send({
+      data: "signout failed",
+    });
+  }
+});
+router.post("/signup", (req, res) => {
+  const Name = req.body.name;
+  const Password = req.body.password;
+  const Time = req.body.time;
+  handleSignUp(Name, Password, Time, res).catch((e) => {
+    console.log(e);
+    res.status(403).send({
+      data: "fail",
+    });
   });
 });
-//router.post("signup")
 
 export default router;
