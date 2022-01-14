@@ -9,7 +9,7 @@ import { usePost } from "../../context";
  **/
 export const PostRoutes = () => {
   const { posts } = usePost();
-  console.log("posts", posts);
+
   return (
     <Routes>
       <Route path="/home" element={<HomeRoot />}>

@@ -2,7 +2,7 @@ import { Row, Col } from "antd";
 import { PostList, Calendar, Gallery, Progress } from "../../components";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
-import instance from "../../instance";
+import { instance } from "../../instance";
 
 const test = [
   {
@@ -17,7 +17,7 @@ const test = [
 export const HomeContent = () => {
   const [events, setEvents] = useState([]);
   useEffect(async () => {
-    setEvents(await instance.get('/event'));
+    setEvents(await instance.get("/event"));
   }, []);
 
   return (

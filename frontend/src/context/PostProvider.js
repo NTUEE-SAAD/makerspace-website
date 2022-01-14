@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import request from "../instance";
+import { request } from "../instance";
 
 const PostContext = React.createContext();
 
@@ -11,10 +11,11 @@ export const PostProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
 
   const refreshPosts = async () => {
-    setPosts(await request({ method: "get", url: "post" }));
+    const newPost = await request({ method: "get", url: "/post" });
+    setPosts(newPost);
   };
 
-  useEffect(() => refreshPosts());
+  useEffect(() => refreshPosts(), []);
 
   return (
     <PostContext.Provider value={{ posts, refreshPosts }}>
