@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SignIn from "./SignIn";
 import { StaffPage } from "./SraffPage";
 import { message } from "antd";
+import instance from "../../instance"
 
 const LOCALSTORAGE_KEY = "save-me";
 
@@ -10,8 +11,10 @@ export const Staff = () => {
   const [signedIn, setSignedIn] = useState(false);
   const [me, setMe] = useState(savedMe || "");
   const [password, setPassword] = useState("");
-  const checkPassWord = (password, me, client) => {
-    setSignedIn(true);
+  const checkPassword = async(password, me) => {
+    const {data} = await instance.post("/staff/signin", {"signInName": me, "signInPassword": password},)
+    console.log("here", data)
+    return data
   };
 
   useEffect(() => {
@@ -46,15 +49,15 @@ export const Staff = () => {
       {signedIn ? (
         <StaffPage />
       ) : (
-        <StaffPage />
-        //<SignIn
-        //  me={me}
-        //  setMe={setMe}
-        //  setSignedIn={setSignedIn}
-        //  displayStatus={displayStatus}
-        //  password={password}
-        //  setPassword={setPassword}
-        ///>
+        <SignIn
+          me={me}
+          setMe={setMe}
+          setSignedIn={setSignedIn}
+          displayStatus={displayStatus}
+          password={password}
+          setPassword={setPassword}
+          checkPassword={checkPassword}
+        />
       )}
     </div>
   );

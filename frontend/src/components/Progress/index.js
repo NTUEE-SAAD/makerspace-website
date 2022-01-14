@@ -13,28 +13,34 @@ export const Progress = () => {
           <Text.SectionTitle.Black>Instruments</Text.SectionTitle.Black>
           <Row gutter={[16, vgut]}>
             <Col span={24}>
-              <Instrument />
+              <Instrument
+                name={"X1E-Plus"}
+                begin={new Date().toISOString()}
+                end={new Date(2022, 0, 14, 19, 30, 0).toISOString()}
+              />
             </Col>
           </Row>
           <Row gutter={[16, vgut]}>
             <Col span={24}>
-              <Instrument />
+              <Instrument name={"HyperCube"} />
             </Col>
           </Row>
           <Row gutter={[16, vgut]}>
             <Col span={24}>
-              <Instrument />
+              <Instrument name={"Formlab"} />
             </Col>
           </Row>
           <Row gutter={[16, vgut]}>
             <Col span={24}>
-              <Instrument />
+              <Instrument name={"ThunderLaser"} />
             </Col>
           </Row>
         </>
       ) : (
         <>
-          <Text.SectionTitle.Black level={2}>Instruments</Text.SectionTitle.Black>
+          <Text.SectionTitle.Black level={2}>
+            Instruments
+          </Text.SectionTitle.Black>
           <Row gutter={[16, vgut]}>
             <Col span={12}>
               <Instrument />
