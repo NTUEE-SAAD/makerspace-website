@@ -14,7 +14,7 @@ import {
   PostRoutes,
   Reservation
 } from "./containers";
-import { PostProvider } from "./context";
+import { PostProvider } from "./contexts";
 
 function App() {
   return (

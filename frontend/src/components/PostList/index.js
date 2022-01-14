@@ -1,28 +1,12 @@
-import React, { useLayoutEffect } from "react";
 import { Tag, Button, Row, List } from "antd";
 import { Text } from "..";
 import styles from "./styles.module.css";
-import faker from "faker";
+import { usePost } from "../../contexts";
+import { useNavigate } from "react-router-dom";
 
 export const PostList = () => {
-  const dataSource = [];
-
-  useLayoutEffect(() => {
-    for (let i = 0; i < 10; i++) {
-      dataSource.push({
-        title: faker.lorem.sentence(),
-        content: faker.lorem.paragraph(),
-        description: (
-          <>
-            <Tag>{faker.lorem.word()}</Tag>
-            <Tag>{faker.lorem.word()}</Tag>
-            <Tag>{faker.lorem.word()}</Tag>
-          </>
-        ),
-        extra: <img width={272} alt="logo" src={faker.image.image()} />,
-      });
-    }
-  });
+  const { posts } = usePost();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -40,23 +24,25 @@ export const PostList = () => {
           hideOnSinglePage: true,
         }}
         bordered={true}
-        dataSource={dataSource}
+        dataSource={posts}
         renderItem={(item) => (
           <List.Item
-            onClick={() => console.log(item.title)}
+            onClick={() => navigate("/home/post/" + item.uuid)}
             className={styles.listItem}
-            key={item.title}
+            key={item.uuid}
             extra={
               <img
                 width={272}
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                alt=" "
+                src={item?.image?.length > 0 ? item?.image[0] : 0}
               />
             }
           >
             <List.Item.Meta
               title={<a href={item.href}>{item.title}</a>}
-              description={item.description}
+              description={item.description.map((tag) => (
+                <Tag color="#66bac6">{tag}</Tag>
+              ))}
             />
             {item.content}
           </List.Item>

@@ -7,12 +7,12 @@ import { instance } from "../../instance";
 export const HomeContent = () => {
   const [events, setEvents] = useState([]);
 
-  useEffect(() => {
-    const refreshEvents = async () => {
-      setEvents(await instance.get("/event"));
-    };
-    refreshEvents();
-  }, []);
+  // useEffect(() => {
+  //   const refreshEvents = async () => {
+  //     setEvents(await instance.get("/event"));
+  //   };
+  //   refreshEvents();
+  // }, []);
 
   return (
     <div style={{ width: "70%", margin: "auto" }}>
