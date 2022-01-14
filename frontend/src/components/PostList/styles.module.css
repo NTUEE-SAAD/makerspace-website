@@ -1,0 +1,15 @@
+.listWrapper {
+  background-color: white;
+  padding: 0 1vw;
+}
+
+.listItem {
+  cursor: pointer;
+  margin-top: 2vh;
+  transition: all ease-in-out 0.3s;
+}
+
+.listItem:hover {
+  filter: opacity(70%);
+  background-color: rgba(102, 186, 198, 0.3);
+}
