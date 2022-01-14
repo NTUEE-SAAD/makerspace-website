@@ -7,10 +7,7 @@ import {
   handleSignIn,
 } from "../utility/staff";
 const router = express.Router();
-
 router.get("/", (req, res) => {
-  console.log(req.session);
-  console.log(req.sessionID);
   findAll(res);
 });
 
@@ -43,7 +40,9 @@ router.post("/signin", (req, res) => {
     .then((success) => {
       if (success) {
         req.session.user = Name;
-        console.log(req.session);
+        res.status(200).send({
+          data: "success",
+        });
       }
     })
     .catch((e) => {

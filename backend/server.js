@@ -1,5 +1,5 @@
 import express from "express";
-import postRoute from "./routes/staff";
+import staffRoute from "./routes/staff";
 import instrumentRoute from "./routes/instrument";
 import mongoose from "mongoose";
 import { dataFind, dataInit } from "./upload";
@@ -8,14 +8,7 @@ import bodyParser from "body-parser";
 require("dotenv").config();
 const session = require("express-session");
 const app = express();
-app.use(
-  session({
-    secret: "mySecret",
-    name: "user",
-    saveUninitialized: false,
-    resave: true,
-  })
-);
+
 app.use(express.json());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -34,8 +27,23 @@ const dboptions = {
   useUnifiedTopology: true,
 };
 app.use(bodyParser.json());
-app.use("/staff", postRoute);
+
+const sessionOptions = {
+  cookie: {
+    path: "/",
+    httpOnly: true,
+    //secure: true,
+    maxAge: 1000 * 60 * 3,
+  },
+  resave: false,
+  saveUninitialized: false,
+  secret: "3%.#Bjj,/Qgt6'X?j'*>",
+  unset: "destroy",
+};
+app.use(session(sessionOptions));
+app.use("/staff", staffRoute);
 app.use("/instrument", instrumentRoute);
+
 app.listen(port, () => {
   console.log(`Server is up on port ${port}.`);
 });
@@ -47,8 +55,8 @@ mongoose
   })
   .then((res) => console.log("mongo db connection created"));
 
-dataInit();
+// dataInit();
 
-(async () => {
-  await init();
-})();
+// (async () => {
+//   await init();
+// })();
