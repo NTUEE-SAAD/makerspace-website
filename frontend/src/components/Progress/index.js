@@ -16,7 +16,7 @@ export const Progress = () => {
               <Instrument
                 name={"X1E-Plus"}
                 begin={new Date().toISOString()}
-                end={new Date(2022, 0, 14, 19, 30, 0).toISOString()}
+                end={new Date(2022, 0, 14, 19, 50, 0).toISOString()}
               />
             </Col>
           </Row>

@@ -11,7 +11,9 @@ import {
   HomeContent,
   Items,
   StaffRoot,
+  PostRoutes,
 } from "./containers";
+
 function App() {
   return (
     <Router>
@@ -26,6 +28,7 @@ function App() {
           <Route path="/staff/items" element={<Items />} />
         </Route>
       </Routes>
+      <PostRoutes />
     </Router>
   );
 }

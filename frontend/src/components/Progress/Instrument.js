@@ -8,17 +8,17 @@ import styles from "./styles.module.css";
  * @param {string} end - a date ISOstring like '1995-12-17T13:24:00
  **/
 export const Instrument = ({ name, begin = null, end = null }) => {
-  const isFree = !(begin && end);
   const [percent, setPercent] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
   const beginTimeRef = useRef(null);
   const durationRef = useRef();
+  const isFree = !(begin && end) || isComplete;
 
   beginTimeRef.current = beginTimeRef.current
     ? beginTimeRef.current
     : new Date(begin);
 
   const endTime = new Date(end);
-  console.log(beginTimeRef.current, endTime);
   durationRef.current = isFree
     ? 0
     : endTime.getTime() - beginTimeRef.current.getTime();
@@ -31,7 +31,18 @@ export const Instrument = ({ name, begin = null, end = null }) => {
 
   const handleTick = () => {
     const elapsed = Date.now() - beginTimeRef.current.getTime();
+    if (elapsed < durationRef.current.getTime) {
+      handleComplete();
+    }
     setPercent(Math.round((elapsed / durationRef.current) * 100));
+  };
+
+  const handleComplete = () => {
+    if (isFree) return;
+    
+    beginTimeRef.current = null;
+    setIsComplete(true);
+    setPercent(100);
   };
 
   return (
@@ -52,6 +63,7 @@ export const Instrument = ({ name, begin = null, end = null }) => {
             <Countdown
               date={beginTimeRef.current.getTime() + durationRef.current}
               onTick={handleTick}
+              onComplete={handleComplete}
             />
           </div>
         </Col>
