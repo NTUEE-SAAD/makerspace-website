@@ -1,6 +1,7 @@
 import express from "express";
 import staffRoute from "./routes/staff";
 import instrumentRoute from "./routes/instrument";
+import eventRoute from "./routes/event";
 import mongoose from "mongoose";
 import { dataFind, dataInit } from "./upload";
 import { init, getStatus } from "./utility/insturment";
@@ -43,6 +44,7 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use("/staff", staffRoute);
 app.use("/instrument", instrumentRoute);
+app.use("/event", eventRoute);
 
 app.listen(port, () => {
   console.log(`Server is up on port ${port}.`);
