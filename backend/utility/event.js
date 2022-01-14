@@ -6,10 +6,10 @@ const findAll = async (res) => {
     if (datas.length !== 0) {
       res.status(200).send({ data: datas });
     } else {
-      res.status(403).send({ data: null });
+      res.status(406).send({ data: null });
     }
   } catch (e) {
-    res.status(403).send({ data: null });
+    res.status(500).send({ data: null });
   }
 };
 
@@ -29,4 +29,22 @@ const deleteAll = async () => {
   await Event.deleteMany({});
 };
 
-export { findAll, handleCreate, deleteAll };
+const handleModify = async (body, res) => {
+  try {
+    const event = await Event.findOne({ id: body.id });
+    if (event) {
+      event.color = body.color || event.color;
+      event.from = body.from || event.from;
+      event.to = body.to || event.to;
+      event.title = body.title || event.title;
+      await event.save();
+      res.status(200).send({ data: event });
+    } else {
+      res.status(406).send({ data: "id not found" });
+    }
+  } catch (error) {
+    res.status(500).send({ data: "failed to modify" });
+  }
+};
+
+export { findAll, handleCreate, deleteAll, handleModify };

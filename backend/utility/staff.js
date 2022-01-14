@@ -6,12 +6,12 @@ const findAll = async (res) => {
     const datas = await Staff.find({}, { name: 1, time: 1 });
     if (datas.length !== 0) {
       datas.sort();
-      res.status(200).send({ message: "success", data: datas });
+      res.status(200).send({ data: datas });
     } else {
-      res.status(403).send({ message: "error", data: null });
+      res.status(406).send({ data: null });
     }
   } catch (e) {
-    res.status(403).send({ message: "error", data: null });
+    res.status(500).send({ data: null });
   }
 };
 
@@ -29,11 +29,6 @@ const staffOnDuty = async (Name, date, res) => {
     data: "success",
   });
 };
-// const saltRounds = 10;
-// const hashPassword = async (password) => {
-//   const hash = await bcrypt.hash(password, saltRounds);
-//   return hash;
-// };
 
 const handleSignIn = async (Name, Password, res, token) => {
   if (token) {
