@@ -1,5 +1,14 @@
 import { useState, useRef } from "react";
-import { Card, Progress, Typography, Row, Col, Tag } from "antd";
+import {
+  Card,
+  Progress,
+  Typography,
+  Row,
+  Col,
+  Tag,
+  Divider,
+  Button,
+} from "antd";
 import Countdown from "react-countdown";
 import styles from "./styles.module.css";
 
@@ -7,12 +16,12 @@ import styles from "./styles.module.css";
  * @param {string} begin - a date ISOstring like '1995-12-17T13:24:00
  * @param {string} end - a date ISOstring like '1995-12-17T13:24:00
  **/
-export const Instrument = ({ name, begin = null, end = null }) => {
+export const Instrument = ({ name, begin, end}) => {
   const [percent, setPercent] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const beginTimeRef = useRef(null);
   const durationRef = useRef();
-  const isFree = !(begin && end) || isComplete;
+  let isFree = !(begin && end) || isComplete;
 
   beginTimeRef.current = beginTimeRef.current
     ? beginTimeRef.current
@@ -22,6 +31,8 @@ export const Instrument = ({ name, begin = null, end = null }) => {
   durationRef.current = isFree
     ? 0
     : endTime.getTime() - beginTimeRef.current.getTime();
+
+  if (durationRef.current <= 0) isFree = true;
 
   const StatusTag = isFree ? (
     <Tag color="green">free</Tag>
@@ -39,7 +50,7 @@ export const Instrument = ({ name, begin = null, end = null }) => {
 
   const handleComplete = () => {
     if (isFree) return;
-    
+
     beginTimeRef.current = null;
     setIsComplete(true);
     setPercent(100);
@@ -48,9 +59,21 @@ export const Instrument = ({ name, begin = null, end = null }) => {
   return (
     <Card
       title={
-        <Row justify="begin">
-          <Typography className={styles.title}>{name}</Typography>
-          {StatusTag}
+        <Row>
+          <Col span={4} align="center">
+            {StatusTag}
+          </Col>
+          <Col span={1} align="center">
+            <Divider type="vertical" />
+          </Col>
+          <Col span={10}>
+            <Typography className={styles.title}>{name}</Typography>
+          </Col>
+          <Col span={9} align="right">
+            <Button shape="round" disabled={!isFree}>
+              book
+            </Button>
+          </Col>
         </Row>
       }
     >
