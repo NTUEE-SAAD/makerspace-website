@@ -1,30 +1,21 @@
 import { Row, Col } from "antd";
 import { Instrument } from "./Instrument";
 import { Text } from "../../components";
-import { Reservation } from "../Reservation";
-import { useState } from "react";
 const vgut = 10;
 
 export const Progress = () => {
-  
   const desktopMode = true;
-
-  const [showModal, setShowModal] = useState(true);
-  const closeModal = () => {
-    setShowModal(false);
-  };
 
 
   return (
     <>
-      <Reservation visible={showModal} onCancel={closeModal} />
       {desktopMode ? (
         <>
           <Text.SectionTitle.Black>Instruments</Text.SectionTitle.Black>
           <Row gutter={[16, vgut]}>
             <Col span={24}>
               <Instrument
-                name={"X1E-Plus"}
+                name="X1E-Plus"
                 begin={new Date().toISOString()}
                 end={new Date(2022, 0, 14, 19, 50, 0).toISOString()}
               />
@@ -32,17 +23,17 @@ export const Progress = () => {
           </Row>
           <Row gutter={[16, vgut]}>
             <Col span={24}>
-              <Instrument name={"HyperCube"} />
+              <Instrument name="HyperCube" />
             </Col>
           </Row>
           <Row gutter={[16, vgut]}>
             <Col span={24}>
-              <Instrument name={"Formlab"} />
+              <Instrument name="Formlab" />
             </Col>
           </Row>
           <Row gutter={[16, vgut]}>
             <Col span={24}>
-              <Instrument name={"ThunderLaser"} />
+              <Instrument name="ThunderLaser" />
             </Col>
           </Row>
         </>

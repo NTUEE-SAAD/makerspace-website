@@ -1,4 +1,4 @@
-import { Modal} from "antd";
+import { Modal } from "antd";
 import { useState } from "react";
 import ReservationForm from "./ReservationForm";
 
