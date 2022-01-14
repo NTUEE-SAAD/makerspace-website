@@ -180,5 +180,22 @@ uuid前6碼.to_lowercase()
 - 部課資訊
 
 #### POST /class/signUp
-- 
+
+
+#### POST /post
+
+post
+``` json=
+{
+    title: "i am a title",
+    content: "lorem ipsum ...",
+    description: ["Make NTU", "Maker"], // Tags
+    image: "/image/url"
+}
+```
+
+#### GET /posts
+
+return a list of posts defined above
+
 
