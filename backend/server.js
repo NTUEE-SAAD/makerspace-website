@@ -4,7 +4,8 @@ import instrumentRoute from "./routes/instrument";
 import eventRoute from "./routes/event";
 import mongoose from "mongoose";
 import { dataFind, dataInit } from "./upload";
-import { init, getStatus } from "./utility/insturment";
+import { init } from "./utility/insturment";
+import postRoute from "./routes/post";
 import bodyParser from "body-parser";
 require("dotenv").config();
 const session = require("express-session");
@@ -28,6 +29,7 @@ const dboptions = {
   useUnifiedTopology: true,
 };
 app.use(bodyParser.json());
+<<<<<<< HEAD
 
 const sessionOptions = {
   cookie: {
@@ -42,6 +44,9 @@ const sessionOptions = {
   unset: "destroy",
 };
 app.use(session(sessionOptions));
+=======
+app.use("/post", postRoute);
+>>>>>>> 3212723 (post v1)
 app.use("/staff", staffRoute);
 app.use("/instrument", instrumentRoute);
 app.use("/event", eventRoute);

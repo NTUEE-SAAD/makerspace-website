@@ -28,6 +28,7 @@ const InstrumentList = {
     healthy: true,
   },
 };
+const re = /^[A-Za-z1-9]+$/;
 const checkId = async (id) => {
   var data = await instrument.find();
   const ret = data.filter((instrument) => {
@@ -151,9 +152,16 @@ const reserve = async ({ user, targetInstrument, date }) => {
     },
   };
 };
-
+const inputValidation = (str) => {
+  if (str.value.match(re)) {
+    return true;
+  } else {
+    return false;
+  }
+};
 const reservationModify = async ({ uuid, date }) => {
   console.log("PUT IN");
+  if (!inputValidation(uuid)) return "input invalid";
   const check = await checkId(uuid);
   console.log(date);
   const d = new Date(date);

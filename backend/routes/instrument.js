@@ -50,17 +50,27 @@ router.post("/reservation", (req, res) => {
     }
   });
 });
+//modify the reservation
 router.put("/reservation", async (req, res) => {
   console.log(req.body);
-  var ret = await reservationModify({ uuid: req.body.id, date: req.body.date });
-  console.log(ret);
-  if (ret === "success")
-    res.status(200).send({ message: "reservation modify success" });
-  else if (ret === "uuid not found")
-    res.status(406).send({
-      message: "uuid not found, the reservation has expired or wrong uuid",
+  if (req.body.id === undefined) {
+    res.status(406).send({ message: "input error" });
+  } else {
+    var ret = await reservationModify({
+      uuid: req.body.id.trim(),
+      date: req.body.date,
     });
-  else res.status(500).send({ message: "something wrong during modifing" });
+    console.log(ret);
+    if (ret === "success")
+      res.status(200).send({ message: "reservation modify success" });
+    else if (ret === "uuid not found")
+      res.status(406).send({
+        message: "uuid not found, the reservation has expired or wrong uuid",
+      });
+    else if (ret === "input invalid") {
+      res.status(406).send({ message: "input error" });
+    } else res.status(500).send({ message: "something wrong during modifing" });
+  }
 });
 
 export default router;
