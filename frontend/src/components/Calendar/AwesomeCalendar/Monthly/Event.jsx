@@ -2,6 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import { middlePosition, startPosition } from "../constants";
 import styles from "./Event.styles.module.css";
+import { Tooltip } from "antd";
 export default class Event extends React.PureComponent {
   returnEventsClassName(position) {
     const { inactive } = this.props;
@@ -44,6 +45,7 @@ export default class Event extends React.PureComponent {
         onClick={this.props.onClick}
       >
         {this.returnEventName(title, position)}
+        
       </div>
     );
   }

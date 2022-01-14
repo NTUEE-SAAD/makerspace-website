@@ -11,11 +11,15 @@ export const Staff = () => {
   const [signedIn, setSignedIn] = useState(false);
   const [me, setMe] = useState(savedMe || "");
   const [password, setPassword] = useState("");
-  const checkPassword = async(password, me) => {
-    const {data} = await instance.post("/staff/signin", {"signInName": me, "signInPassword": password},)
-    console.log("here", data)
-    return data
-  };
+  const checkPassword = async (password, me) => {
+    try {
+      const {data:{data},} = await instance.post("/staff/signin", {"name": me, "password": password})
+      return data
+    } catch (error) {
+      const data = JSON.stringify(error.response.data.data)
+      return data
+    }
+  }
 
   useEffect(() => {
     if (signedIn) {

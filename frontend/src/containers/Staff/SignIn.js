@@ -55,8 +55,7 @@ const SignIn = ({
         placeholder="Enter your name"
         size="large"
         sytle={{ width: 300, margin: 50 }}
-        onSearch={(me) => {
-          console.log(me)
+        onSearch={async (me) => {
           if (!me || !password) {
             displayStatus({
               type: "error",
@@ -64,17 +63,20 @@ const SignIn = ({
             });
             setSignedIn(false)
           } else  {
-            const message = checkPassword(password, me)
-            if (message === "success"){
-              setSignedIn(true)
-            }else{
-              displayStatus({
-                type: "error",
-                msg: "Wrong Password",
-              })
+            const message =  await checkPassword(password, me)
+              if(message !== "success")
+              {
+                displayStatus({
+                  type: "error",
+                  msg: message,
+                })
+                setSignedIn(false)
+              }else{
+                setSignedIn(true)
+              }
             }
           } 
-        }}
+        }
       ></Input.Search>
       <Input.Password
         prefix={<LockOutlined />}

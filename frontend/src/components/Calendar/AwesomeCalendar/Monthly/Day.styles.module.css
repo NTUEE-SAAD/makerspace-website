@@ -10,9 +10,9 @@
   /* border: 1px solid transparent; */
 }
 
-.dayCell:hover{
+/* .dayCell:hover{
   border: 1px solid #d0d0d0;
-}
+} */
 
 .dayCell .dayDate {
   display: block;
