@@ -36,8 +36,6 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((res) => console.log("mongo db connection created"));
-if (process.env.MODE === "EXAM") {
-  dataInit();
-  console.log("hehe");
-  //dataFind();
-}
+
+dataInit();
+//dataFind();

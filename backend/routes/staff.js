@@ -21,24 +21,6 @@ const findAll = async (res) => {
   }
 };
 
-// router.get("/postDetail", (req, res) => {
-//   const pid = req.query["pid"];
-//   findOnePost(pid, res);
-// });
-
-// const findOnePost = async (pid, res) => {
-//   try {
-//     const postToSend = await Post.find({ postId: pid });
-//     if (postToSend.length !== 0) {
-//       res.status(200).send({ message: "success", post: postToSend[0] });
-//     } else {
-//       res.status(403).send({ message: "error", post: null });
-//     }
-//   } catch (e) {
-//     res.status(403).send({ message: "error", post: null });
-//   }
-// };
-
 // TODO
 router.post(`/notify`, (req, res) => {
   const Time = req.body["Time"];
@@ -74,9 +56,8 @@ router.post("/signin", (req, res) => {
 
 const handleSignIn = async (Name, Password, res) => {
   const user = await Staff.findOne({ name: Name });
-  const PW = await hashPassword(Password);
   if (user) {
-    if (user.password === PW) {
+    if (bcrypt.compareSync(Password, user.password)) {
       res.status(200).send({
         data: "success",
       });
@@ -87,47 +68,5 @@ const handleSignIn = async (Name, Password, res) => {
     });
   }
 };
-
-// const savePost = async (postId, title, content, timestamp, res) => {
-//   try {
-//     const newPost = new Staff({ postId, title, content, timestamp });
-//     console.log("create ", newPost);
-//     res.status(200).send({
-//       message: "success",
-//     });
-//     return newPost.save();
-//   } catch (e) {
-//     res.status(403).send({
-//       message: "error",
-//     });
-//   }
-// };
-
-// router.delete("/post", (req, res) => {
-//   const pid = req.query["pid"];
-//   deletePost(pid, res);
-// });
-
-// const deletePost = async (pid, res) => {
-//   try {
-//     const deletion = await Post.findOneAndDelete({ postId: pid });
-//     console.log("delete ", deletion);
-//     if (deletion) {
-//       res.status(200).send({
-//         message: "success",
-//       });
-//     } else {
-//       res.status(403).send({
-//         message: "error",
-//         post: null,
-//       });
-//     }
-//   } catch (e) {
-//     res.status(403).send({
-//       message: "error",
-//       post: null,
-//     });
-//   }
-// };
 
 export default router;
