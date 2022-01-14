@@ -1,6 +1,7 @@
 import { Row, Col } from "antd";
 import { Instrument } from "./Instrument";
 import { Text } from "../../components";
+import { Reservation } from "../Reservation";
 
 const vgut = 10;
 

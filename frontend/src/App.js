@@ -12,6 +12,7 @@ import {
   Items,
   StaffRoot,
   PostRoutes,
+  Reservation
 } from "./containers";
 import { PostProvider } from "./context";
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/home" element={<HomeRoot />}>
             <Route path="/home" element={<HomeContent />} />
             <Route path="/home/about" element={<About />} />
+            <Route path="/home/items" element={<Items />} />
           </Route>
           <Route path="/staff" element={<StaffRoot />}>
             <Route path="/staff" element={<Staff />} />

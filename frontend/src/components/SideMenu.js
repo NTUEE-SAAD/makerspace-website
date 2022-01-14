@@ -11,18 +11,7 @@ let Item = styled(Menu.Item)`
 const menu = (
   <Menu>
     <Item>
-      <Link to="/home/about">
-        預約
-      </Link>
-    </Item>
-    <Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.aliyun.com"
-      >
-        借用/查詢
-      </a>
+      <Link to="/home/items">借用/查詢</Link>
     </Item>
     <Item>
       <a
