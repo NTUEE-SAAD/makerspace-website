@@ -1,22 +1,24 @@
 import { Row, Col } from "antd";
 import { PostList, Calendar, Gallery, Progress } from "../../components";
-import styles from "./styles.module.css"
-import {useEffect, useState} from 'react';
+import styles from "./styles.module.css";
+import { useEffect, useState } from "react";
+import request from "../../instance";
 
-const test = [{
-  id: 3,
-  color: "#3694DF",
-  from: "2022-01-25T13:00:00+00:00",
-  to: "2022-01-25T20:00:00+00:00",
-  title: "專題說明會",
-},]
+const test = [
+  {
+    id: 3,
+    color: "#3694DF",
+    from: "2022-01-25T13:00:00+00:00",
+    to: "2022-01-25T20:00:00+00:00",
+    title: "專題說明會",
+  },
+];
 
 export const HomeContent = () => {
-
   const [events, setEvents] = useState([]);
-  useEffect(()=>{
-    setEvents(test);
-  },[])
+  useEffect(() => {
+    setEvents(request({ method: "get", url:'/status'}));
+  }, []);
 
   return (
     <div style={{ width: "70%", margin: "auto" }}>
@@ -30,7 +32,7 @@ export const HomeContent = () => {
           <Progress />
         </Col>
         <Col span={12} className={styles.column}>
-          <Calendar events={events}/>
+          <Calendar events={events} />
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
