@@ -1,18 +1,25 @@
 import { Image, Typography } from "antd";
-import faker from "faker";
 import styles from "./horse.module.css";
+import { useNavigate } from "react-router-dom";
 
-export const Horse = ({ data: { title, detail, image } }) => {
+export const Horse = ({ post }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(navigate("/home/post/" + post.uuid));
+  };
   return (
-    <div style={{ position: "relative", height: "60vh" }}>
+    <div
+      style={{ position: "relative", height: "60vh", cursor: "pointer" }}
+      onClick={handleClick}
+    >
       <Image
-        src={faker.image.image()}
+        src={post.image}
         width="100%"
         preview={false}
         style={{ filter: "brightness(70%)" }}
       />
-      <HorseTitle>{faker.lorem.sentence()}</HorseTitle>
-      <HorseDetail>{faker.lorem.paragraphs()}</HorseDetail>
+      <HorseTitle>{post.title}</HorseTitle>
+      <HorseDetail>{post.content}</HorseDetail>
     </div>
   );
 };
