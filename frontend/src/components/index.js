@@ -7,5 +7,5 @@ export * from "./SideMenu";
 export * from "./LogoLink";
 export * from "./HomeHeader";
 export * from "./HomeFooter";
-export * from "./AdminHeader";
+export * from "./StaffHeader";
 export * from "./SerachItem";

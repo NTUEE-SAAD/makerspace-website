@@ -3,7 +3,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { LogoLink } from ".";
 import { Link } from "react-router-dom";
 
-export const AdminHeader = () => {
+export const StaffHeader = () => {
   return (
     <Row justify="space-around" align="center">
       <Col span={6}>
@@ -20,10 +20,7 @@ export const AdminHeader = () => {
           <Menu.Item key="3">
             <Link to="/staff/items">Item</Link>
           </Menu.Item>
-          <Menu.Item
-            key="4"
-            icon={<UserOutlined />}
-          >
+          <Menu.Item key="4" icon={<UserOutlined />}>
             Sign Out
           </Menu.Item>
         </Menu>

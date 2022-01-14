@@ -10,7 +10,7 @@ import {
   HomeRoot,
   HomeContent,
   Items,
-  AdminRoot,
+  StaffRoot,
 } from "./containers";
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Route path="/home" element={<HomeContent />} />
           <Route path="/home/about" element={<About />} />
         </Route>
-        <Route path="/staff" element={<AdminRoot />}>
+        <Route path="/staff" element={<StaffRoot />}>
           <Route path="/staff" element={<Staff />} />
           <Route path="/staff/items" element={<Items />} />
         </Route>

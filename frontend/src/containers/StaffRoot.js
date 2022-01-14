@@ -1,12 +1,12 @@
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
-import { AdminHeader } from "../components";
+import { StaffHeader } from "../components";
 
-export const AdminRoot = () => {
+export const StaffRoot = () => {
   return (
     <Layout>
       <Layout.Header>
-        <AdminHeader />
+        <StaffHeader />
       </Layout.Header>
       <Layout.Content>
         <Outlet />
