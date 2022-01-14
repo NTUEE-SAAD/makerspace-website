@@ -184,4 +184,37 @@ const reservationModify = async ({ uuid, date }) => {
     //const target=await instrument.findOne({check[1]})
   }
 };
-export { init, getStatus, getAll, setBusyTime, reserve, reservationModify };
+const reservationDelete = async ({ uuid }) => {
+  console.log("PUT IN");
+  if (!inputValidation(uuid)) return "input invalid";
+  const check = await checkId(uuid);
+  console.log(date);
+  const d = new Date(date);
+  if (check[0]) {
+    console.log("uuid not found");
+    return "uuid not found";
+  } else {
+    check[1].reservation.forEach((r) => {
+      if (r.uuid === uuid) {
+        console.log(d);
+        r.date = d;
+      }
+    });
+    const model = await instrument.findOne({ name: check[1].name });
+    console.log(model.reservation, check[1].reservation);
+    model.reservation = check[1].reservation;
+    await model.save();
+    return "success";
+
+    //const target=await instrument.findOne({check[1]})
+  }
+};
+export {
+  init,
+  getStatus,
+  getAll,
+  setBusyTime,
+  reserve,
+  reservationModify,
+  reservationDelete,
+};

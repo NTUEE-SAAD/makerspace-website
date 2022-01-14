@@ -29,7 +29,6 @@ const dboptions = {
   useUnifiedTopology: true,
 };
 app.use(bodyParser.json());
-<<<<<<< HEAD
 
 const sessionOptions = {
   cookie: {
@@ -44,9 +43,7 @@ const sessionOptions = {
   unset: "destroy",
 };
 app.use(session(sessionOptions));
-=======
 app.use("/post", postRoute);
->>>>>>> 3212723 (post v1)
 app.use("/staff", staffRoute);
 app.use("/instrument", instrumentRoute);
 app.use("/event", eventRoute);
@@ -62,8 +59,8 @@ mongoose
   })
   .then((res) => console.log("mongo db connection created"));
 
-// dataInit();
+dataInit();
 
-// (async () => {
-//   await init();
-// })();
+(async () => {
+  await init();
+})();

@@ -13,11 +13,15 @@ const PostSchema = Schema({
   },
   description: {
     type: [String],
-    required: false,
+    required: [true, "description is required"],
   },
   image: {
+    type: [String],
+    required: [true, "image is required"],
+  },
+  uuid: {
     type: String,
-    required: false,
+    required: [true, "uuid is required"],
   },
 });
 
