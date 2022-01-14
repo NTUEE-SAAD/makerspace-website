@@ -1,11 +1,13 @@
 import { Image, Typography } from "antd";
 import faker from "faker";
+import styles from "./horse.module.css";
 
 export const Horse = ({ data: { title, detail, image } }) => {
+  console.log(styles);
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", height: "60vh" }}>
       <Image
-        src="https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png"
+        src={faker.image.image()}
         width="100%"
         preview={false}
         style={{ filter: "brightness(70%)" }}
@@ -17,33 +19,15 @@ export const Horse = ({ data: { title, detail, image } }) => {
 };
 
 const HorseTitle = ({ children }) => (
-  <div
-    style={{
-      position: "absolute",
-      top: "40%",
-      left: "3%",
-      paddingRight: "20%",
-    }}
-  >
-    <Typography.Title
-      style={{
-        color: "white",
-      }}
-    >
-      {children}
-    </Typography.Title>
+  <div className={styles.horseTitleWrapper}>
+    <Typography.Title style={{ color: "white" }}>{children}</Typography.Title>
   </div>
 );
 
 const HorseDetail = ({ children }) => (
-  <div
-    style={{
-      position: "absolute",
-      top: "60%",
-      left: "0",
-      padding: "0 40% 5% 5%"
-    }}
-  >
-    <Typography.Text style={{ color: "white", fontSize: "16px" }}>{children}</Typography.Text>
+  <div className={styles.horseDetailWrapper}>
+    <Typography.Link style={{ color: "white", fontSize: "16px" }}>
+      {children}
+    </Typography.Link>
   </div>
 );

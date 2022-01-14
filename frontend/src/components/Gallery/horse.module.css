@@ -1,0 +1,13 @@
+.horseTitleWrapper {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  padding: 0 40% 5% 5%;
+}
+
+.horseDetailWrapper {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  padding: 0 40% 5% 5%;
+}

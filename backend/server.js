@@ -1,8 +1,10 @@
 import express from "express";
 import postRoute from "./routes/staff";
+import instrumentRoute from "./routes/instrument";
 import mongoose from "mongoose";
 import { dataFind, dataInit } from "./upload";
-
+import { init, getStatus } from "./utility/insturment";
+import bodyParser from "body-parser";
 require("dotenv").config();
 const app = express();
 
@@ -23,9 +25,9 @@ const dboptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-
+app.use(bodyParser.json());
 app.use("/staff", postRoute);
-
+app.use("/instrument", instrumentRoute);
 app.listen(port, () => {
   console.log(`Server is up on port ${port}.`);
 });
@@ -38,4 +40,8 @@ mongoose
   .then((res) => console.log("mongo db connection created"));
 
 dataInit();
-//dataFind();
+console.log("hehe");
+
+(async () => {
+  await init();
+})();
