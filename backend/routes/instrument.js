@@ -5,6 +5,7 @@ import {
   setBusyTime,
   reserve,
   reservationModify,
+  reservationDelete,
 } from "../utility/insturment";
 const router = express.Router();
 
@@ -70,6 +71,25 @@ router.put("/reservation", async (req, res) => {
     else if (ret === "input invalid") {
       res.status(406).send({ message: "input error" });
     } else res.status(500).send({ message: "something wrong during modifing" });
+  }
+});
+router.delete("/reservation", async (req, res) => {
+  console.log(req.body);
+  if (req.body.id === undefined) {
+    res.status(406).send({ message: "input error" });
+  } else {
+    const ret = await reservationDelete({ uuid: req.body.id.trim() });
+    console.log(ret);
+    if (ret === "uuid not found")
+      res.status(406).send({ message: "uuid not found" });
+    else if (ret === "success")
+      res.status(200).send({ message: "reservation delete success" });
+    else if (ret === "input invalid")
+      res.status(406).send({ message: "input error" });
+    else
+      res
+        .status(500)
+        .send({ message: "error happenes during reservation deletion" });
   }
 });
 

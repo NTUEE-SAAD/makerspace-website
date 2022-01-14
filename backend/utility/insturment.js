@@ -153,7 +153,8 @@ const reserve = async ({ user, targetInstrument, date }) => {
   };
 };
 const inputValidation = (str) => {
-  if (str.value.match(re)) {
+  console.log(str.match(re));
+  if (str.match(re)) {
     return true;
   } else {
     return false;
@@ -185,27 +186,23 @@ const reservationModify = async ({ uuid, date }) => {
   }
 };
 const reservationDelete = async ({ uuid }) => {
-  console.log("PUT IN");
+  console.log(uuid);
   if (!inputValidation(uuid)) return "input invalid";
   const check = await checkId(uuid);
-  console.log(date);
-  const d = new Date(date);
+  var res;
   if (check[0]) {
     console.log("uuid not found");
     return "uuid not found";
   } else {
-    check[1].reservation.forEach((r) => {
+    res = check[1].reservation.filter((r) => {
       if (r.uuid === uuid) {
-        console.log(d);
-        r.date = d;
-      }
+        return false;
+      } else return true;
     });
     const model = await instrument.findOne({ name: check[1].name });
-    console.log(model.reservation, check[1].reservation);
-    model.reservation = check[1].reservation;
+    model.reservation = res;
     await model.save();
     return "success";
-
     //const target=await instrument.findOne({check[1]})
   }
 };
