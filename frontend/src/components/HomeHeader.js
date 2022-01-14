@@ -21,7 +21,7 @@ export const HomeHeader = () => {
               href="https://ntueesaad.notion.site/d7c0947ce7fe4628851125032cde27b9"
               target="_blank"
             >
-              Docunmentation
+              Documentation
             </Typography.Link>
           </Menu.Item>
         </Menu>
