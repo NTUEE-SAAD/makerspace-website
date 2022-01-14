@@ -6,8 +6,16 @@ import { dataFind, dataInit } from "./upload";
 import { init, getStatus } from "./utility/insturment";
 import bodyParser from "body-parser";
 require("dotenv").config();
+const session = require("express-session");
 const app = express();
-
+app.use(
+  session({
+    secret: "mySecret",
+    name: "user",
+    saveUninitialized: false,
+    resave: true,
+  })
+);
 app.use(express.json());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -40,7 +48,6 @@ mongoose
   .then((res) => console.log("mongo db connection created"));
 
 dataInit();
-console.log("hehe");
 
 (async () => {
   await init();

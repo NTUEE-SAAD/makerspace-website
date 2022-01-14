@@ -7,15 +7,15 @@ const dataInit = async () => {
   const checkData = await Staff.find();
   var hashes = [];
   const passwords = ["123123123", "234234234", "345345345", "456456456"];
-
+  //console.log(bcrypt.compareSync(passwords[0], bcrypt.hashSync(passwords[0])));
   for (var i = 0; i < passwords.length; i++) {
     const hash = await bcrypt.hash(passwords[i], saltRounds);
     hashes.push(hash);
   }
   const example = [
     {
-      name: "莊詠翔",
-      password: hashes[0],
+      name: "eleson",
+      password: bcrypt.hashSync(passwords[0]),
       time: [
         {
           day: "Mon",
@@ -71,9 +71,8 @@ const dataInit = async () => {
       ],
     },
   ];
-  if (checkData.length !== 4) {
+  if (checkData.length === 4) {
     await Staff.deleteMany({});
-    console.log("HI");
     await Staff.insertMany(example);
   }
 };

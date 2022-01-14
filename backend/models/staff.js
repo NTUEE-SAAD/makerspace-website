@@ -28,7 +28,10 @@ const StaffSchema = Schema(
         },
       },
     ],
-    onduty: { type: Date },
+    onduty: {
+      type: Date,
+      required: false,
+    },
   },
 
   {

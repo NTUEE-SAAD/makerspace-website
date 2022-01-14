@@ -12,9 +12,9 @@ export default class Header extends React.PureComponent {
       case monthlyMode:
         return (
           <React.Fragment>
-            <span className={styles.thickText}>{monthName}</span>
+            <span className={styles.thickText}>{year}</span>
             &nbsp;
-            <span className={styles.thinText}>{year}</span>
+            <span className={styles.thinText}>{monthName}</span>
           </React.Fragment>
         );
     }
