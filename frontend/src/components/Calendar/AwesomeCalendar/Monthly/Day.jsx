@@ -67,7 +67,6 @@ export default class Day extends React.PureComponent {
   returnEventList() {
     const { events } = this.props;
     if (Array.isArray(events) && events.length) {
-      console.log(events);
       let displayEvents = events.slice(0, this.state.eventNumber);
       return (
         <div className={styles.dayCellEventWrapper}>
@@ -79,7 +78,6 @@ export default class Day extends React.PureComponent {
 
   returnEvents(events) {
     return events.map((event) => {
-      console.log("returnEvents");
       return (
         <Event
           height={16}

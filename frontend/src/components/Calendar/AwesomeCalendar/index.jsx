@@ -34,7 +34,6 @@ class Calendar extends React.PureComponent {
   // necessary
   returnCalendar() {
     const events = formatEvents(this.props.events);
-    console.log("function: returnCalendar")
     switch (this.state.mode) {
       case monthlyMode:
         return (
@@ -52,7 +51,6 @@ class Calendar extends React.PureComponent {
 
   // needs modify
   onClickDay(date) {
-    console.log(date)
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
@@ -71,7 +69,6 @@ class Calendar extends React.PureComponent {
 
   // necessary
   onClickPrev() {
-    console.log("function: onClickPrev")
     const { mode, year, month, day } = this.state;
     const details = calendarDetails(mode, year, month, day);
     this.setState({ ...details.prev }, this.onChange);
@@ -79,7 +76,6 @@ class Calendar extends React.PureComponent {
 
   // necessary
   onClickNext() {
-    console.log("function: onClickNext")
     const { mode, year, month, day } = this.state;
     const details = calendarDetails(mode, year, month, day);
     this.setState({ ...details.next }, this.onChange);
@@ -88,7 +84,6 @@ class Calendar extends React.PureComponent {
 
   // necessary
   onChange() {
-    console.log("function: onChange")
     if (this.props.onChange) {
       this.props.onChange(this.getDetails());
     }
@@ -96,7 +91,6 @@ class Calendar extends React.PureComponent {
 
   // necessary
   returnHeader() {
-    console.log("function: returnHeader")
     const { mode, year, month, day } = this.state;
     const props = {
       ...calendarDetails(mode, year, month, day),

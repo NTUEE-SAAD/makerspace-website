@@ -16,8 +16,9 @@ const test = [
 
 export const HomeContent = () => {
   const [events, setEvents] = useState([]);
-  useEffect(() => {
-    setEvents(request({ method: "get", url:'/status'}));
+  useEffect(async () => {
+    console.log(await request({method:'get', url:'/'}));
+    setEvents(test);
   }, []);
 
   return (
