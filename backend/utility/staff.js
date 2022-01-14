@@ -38,17 +38,12 @@ const hashPassword = async (password) => {
 const handleSignIn = async (Name, Password, res, token) => {
   if (token) {
     console.log("remember");
-    res.status(200).send({
-      data: "success",
-    });
+
     return true;
   }
   const user = await Staff.findOne({ name: Name });
   if (user) {
     if (bcrypt.compareSync(Password, user.password)) {
-      res.status(200).send({
-        data: "success",
-      });
       return true;
     } else {
       res.status(403).send({
