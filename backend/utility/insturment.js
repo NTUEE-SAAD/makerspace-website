@@ -1,6 +1,7 @@
 import instrument from "../models/instrument";
 import { v4 } from "uuid";
-
+import emailsender from "./mailer";
+import { contentGenerator, subjectGenerator } from "./reservationTemplate";
 //[must] initialize data
 const InstrumentList = {
   "X1E-Plus": {
@@ -127,6 +128,7 @@ const setBusyTime = async ({ name, duration }) => {
   await target.save();
   return "success";
 };
+
 const reserve = async ({ user, targetInstrument, date }) => {
   console.log(targetInstrument);
   const target = await instrument.findOne({ name: targetInstrument });
@@ -142,6 +144,19 @@ const reserve = async ({ user, targetInstrument, date }) => {
     date: new Date(date),
   });
   await target.save();
+  emailsender({
+    target: user.email,
+    content: contentGenerator({
+      data: {
+        user: user.name,
+        date: new Date(),
+        reservationDate: new Date(date),
+        instrument: targetInstrument,
+        id: reservationId,
+      },
+    }),
+    subject: subjectGenerator(),
+  });
   return {
     message: "success",
     data: {
