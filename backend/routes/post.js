@@ -1,4 +1,3 @@
-import e from "express";
 import express from "express";
 import {
   getPost,
@@ -9,7 +8,8 @@ import {
 } from "../utility/post";
 const router = express.Router();
 router.get("/", (req, res) => {
-  getPost().then((r) => {
+  console.log(req.body);
+  getPost(req.body).then((r) => {
     if (r !== undefined) {
       res.status(200).send(r);
     }

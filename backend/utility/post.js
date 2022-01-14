@@ -1,9 +1,16 @@
 import posts from "../models/post";
 import { v4 } from "uuid";
-const getPost = async () => {
-  console.log("Getting all");
-  const res = posts.find();
-  return res;
+const getPost = async (data) => {
+  console.log(data);
+  if (data !== {}) {
+    const query = {};
+    if (data.title) query["title"] = data.title;
+    if (data.description) query["description"] = { $all: data.description };
+    if (data.id) query["uuid"] = data.id;
+    const res = await posts.find(query);
+    console.log(res);
+    return res;
+  }
 };
 
 const checkId = async (id) => {
