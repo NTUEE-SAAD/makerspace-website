@@ -2,12 +2,12 @@
   display: inline-block;
   box-sizing: border-box;
   position: relative;
-  text-align: right;
+  text-align: left;
   overflow: hidden;
   cursor: pointer;
   width: calc(100% / 7);
   height: 90px;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
 }
 
 .dayCell:hover{
@@ -16,7 +16,7 @@
 
 .dayCell .dayDate {
   display: block;
-  text-align: right;
+  text-align: left;
   padding: 3px;
   position: relative;
   -webkit-user-select: none;

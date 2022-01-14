@@ -1,10 +1,10 @@
-import React from 'react';
-import styles from './Day.styles.module.css';
-import classnames from 'classnames';
-import Event from './Event';
-import { getElementHeight } from '../util/getElementHeight';
-import { getDate } from '../util/date';
-import { Tooltip, Button } from 'antd';
+import React from "react";
+import styles from "./Day.styles.module.css";
+import classnames from "classnames";
+import Event from "./Event";
+import { getElementHeight } from "../util/getElementHeight";
+import { getDate } from "../util/date";
+import { Tooltip, Button } from "antd";
 
 export default class Day extends React.PureComponent {
   constructor(props) {
@@ -39,13 +39,13 @@ export default class Day extends React.PureComponent {
   shouldShowRemainder() {
     const { events } = this.props;
     if (Array.isArray(events) && events.length) {
-      const dayCell = document.getElementById('dayCell');
+      const dayCell = document.getElementById("dayCell");
       const dayCellHeight = getElementHeight(dayCell);
 
-      const dayHeader = document.getElementById('dayHeader');
+      const dayHeader = document.getElementById("dayHeader");
       const dayHeaderHeight = getElementHeight(dayHeader);
 
-      const eventsList = document.getElementsByClassName('dayCellEvent');
+      const eventsList = document.getElementsByClassName("dayCellEvent");
       const singleEvent = eventsList[0];
       const singleEventHeight = getElementHeight(singleEvent);
 
@@ -77,7 +77,7 @@ export default class Day extends React.PureComponent {
   }
 
   returnEvents(events) {
-    return events.map(event => {
+    return events.map((event) => {
       return (
         <Event
           height={16}
@@ -114,28 +114,40 @@ export default class Day extends React.PureComponent {
   }
 
   render() {
+    const { events } = this.props;
+    let title = "";
+    if(events){
+      events.forEach(event => {
+        if(title === "") title = event.title;
+        else title = title + ", " + event.title;
+      });
+    }
+    
     return (
-      <div
-        id="dayCell"
-        className={styles.dayCell}
-        onClick={this.props.onClickDay}
-        title="prompt text"
+      <Tooltip
+        title={title}
         placement="topLeft"
-        arrowPointAtCenter
-        color='#66bac6'
+        mouseEnterDelay="0"
+        mouseLeaveDelay="0"
+        color="#66bac6"
       >
-        <div id="dayHeader" className={this.returnDayClassStyle()} >
-          <div className={this.returnDayTextClass()}>
-            <span >{this.props.date.getDate()}</span>
+        <div
+          id="dayCell"
+          className={styles.dayCell}
+          onClick={this.props.onClickDay}
+        >
+          <div id="dayHeader" className={this.returnDayClassStyle()}>
+            <div className={this.returnDayTextClass()}>
+              <span>{this.props.date.getDate()}</span>
+            </div>
           </div>
-        </div>
-        {/* <Tooltip title="prompt text">
+          {/* <Tooltip title="prompt text">
           <span>Tooltip will show on mouse enter.</span>
         </Tooltip> */}
-        {this.returnEventList()}
-        {this.returnEventRemainder()}
-      </div>
-
+          {this.returnEventList()}
+          {this.returnEventRemainder()}
+        </div>
+      </Tooltip>
     );
   }
 }
