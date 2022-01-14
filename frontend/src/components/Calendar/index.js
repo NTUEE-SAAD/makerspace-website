@@ -26,8 +26,7 @@ const exampleEvents = [
   },
 ];
 
-export const Calendar = (props) => {
-  const { events } = props;
+export const Calendar = ({events}) => {
   return (
     <>
       <Text.SectionTitle.Black>Calendar</Text.SectionTitle.Black>
