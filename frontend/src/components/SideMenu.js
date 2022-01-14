@@ -1,7 +1,7 @@
 import { Menu, Dropdown } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 let Item = styled(Menu.Item)`
   width: 10vw;
@@ -11,13 +11,9 @@ let Item = styled(Menu.Item)`
 const menu = (
   <Menu>
     <Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.antgroup.com"
-      >
+      <Link to="/home/about">
         預約
-      </a>
+      </Link>
     </Item>
     <Item>
       <a
@@ -49,7 +45,13 @@ export const SideMenu = () => {
         className="ant-dropdown-link"
         onClick={(e) => e.preventDefault()}
       >
-        <MenuOutlined style={{ fontSize: "24px", color: "white", transform: "translateY(4px)" }} />
+        <MenuOutlined
+          style={{
+            fontSize: "24px",
+            color: "white",
+            transform: "translateY(4px)",
+          }}
+        />
       </div>
     </Dropdown>
   );

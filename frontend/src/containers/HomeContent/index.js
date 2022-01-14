@@ -4,20 +4,14 @@ import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 import { instance } from "../../instance";
 
-const test = [
-  {
-    id: 3,
-    color: "#3694DF",
-    from: "2022-01-25T13:00:00+00:00",
-    to: "2022-01-25T20:00:00+00:00",
-    title: "專題說明會",
-  },
-];
-
 export const HomeContent = () => {
   const [events, setEvents] = useState([]);
-  useEffect(async () => {
-    setEvents(await instance.get("/event"));
+
+  useEffect(() => {
+    const refreshEvents = async () => {
+      setEvents(await instance.get("/event"));
+    };
+    refreshEvents();
   }, []);
 
   return (
