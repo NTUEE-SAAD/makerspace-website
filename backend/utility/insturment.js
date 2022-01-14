@@ -119,7 +119,7 @@ const setBusyTime = async ({ name, duration }) => {
     (duration.hours | 0) * 60 +
     (duration.minutes | 0);
   const target = await instrument.findOne({ name: name });
-  const until = new Date(start.getTime() + d * 10 * 1000);
+  const until = new Date(start.getTime() + d * 60 * 1000);
 
   target.busyBegin = start;
   target.busyUntil = until;
@@ -127,6 +127,7 @@ const setBusyTime = async ({ name, duration }) => {
   return "success";
 };
 const reserve = async ({ user, targetInstrument, date }) => {
+  console.log(targetInstrument);
   const target = await instrument.findOne({ name: targetInstrument });
   var reservationId;
   do {
