@@ -3,7 +3,6 @@ import faker from "faker";
 import styles from "./horse.module.css";
 
 export const Horse = ({ data: { title, detail, image } }) => {
-  console.log(styles);
   return (
     <div style={{ position: "relative", height: "60vh" }}>
       <Image
