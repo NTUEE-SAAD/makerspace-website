@@ -1,5 +1,5 @@
 import { Button, Modal } from "antd";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ReservationForm from "./ReservationForm";
 
 export const Reservation = (props) => {
@@ -10,7 +10,11 @@ export const Reservation = (props) => {
     console.log(date, dateString);
   };
 
+  const formRef = useRef();
+  const handleSubmit = () => formRef.current.submit();
+  
   return (
+    
     <Modal
       title="Not submitted"
       visible={visible}
@@ -20,11 +24,13 @@ export const Reservation = (props) => {
       footer={
         <>
           <Button onClick={onCancel}>cancel</Button>
-          <Button type="primary">submit</Button>
+          <Button type="primary" onClick={handleSubmit}>
+            submit
+          </Button>
         </>
       }
     >
-      <ReservationForm />
+      <ReservationForm formRef={formRef} />
     </Modal>
   );
 };
