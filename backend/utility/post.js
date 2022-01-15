@@ -50,6 +50,7 @@ const createPost = async (data) => {
   do {
     postId = v4().slice(0, 6).toLowerCase();
   } while (!(await checkId(postId)));
+  if (data.title === "" || data.content === "") return "failed";
   try {
     const newPost = new posts({
       title: data.title,
@@ -59,11 +60,10 @@ const createPost = async (data) => {
       uuid: postId,
     });
     await newPost.save();
+    return { message: "success", id: postId };
   } catch (e) {
     return { message: "failed", error: e };
   }
-
-  return { message: "success", id: postId };
 };
 
 const modify = async ({ id, data }) => {
