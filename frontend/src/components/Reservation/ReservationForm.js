@@ -1,6 +1,7 @@
 import {
   Input,
   DatePicker,
+  TimePicker,
   Checkbox,
   Form,
   Typography,
@@ -8,84 +9,138 @@ import {
   Tooltip,
   Select,
   Button,
+  Row,
+  Col,
+  Divider,
 } from "antd";
 import { useState } from "react";
 import React from "react";
 import moment from "moment";
-
-const { Option } = Select;
+import useReservation from "./useReservation";
 
 export const ReservationForm = (props) => {
   const { formRef } = props;
 
-  const [id, setId] = useState("");
-  const [useNTUMail, setUseNTUMail] = useState(false);
-  const [privateMail, setPrivateMail] = useState("");
-  const handleChange = (setState) => {
-    return (e) => {
-      setState(e.target.value);
-      console.log(e.target.value);
-    };
-  };
-  const onUseNTUMail = () => {
-    setUseNTUMail(!useNTUMail);
-    console.log(!useNTUMail);
-  };
+  const dateFormat = "YYYY-MM-DD";
+  const {
+    name,
+    setName,
+    id,
+    setId,
+    mail,
+    setMail,
+    useNTUMail,
+    date,
+    setDate,
+    onUseNTUMail,
+    handleChange,
+  } = useReservation();
 
   const onFinish = (value) => {
     console.log("Success:", value);
   };
 
-  return (
-    <Form
-      name="complex-form"
-      onFinish={onFinish}
-      labelCol={{ span: 5 }}
-      wrapperCol={{ span: 16 }}
-      ref={formRef}
-    >
-      <Form.Item
-        label="User"
-        name="user"
-      >
-        <Input.Group compact>
-          <Form.Item
-            name={["user", "name"]}
-            noStyle
-            rules={[{ required: true, message: "Name required" }]}
-          >
-            <Input placeholder="Input Name" />
-          </Form.Item>
-          <Form.Item
-            name={["user", "id"]}
-            noStyle
-            rules={[{ required: true, message: "student ID required" }]}
-          >
-            <Input placeholder="Input Student ID" />
-          </Form.Item>
-        </Input.Group>
-      </Form.Item>
+  function onChange(value, dateString) {
+    console.log("Formatted Selected Time: ", value.format());
+  }
 
-      <Form.Item label="Email">
-        <>
-          <Checkbox onChange={onUseNTUMail} checked={useNTUMail}>
+  return (
+    <>
+      <Row gutters={[15, 32]} align="middle">
+        <Col span={6} align="right" justify="center">
+          Your Name:
+        </Col>
+        <Col span={1} />
+        <Col span={15}>
+          <Input
+            style={{ width: "80%" }}
+            size="default"
+            value={name}
+            onChange={handleChange(setName)}
+            placeholder="Your Name"
+          />
+        </Col>
+        <Col span={3}></Col>
+      </Row>
+      <Row gutters={[15, 32]} align="middle">
+        <Col span={6} align="right" justify="center">
+          Student ID:
+        </Col>
+        <Col span={1} />
+        <Col span={15}>
+          <Input
+            style={{ width: "80%" }}
+            size="default"
+            value={id}
+            onChange={handleChange(setId)}
+            placeholder="Student ID"
+          />
+        </Col>
+        <Col span={3}></Col>
+      </Row>
+      <Divider />
+      <Row gutters={[15, 32]} align="middle">
+        <Col span={6} align="right" justify="center">
+          Date & Time:
+        </Col>
+        <Col span={1} />
+        <Col span={15}>
+          <DatePicker
+            defaultValue={date}
+            format={"YYYY-MM-DD"}
+            style={{ width: "80%" }}
+          />
+          <TimePicker
+            defaultValue={moment()}
+            format={"hh:mm:ss"}
+            style={{ width: "80%" }}
+          />
+        </Col>
+        <Col span={3}></Col>
+      </Row>
+      <Divider style={{ margin: "12 0" }} />
+      <Row gutters={[15, 32]} align="middle">
+        <Col span={6} align="right" justify="center">
+          
+        </Col>
+        <Col span={1} />
+        <Col span={15}>
+          <Checkbox
+            onChange={onUseNTUMail}
+            checked={useNTUMail}
+            style={{ width: "100%" }}
+          >
             Use NTU Mail
           </Checkbox>
-          <Form.Item label="Email" name={["Email", "name"]} noStyle>
-              <Input
-                placeholder="email"
-                // value={useNTUMail ? id + "@ntu.edu.tw" : privateMail}
-                value = "lll"
-                onChange={
-                  useNTUMail ? onUseNTUMail : handleChange(setPrivateMail)
-                }
-              />
-            </Form.Item>
+        </Col>
+        <Col span={3}></Col>
+      </Row>
+      <Row gutters={[15, 32]} align="middle">
+        <Col span={6} align="right" justify="center">
+          Email:
+        </Col>
+        <Col span={1} />
+        <Col span={15}>
+          <Input
+            style={{ width: "80%" }}
+            size="default"
+            value={mail}
+            onChange={setMail}
+          />
+        </Col>
+        <Col span={3}></Col>
+      </Row>
+      <Row gutters={[15, 32]} align="middle">
+        <Col span={6} align="right" justify="center">
+        </Col>
+        <Col span={1} />
+        <Col span={15}>
           <Typography.Text type="secondary">
-            Fill in to receive Reservation Token via email
+            Fill to receive Token via mail
           </Typography.Text>
-        </>
-      </Form.Item>
-    </Form>
+        </Col>
+        <Col span={3}></Col>
+      </Row>
+    </>
   );
 };
