@@ -8,18 +8,15 @@ import {
   Col,
   Divider,
 } from "antd";
-import moment from "moment";
-import useReservation from "./useReservation";
 
 export const ReservationForm = (props) => {
-
   const {
     name,
     setName,
     id,
     setId,
-    mail,
-    setMail,
+    email,
+    setEmail,
     useNTUMail,
     datetime,
     setDate,
@@ -108,8 +105,8 @@ export const ReservationForm = (props) => {
           <Input
             style={{ width: "80%" }}
             size="default"
-            value={mail}
-            onChange={setMail}
+            value={email}
+            onChange={setEmail}
           />
         </Col>
         <Col span={3}></Col>

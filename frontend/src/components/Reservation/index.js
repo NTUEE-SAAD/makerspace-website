@@ -1,5 +1,4 @@
 import { Button, Modal } from "antd";
-import { useState } from "react";
 import React from "react";
 import { ReservationForm } from "./ReservationForm";
 import useReservation from "./useReservation";
@@ -12,8 +11,8 @@ export const Reservation = (props) => {
     setName,
     id,
     setId,
-    mail,
-    setMail,
+    email,
+    setEmail,
     useNTUMail,
     date,
     setDatetime,
@@ -54,8 +53,8 @@ export const Reservation = (props) => {
         setName={setName}
         id={id}
         setId={setId}
-        mail={mail}
-        setMail={setMail}
+        email={email}
+        setEmail={setEmail}
         useNTUMail={useNTUMail}
         date={date}
         setDate={setDate}

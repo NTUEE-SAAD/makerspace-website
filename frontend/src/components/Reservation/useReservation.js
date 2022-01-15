@@ -58,9 +58,6 @@ const useReservation = () => {
     setId("");
     console.log(1);
     setPrivateMail("");
-    console.log(setEmail);
-    setEmail("");
-    console.log(1);
     setUseNTUMail(false);
     console.log(1);
     setDatetime("");
@@ -74,8 +71,8 @@ const useReservation = () => {
     setId,
     privateMail,
     setPrivateMail,
-    mail: email,
-    setMail: setEmail,
+    email,
+    setEmail,
     useNTUMail,
     datetime,
     setDate,
