@@ -24,7 +24,7 @@ export const Progress = () => {
     <>
       {desktopMode ? (
         <>
-          <Text.SectionTitle.Black>Instruments</Text.SectionTitle.Black>
+          <Text.SectionTitle.Black>機台</Text.SectionTitle.Black>
           {instruments.map(({ name, busyBegin, busyUntil, healthy }) => (
             <Row gutter={[16, vgut]} key={uuid()}>
               <Col span={24}>
@@ -41,7 +41,7 @@ export const Progress = () => {
       ) : (
         <>
           <Text.SectionTitle.Black level={2}>
-            Instruments
+            機台
           </Text.SectionTitle.Black>
           <Row gutter={[16, vgut]}>
             <Col span={12}>

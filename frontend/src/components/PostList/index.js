@@ -36,7 +36,7 @@ export const PostList = ({ isStaff = false }) => {
         handleSubmit={handleSubmit}
       />
       <Row justify="space-between">
-        <Text.SectionTitle.Black>Posts</Text.SectionTitle.Black>
+        <Text.SectionTitle.Black>貼文</Text.SectionTitle.Black>
         {isStaff && (
           <Button type="primary" onClick={handleNewPost}>
             new

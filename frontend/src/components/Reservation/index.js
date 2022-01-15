@@ -37,14 +37,14 @@ export const Reservation = (props) => {
 
   return (
     <Modal
-      title={`${instrument} Reservation`}
+      title={`${instrument} 預約`}
       visible={visible}
       onCancel={handleCancel}
       footer={
         <>
-          <Button onClick={onCancel}>cancel</Button>
-          <Button type="primary" onClick={handleClick}>
-            submit
+          <Button onClick={onCancel}>關閉</Button>
+          <Button type="primary" onClick={handleSubmit}>
+            預約
           </Button>
         </>
       }
