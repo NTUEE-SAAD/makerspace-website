@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Layout, ConfigProvider } from "antd";
-import { SearchItem } from "../../components";
+import { SearchItem, BorrowItem } from "../../components";
 import zh_TW from "antd/lib/locale/zh_TW";
 export const Items = () => {
+  const [toborrow, setToborrow] = useState([]);
   return (
     <ConfigProvider locale={zh_TW}>
       <Layout>
@@ -12,7 +14,8 @@ export const Items = () => {
             justifyContent: "center",
           }}
         >
-          <SearchItem />
+          <SearchItem toborrow={toborrow} setToborrow={setToborrow} />
+          <BorrowItem toborrow={toborrow} setToborrow={setToborrow} />
         </Layout.Content>
       </Layout>
     </ConfigProvider>
