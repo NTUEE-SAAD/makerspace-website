@@ -5,7 +5,7 @@ const emailsender = async (data) => {
     service: "gmail",
     auth: {
       user: "ntueemakerspace@gmail.com",
-      pass: "ntueesaad",
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
