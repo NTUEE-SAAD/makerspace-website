@@ -3,7 +3,12 @@ import { UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { instance } from "../instance";
 import styled from "styled-components";
+<<<<<<< HEAD
 import { useState } from "react";
+=======
+import { instance } from "../instance";
+
+>>>>>>> staffheader change
 const LogoImage = styled.img`
   height: 54px;
   width: auto;
@@ -11,15 +16,42 @@ const LogoImage = styled.img`
 `;
 
 export const StaffHeader = () => {
+<<<<<<< HEAD
+=======
+  const displayStatus = (payload) => {
+    if (payload.msg) {
+      const { type, msg } = payload;
+      const content = {
+        content: msg,
+        duration: 0.5,
+      };
+      switch (type) {
+        case "success":
+          message.success(content);
+          break;
+        case "error":
+        default:
+          message.error(content);
+          break;
+      }
+    }
+  };
+
+>>>>>>> staffheader change
   const [signedIn, setSignedIn] = useState(false);
 
   const checkLogin = async () => {
     const status = await instance.get("/staff/signin");
+<<<<<<< HEAD
+=======
+    //console.log(remember.data);
+>>>>>>> staffheader change
     if (status.data.data === "success") {
       setSignedIn(true);
     }
   };
 
+<<<<<<< HEAD
   const signOut = () => {
     instance.delete("/staff/signout");
     checkLogin();
@@ -27,6 +59,8 @@ export const StaffHeader = () => {
   };
   checkLogin();
 
+=======
+>>>>>>> staffheader change
   return (
     <Row justify="space-around" align="center">
       <Col span={6}>
@@ -49,7 +83,11 @@ export const StaffHeader = () => {
             <Menu.Item
               key="4"
               icon={<UserOutlined></UserOutlined>}
+<<<<<<< HEAD
               onClick={signOut}
+=======
+              onClick={instance.post("/staff/signout")}
+>>>>>>> staffheader change
             >
               Sign Out
             </Menu.Item>
