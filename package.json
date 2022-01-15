@@ -4,5 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/NTUEE-SAAD/makerspace-website.git",
   "author": "elesonchuang <b08901093@ntu.edu.tw>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "cd backend && yarn && yarn deploy",
+    "heroku-postbuild": "cd frontend && yarn && yarn build"
+  }
 }
