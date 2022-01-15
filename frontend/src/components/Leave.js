@@ -52,7 +52,7 @@ export const Leave = () => {
 
   return (
     <div>
-      <Text.SectionTitle.Black>Leave Application</Text.SectionTitle.Black>
+      <Text.SectionTitle.Black>管理員請假</Text.SectionTitle.Black>
       <div>
         <DatePicker onChange={dateChange} />
         <DatePicker onChange={timeChange} picker="time" />
@@ -61,7 +61,7 @@ export const Leave = () => {
           onChange={(e) => setReason(e.target.value)}
         ></Input>
         <Button type="primary" onClick={submit}>
-          Submit
+          提交
         </Button>
       </div>
     </div>

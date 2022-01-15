@@ -91,7 +91,7 @@ export const Instrument = ({ name, begin, end, healthy }) => {
                 disabled={!isFree || !healthy}
                 onClick={handleBook}
               >
-                book
+                預約
               </Button>
             </Col>
           </Row>

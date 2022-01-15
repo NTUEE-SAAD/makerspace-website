@@ -23,7 +23,7 @@ export const Reservation = (props) => {
     setTime,
     clearData,
   } = useReservation();
-  
+
   const handleCancel = () => {
     clearData();
     onCancel();
@@ -36,14 +36,14 @@ export const Reservation = (props) => {
 
   return (
     <Modal
-      title={`${instrument} Reservation`}
+      title={`${instrument} 預約`}
       visible={visible}
       onCancel={handleCancel}
       footer={
         <>
-          <Button onClick={onCancel}>cancel</Button>
+          <Button onClick={onCancel}>關閉</Button>
           <Button type="primary" onClick={handleClick}>
-            submit
+            預約
           </Button>
         </>
       }
