@@ -71,7 +71,7 @@ const dataInit = async () => {
       ],
     },
   ];
-  if (checkData.length === 4) {
+  if (checkData.length !== 4) {
     await Staff.deleteMany({});
     await Staff.insertMany(example);
   }
