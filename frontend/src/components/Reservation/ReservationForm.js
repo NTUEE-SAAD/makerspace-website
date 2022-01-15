@@ -8,11 +8,8 @@ import {
   Col,
   Divider,
 } from "antd";
-import moment from "moment";
-import useReservation from "./useReservation";
 
 export const ReservationForm = (props) => {
-
   const {
     name,
     setName,
