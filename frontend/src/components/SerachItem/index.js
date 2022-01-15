@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import ProTable, { TableDropdown } from "@ant-design/pro-table";
-import instance from "../../instance";
+import { instance } from "../../instance";
 import { Text } from "../../components";
 const addItem = (e) => {
   console.log(e.target);
