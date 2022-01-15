@@ -1,61 +1,91 @@
-import { Input, DatePicker, Checkbox, Form, Button, Select } from "antd";
-import { useEffect } from "react";
-import { useReservation } from "./useReservation";
-import { name, setName, email, setEmail, id, setId } from "./useReservation";
+import {
+  Input,
+  DatePicker,
+  Checkbox,
+  Form,
+  Typography,
+  Space,
+  Tooltip,
+  Select,
+  Button,
+} from "antd";
+import { useState } from "react";
+import React from "react";
+import moment from "moment";
 
-const ReservationForm = (props) => {
+const { Option } = Select;
+
+export const ReservationForm = (props) => {
   const { formRef } = props;
 
+  const [id, setId] = useState("");
+  const [useNTUMail, setUseNTUMail] = useState(false);
+  const [privateMail, setPrivateMail] = useState("");
+  const handleChange = (setState) => {
+    return (e) => {
+      setState(e.target.value);
+      console.log(e.target.value);
+    };
+  };
+  const onUseNTUMail = () => {
+    setUseNTUMail(!useNTUMail);
+    console.log(!useNTUMail);
+  };
+
   const onFinish = (value) => {
-    console.log("Succesrs:", value);
+    console.log("Success:", value);
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  const { Option } = Select;
-
-  useEffect(()=>{console.log(formRef.current)}, formRef.current);
-  
   return (
-    <>
-      <Form
-        ref={formRef}
-        name="basic"
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 16 }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
+    <Form
+      name="complex-form"
+      onFinish={onFinish}
+      labelCol={{ span: 5 }}
+      wrapperCol={{ span: 16 }}
+      ref={formRef}
+    >
+      <Form.Item
+        label="User"
+        name="user"
       >
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: "Please input your username!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Student ID"
-          name="student ID"
-          rules={[{ required: true, message: "Please input your Student ID!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item label="Email Address" name="email">
-          <Input.Group compact>
-            <Select defaultValue="Use NTU Mail" dropdownMatchSelectWidth={false}>
-              <Option value="Use NTU Mail">Use NTU Mail</Option>
-              <Option value="Private Mail">Private Mail</Option>
-            </Select>
-            <Checkbox />
-            <Input />
-          </Input.Group>
-        </Form.Item>
-      </Form>
-    </>
+        <Input.Group compact>
+          <Form.Item
+            name={["user", "name"]}
+            noStyle
+            rules={[{ required: true, message: "Name required" }]}
+          >
+            <Input placeholder="Input Name" />
+          </Form.Item>
+          <Form.Item
+            name={["user", "id"]}
+            noStyle
+            rules={[{ required: true, message: "student ID required" }]}
+          >
+            <Input placeholder="Input Student ID" />
+          </Form.Item>
+        </Input.Group>
+      </Form.Item>
+
+      <Form.Item label="Email">
+        <>
+          <Checkbox onChange={onUseNTUMail} checked={useNTUMail}>
+            Use NTU Mail
+          </Checkbox>
+          <Form.Item label="Email" name={["Email", "name"]} noStyle>
+              <Input
+                placeholder="email"
+                // value={useNTUMail ? id + "@ntu.edu.tw" : privateMail}
+                value = "lll"
+                onChange={
+                  useNTUMail ? onUseNTUMail : handleChange(setPrivateMail)
+                }
+              />
+            </Form.Item>
+          <Typography.Text type="secondary">
+            Fill in to receive Reservation Token via email
+          </Typography.Text>
+        </>
+      </Form.Item>
+    </Form>
   );
 };
-
-export default ReservationForm;

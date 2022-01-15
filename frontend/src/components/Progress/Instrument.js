@@ -72,7 +72,7 @@ export const Instrument = ({ name, begin, end, healthy }) => {
 
   return (
     <>
-      <Reservation visible={showModal} onCancel={handleCloseModal} />
+      <Reservation visible={showModal} onCancel={handleCloseModal} instrument={name}/>
       <Card
         title={
           <Row>
