@@ -1,5 +1,6 @@
 import Staff from "../models/staff";
 import bcrypt from "bcryptjs";
+import { GoogleAuth } from "./googleauth";
 
 const findAll = async (res) => {
   try {
@@ -74,4 +75,79 @@ const handleSignUp = async (Name, Password, Time, res) => {
   }
 };
 
-export { findAll, notifyReserve, staffOnDuty, handleSignIn, handleSignUp };
+const itemQuery = async (search, type, location, res) => {
+  try {
+    const { sheet, request } = await GoogleAuth();
+    console.log(sheet);
+    const response = (await sheet.spreadsheets.values.get(request)).data;
+    const sheetdata = response.values;
+    let searchResult = [],
+      typeResult = [],
+      Result = [];
+    if (search) {
+      sheetdata.forEach((value, i) => {
+        if (value[0].toLowerCase().includes(search.toLowerCase())) {
+          searchResult.push(value);
+        }
+      });
+      if (!searchResult) {
+      }
+    } else {
+      searchResult = sheetdata;
+    }
+    if (type && type != "all") {
+      searchResult.forEach((value, i) => {
+        if (value[1].includes(type)) {
+          typeResult.push(value);
+        }
+      });
+      if (!typeResult) {
+      }
+    } else {
+      typeResult = searchResult;
+    }
+    if (location && location != "all") {
+      typeResult.forEach((value, i) => {
+        if (value[2].includes(location)) {
+          Result.push({
+            key: `E${i}`,
+            name: value[0],
+            type: value[1],
+            location: value[2],
+            quantity: value[3],
+          });
+        }
+      });
+      if (!Result) {
+      }
+    } else {
+      typeResult.forEach((value, i) => {
+        Result.push({
+          key: `E${i}`,
+          name: value[0],
+          type: value[1],
+          location: value[2],
+          quantity: value[3],
+        });
+      });
+    }
+    console.log({ data: Result });
+    res.send({ data: Result });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const itemBorrow = async () => {};
+
+const itemReturn = async () => {};
+export {
+  findAll,
+  notifyReserve,
+  staffOnDuty,
+  handleSignIn,
+  handleSignUp,
+  itemQuery,
+  itemBorrow,
+  itemReturn,
+};
