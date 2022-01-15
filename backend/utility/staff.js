@@ -2,7 +2,7 @@ import Staff from "../models/staff.js";
 import bcrypt from "bcryptjs";
 import Item from "../models/item.js";
 import { GoogleAuth } from "./googleauth.js";
-
+let sheetdata = [];
 const findAll = async (res) => {
   try {
     const datas = await Staff.find({}, { name: 1, time: 1 });
@@ -93,8 +93,9 @@ const handleBorrow = async (body, res) => {
     });
     console.log("create", newBorrow);
     await newBorrow.save();
+    updateSheet(body.items, "-");
     res.status(200).send({
-      data: { _id: newBorrow._id, duedate: newBorrow.duedate },
+      data: { _id: newBorrow._id, duedate: newBorrow.duedate.toDateString() },
     });
   } catch (e) {
     console.log(e);
@@ -105,7 +106,8 @@ const handleBorrow = async (body, res) => {
 };
 
 const handleReturn = async (body, res) => {
-  const deletion = await Item.findByIdAndDelete(body._id);
+  console.log("returning", body);
+  const deletion = await Item.findByIdAndDelete(body.id);
   if (deletion) {
     res.status(200).send({ data: "successfully delete" });
   } else {
@@ -128,9 +130,8 @@ const handleGet = async (id, res) => {
 const itemQuery = async (search, type, location, res) => {
   try {
     const { sheet, request } = await GoogleAuth();
-    console.log(sheet);
     const response = (await sheet.spreadsheets.values.get(request)).data;
-    const sheetdata = response.values;
+    sheetdata = response.values;
     let searchResult = [],
       typeResult = [],
       Result = [];
@@ -181,11 +182,25 @@ const itemQuery = async (search, type, location, res) => {
         });
       });
     }
-    console.log({ data: Result });
+    // console.log({ data: Result });
     res.send({ data: Result });
   } catch (err) {
     console.error(err);
   }
+};
+
+const updateSheet = async (items, type) => {
+  console.log("updating", sheetdata);
+  items.forEach((item) => {
+    sheetdata.forEach((sheet, i) => {
+      if (sheet[0] === item.name) {
+        if (type === "-") {
+          console.log(`E${i}`);
+        } else {
+        }
+      }
+    });
+  });
 };
 
 export {

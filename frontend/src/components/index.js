@@ -10,4 +10,5 @@ export * from "./HomeFooter";
 export * from "./StaffHeader";
 export * from "./SerachItem";
 export * from "./BorrowItem";
+export * from "./ReturnItem";
 export * from "./Reservation";

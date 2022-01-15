@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Layout, ConfigProvider } from "antd";
-import { SearchItem, BorrowItem } from "../../components";
+import { SearchItem, BorrowItem, ReturnItem } from "../../components";
 import zh_TW from "antd/lib/locale/zh_TW";
 export const Items = () => {
   const [toborrow, setToborrow] = useState([]);
@@ -16,6 +16,7 @@ export const Items = () => {
         >
           <SearchItem toborrow={toborrow} setToborrow={setToborrow} />
           <BorrowItem toborrow={toborrow} setToborrow={setToborrow} />
+          <ReturnItem />
         </Layout.Content>
       </Layout>
     </ConfigProvider>

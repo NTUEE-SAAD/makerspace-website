@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { message, Input, Form, Button, Row } from "antd";
+import { message, Input, Form, Button, Row, notification } from "antd";
 import { EditableProTable } from "@ant-design/pro-table";
 import { Text } from "../../components";
 import { instance } from "../../instance";
@@ -9,6 +9,19 @@ const waitTime = (time = 100) => {
       resolve(true);
     }, time);
   });
+};
+const openNotificationWithIcon = (type, _id, duedate) => {
+  if (type === "error") {
+    notification[type]({
+      message: `Can not be borrowed out`,
+      description: `Please refer to Admin`,
+    });
+  } else {
+    notification[type]({
+      message: `Borrow Successfully with ID : ${_id}`,
+      description: `Please return by ${duedate}`,
+    });
+  }
 };
 const defaultData = [
   {
@@ -32,16 +45,36 @@ const defaultData = [
 ];
 export const BorrowItem = ({ toborrow, setToborrow }) => {
   const [editableKeys, setEditableRowKeys] = useState([]);
+  const [form] = Form.useForm();
   const position = "hidden";
   const handleBorrow = async (values) => {
     console.log("Success", values);
-    console.log(toborrow);
-    const {
-      data: { _id, duedate },
-    } = await instance.post("/staff/borrow", {
-      studentid: values.studentid,
-      items: toborrow,
-    });
+    if (toborrow && values.name && values.studentid) {
+      console.log("in");
+      const {
+        data: { data },
+      } = await instance.post("/staff/borrow", {
+        studentid: values.studentid,
+        items: toborrow,
+      });
+      if (data === "failed") {
+        openNotificationWithIcon("error");
+      } else {
+        openNotificationWithIcon("success", data._id, data.duedate);
+        setToborrow([]);
+        form.resetFields();
+      }
+    } else {
+      if (!values.studentid) {
+        message.error("請輸入學號");
+      }
+      if (!values.name) {
+        message.error("請輸入姓名");
+      }
+      if (!toborrow[0]) {
+        message.error("請選擇欲借用物品");
+      }
+    }
   };
   const columns = [
     {
@@ -110,6 +143,32 @@ export const BorrowItem = ({ toborrow, setToborrow }) => {
   return (
     <>
       <Text.SectionTitle.Black>借用品項</Text.SectionTitle.Black>
+      <Row
+        type="flex"
+        justify="center"
+        align="middle"
+        style={{ margin: "1vh auto" }}
+      >
+        <Form
+          form={form}
+          name="basic"
+          layout="inline"
+          onFinish={handleBorrow}
+          // onFinishFailed={onFinishFailed}
+        >
+          <Form.Item label="姓名" name="name">
+            <Input />
+          </Form.Item>
+          <Form.Item label="學號" name="studentid">
+            <Input />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              借出
+            </Button>
+          </Form.Item>
+        </Form>
+      </Row>
       <EditableProTable
         recordCreatorProps={
           position !== "hidden"
@@ -138,31 +197,6 @@ export const BorrowItem = ({ toborrow, setToborrow }) => {
           onChange: setEditableRowKeys,
         }}
       />
-      <Row
-        type="flex"
-        justify="center"
-        align="middle"
-        style={{ margin: "1vh auto" }}
-      >
-        <Form
-          name="basic"
-          layout="inline"
-          onFinish={handleBorrow}
-          // onFinishFailed={onFinishFailed}
-        >
-          <Form.Item label="姓名" name="name">
-            <Input />
-          </Form.Item>
-          <Form.Item label="學號" name="studentid">
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              借出
-            </Button>
-          </Form.Item>
-        </Form>
-      </Row>
     </>
   );
 };
