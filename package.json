@@ -1,8 +1,0 @@
-{
-  "name": "makerspace-website",
-  "packageManager": "yarn@3.1.0",
-  "scripts": {
-    "start": "cd backend && yarn && yarn deploy",
-    "heroku-postbuild": "cd frontend && yarn && yarn build"
-  }
-}
