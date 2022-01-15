@@ -24,7 +24,7 @@ export const Reservation = (props) => {
     setTime,
     clearData,
   } = useReservation();
-
+  
   const handleCancel = () => {
     clearData();
     onCancel();
@@ -43,7 +43,7 @@ export const Reservation = (props) => {
       footer={
         <>
           <Button onClick={onCancel}>關閉</Button>
-          <Button type="primary" onClick={handleClick}>
+          <Button type="primary" onClick={handleSubmit}>
             預約
           </Button>
         </>
