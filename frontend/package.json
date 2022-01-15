@@ -12,6 +12,7 @@
     "antd": "4.11.2",
     "apollo-link-ws": "^1.0.20",
     "axios": "^0.24.0",
+    "express-async-handler": "^1.2.0",
     "faker": "5.5.3",
     "graphql": "^16.2.0",
     "rc-queue-anim": "^2.0.0",

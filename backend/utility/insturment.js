@@ -1,6 +1,6 @@
-import instrument from "../models/instrument";
+import instrument from "../models/instrument.js";
 import { v4 } from "uuid";
-import emailsender from "./mailer";
+import emailsender from "./mailer.js";
 import { contentGenerator, subjectGenerator } from "./reservationTemplate";
 //[must] initialize data
 const InstrumentList = [

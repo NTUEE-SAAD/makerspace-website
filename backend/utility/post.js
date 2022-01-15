@@ -1,4 +1,4 @@
-import posts from "../models/post";
+import posts from "../models/post.js";
 import { v4 } from "uuid";
 const getPost = async (data) => {
   console.log(data);

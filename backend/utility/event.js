@@ -1,4 +1,4 @@
-import Event from "../models/event";
+import Event from "../models/event.js";
 import { v4 } from "uuid";
 const findAll = async (res) => {
   try {

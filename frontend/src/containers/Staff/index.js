@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import SignIn from "./SignIn";
 import { StaffPage } from "./SraffPage";
 import { message } from "antd";
-import {instance} from "../../instance";
-
+import { instance } from "../../instance";
+const asyncHandler = require("express-async-handler");
 const LOCALSTORAGE_KEY = "save-me";
 
 export const Staff = () => {
@@ -31,6 +31,10 @@ export const Staff = () => {
       localStorage.setItem(LOCALSTORAGE_KEY, me);
     }
   }, [signedIn]); // useEffect(func, change_var)
+  asyncHandler(async () => {
+    const remember = await instance.get("/staff/signin");
+    console.log(remember.data);
+  });
 
   const displayStatus = (payload) => {
     if (payload.msg) {

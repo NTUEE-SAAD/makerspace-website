@@ -1,6 +1,6 @@
-import Staff from "../models/staff";
+import Staff from "../models/staff.js";
 import bcrypt from "bcryptjs";
-import Item from "../models/item";
+import Item from "../models/item.js";
 import { GoogleAuth } from "./googleauth";
 
 const findAll = async (res) => {
@@ -86,7 +86,6 @@ const handleBorrow = async (body, res) => {
   try {
     var d = new Date();
     d = addDays(d, 14);
-    console.log(d);
     const newBorrow = new Item({
       studentid: body.studentid,
       items: body.items,

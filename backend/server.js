@@ -1,11 +1,11 @@
 import express from "express";
-import staffRoute from "./routes/staff";
-import instrumentRoute from "./routes/instrument";
-import eventRoute from "./routes/event";
+import staffRoute from "./routes/staff.js";
+import instrumentRoute from "./routes/instrument.js";
+import eventRoute from "./routes/event.js";
 import mongoose from "mongoose";
-import { dataFind, dataInit } from "./upload";
-import { init } from "./utility/insturment";
-import postRoute from "./routes/post";
+import { dataFind, dataInit } from "./upload.js";
+import { init } from "./utility/insturment.js";
+import postRoute from "./routes/post.js";
 import bodyParser from "body-parser";
 require("dotenv").config();
 const session = require("express-session");

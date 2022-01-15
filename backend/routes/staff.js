@@ -9,7 +9,7 @@ import {
   handleReturn,
   handleGet,
   itemQuery,
-} from "../utility/staff";
+} from "../utility/staff.js";
 const router = express.Router();
 const { google } = require("googleapis");
 router.get("/", (req, res) => {
@@ -35,6 +35,15 @@ router.post("/onduty", (req, res) => {
       data: "fail",
     });
   });
+});
+
+router.get("/signin", (req, res) => {
+  const token = req.session.user;
+  if (token) {
+    res.status(200).send({ data: "success" });
+  } else {
+    res.status(200).send({ data: "no" });
+  }
 });
 
 router.post("/signin", (req, res) => {
