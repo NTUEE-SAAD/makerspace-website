@@ -58,7 +58,6 @@ const init = async () => {
 };
 const getStatus = async () => {
   const res = await instrument.find();
-  const obj = {};
   const d = new Date();
   res.forEach((value) => {
     if (value.busyUntil !== undefined) {
@@ -81,8 +80,9 @@ const getStatus = async () => {
       }
     });
   });
-  res.forEach((value) => {
-    obj[value.name] = {
+  const obj = res.map((value) => {
+    return {
+      name: value.name,
       available: value.busyUntil !== undefined ? false : true,
       healthy: value.healthy,
       busyUntil: value.busyUntil !== undefined ? value.busyUntil : null,
