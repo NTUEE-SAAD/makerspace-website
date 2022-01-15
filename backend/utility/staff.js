@@ -1,6 +1,8 @@
 import Staff from "../models/staff";
 import bcrypt from "bcryptjs";
 import Item from "../models/item";
+import { GoogleAuth } from "./googleauth";
+
 const findAll = async (res) => {
   try {
     const datas = await Staff.find({}, { name: 1, time: 1 });
@@ -115,6 +117,69 @@ const handleGet = async (id, res) => {
     });
 };
 
+const itemQuery = async (search, type, location, res) => {
+  try {
+    const { sheet, request } = await GoogleAuth();
+    console.log(sheet);
+    const response = (await sheet.spreadsheets.values.get(request)).data;
+    const sheetdata = response.values;
+    let searchResult = [],
+      typeResult = [],
+      Result = [];
+    if (search) {
+      sheetdata.forEach((value, i) => {
+        if (value[0].toLowerCase().includes(search.toLowerCase())) {
+          searchResult.push(value);
+        }
+      });
+      if (!searchResult) {
+      }
+    } else {
+      searchResult = sheetdata;
+    }
+    if (type && type != "all") {
+      searchResult.forEach((value, i) => {
+        if (value[1].includes(type)) {
+          typeResult.push(value);
+        }
+      });
+      if (!typeResult) {
+      }
+    } else {
+      typeResult = searchResult;
+    }
+    if (location && location != "all") {
+      typeResult.forEach((value, i) => {
+        if (value[2].includes(location)) {
+          Result.push({
+            key: `E${i}`,
+            name: value[0],
+            type: value[1],
+            location: value[2],
+            quantity: value[3],
+          });
+        }
+      });
+      if (!Result) {
+      }
+    } else {
+      typeResult.forEach((value, i) => {
+        Result.push({
+          key: `E${i}`,
+          name: value[0],
+          type: value[1],
+          location: value[2],
+          quantity: value[3],
+        });
+      });
+    }
+    console.log({ data: Result });
+    res.send({ data: Result });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export {
   findAll,
   notifyReserve,
@@ -124,4 +189,5 @@ export {
   handleBorrow,
   handleReturn,
   handleGet,
+  itemQuery,
 };

@@ -31,7 +31,6 @@ const InstrumentSchema = Schema({
   },
   name: {
     type: String,
-    lowercase: true,
     required: [true, "Name is required"],
   },
   busyUntil: {

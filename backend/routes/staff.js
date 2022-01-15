@@ -8,8 +8,10 @@ import {
   handleBorrow,
   handleReturn,
   handleGet,
+  itemQuery,
 } from "../utility/staff";
 const router = express.Router();
+const { google } = require("googleapis");
 router.get("/", (req, res) => {
   findAll(res);
 });
@@ -82,66 +84,7 @@ router.post("/signup", (req, res) => {
 });
 router.get("/search", (req, res) => {
   const { search, type, location } = req.query;
-  console.log(
-    `search index : ${search} / type : ${type} / location : ${location} `
-  );
-  let searchResult = [],
-    typeResult = [],
-    Result = [];
-  const sheetdata = [
-    ["STM32", "board", "A", "10"],
-    ["MPU6050", "module", "B", "15"],
-    ["MG-90", "motor", "C", "20"],
-  ];
-  if (search) {
-    sheetdata.forEach((value, i) => {
-      if (value[0].includes(search)) {
-        searchResult.push(value);
-      }
-    });
-    if (!searchResult) {
-    }
-  } else {
-    searchResult = sheetdata;
-  }
-  if (type && type != "all") {
-    searchResult.forEach((value, i) => {
-      if (value[1].includes(type)) {
-        typeResult.push(value);
-      }
-    });
-    if (!typeResult) {
-    }
-  } else {
-    typeResult = searchResult;
-  }
-  if (location && location != "all") {
-    typeResult.forEach((value, i) => {
-      if (value[2].includes(location)) {
-        Result.push({
-          key: `E${i}`,
-          name: value[0],
-          type: value[1],
-          location: value[2],
-          quantity: value[3],
-        });
-      }
-    });
-    if (!Result) {
-    }
-  } else {
-    typeResult.forEach((value, i) => {
-      Result.push({
-        key: `E${i}`,
-        name: value[0],
-        type: value[1],
-        location: value[2],
-        quantity: value[3],
-      });
-    });
-  }
-  console.log({ data: Result });
-  res.send({ data: Result });
+  itemQuery(search, type, location, res);
 });
 
 router.post("/borrow", (req, res) => {

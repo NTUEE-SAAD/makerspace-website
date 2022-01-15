@@ -94,11 +94,7 @@ export const SearchItem = () => {
   const actionRef = useRef();
   return (
     <>
-      <Text.SectionTitle.Black
-        style={{ marginTop: "5vh", justifyContent: "center" }}
-      >
-        物品搜尋
-      </Text.SectionTitle.Black>
+      <Text.SectionTitle.Black>物品搜尋</Text.SectionTitle.Black>
       <ProTable
         columns={columns}
         actionRef={actionRef}

@@ -5,7 +5,13 @@ export const Items = () => {
   return (
     <ConfigProvider locale={zh_TW}>
       <Layout>
-        <Layout.Content style={{ width: "70%", margin: "auto" }}>
+        <Layout.Content
+          style={{
+            width: "70%",
+            margin: "5vh auto",
+            justifyContent: "center",
+          }}
+        >
           <SearchItem />
         </Layout.Content>
       </Layout>

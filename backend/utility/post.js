@@ -33,9 +33,6 @@ const testDataInit = async () => {
       content: "Hi I'm marco",
       description: ["m", "aaa", "bbb", "ccc"],
     });
-    await createPost({ title: "john", content: "Hi I'm john" });
-    await createPost({ title: "ric", content: "Hi I'm ric" });
-    await createPost({ title: "kevin", content: "Hi I'm kevin" });
     await createPost({
       title: "ben",
       content: "Hi I'm ben",
