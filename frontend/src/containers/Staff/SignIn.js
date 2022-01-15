@@ -74,20 +74,6 @@ const SignIn = ({
                 setSignedIn(true);
               }
             }
-<<<<<<< HEAD
-          }}
-        ></Input.Search>
-        <Input.Password
-          prefix={<LockOutlined />}
-          value={password}
-          enterButton="Sign In"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          size="large"
-          sytle={{ width: 300, margin: 50 }}
-        ></Input.Password>
-      </StyledSignIn>
-=======
           } 
         }
       ></Input.Search>
@@ -102,7 +88,6 @@ const SignIn = ({
       ></Input.Password>
       <Link to="staff/signUp">Sign  Up</Link>
     </StyledSignIn>
->>>>>>> signUp
     </>
   );
 };
