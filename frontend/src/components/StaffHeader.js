@@ -1,6 +1,5 @@
 import { Menu, Row, Col } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { LogoLink } from ".";
 import { Link } from "react-router-dom";
 import { instance } from "../instance";
 import styled from "styled-components";

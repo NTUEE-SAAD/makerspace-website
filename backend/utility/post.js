@@ -1,5 +1,5 @@
 import posts from "../models/post.js";
-import { v4 as uuidv4 } from "uuid/v4";
+import { v4 } from "uuid";
 
 const getPost = async (data) => {
   console.log(data);
@@ -48,7 +48,7 @@ const testDataInit = async () => {
 const createPost = async (data) => {
   var postId;
   do {
-    postId = uuidv4().slice(0, 6).toLowerCase();
+    postId = v4().slice(0, 6).toLowerCase();
   } while (!(await checkId(postId)));
   try {
     const newPost = new posts({
