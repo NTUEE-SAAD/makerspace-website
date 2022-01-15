@@ -15,8 +15,8 @@ export const ReservationForm = (props) => {
     setName,
     id,
     setId,
-    mail,
-    setMail,
+    email,
+    setEmail,
     useNTUMail,
     datetime,
     setDate,
@@ -105,8 +105,8 @@ export const ReservationForm = (props) => {
           <Input
             style={{ width: "80%" }}
             size="default"
-            value={mail}
-            onChange={setMail}
+            value={email}
+            onChange={setEmail}
           />
         </Col>
         <Col span={3}></Col>

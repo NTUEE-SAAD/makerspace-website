@@ -11,8 +11,8 @@ export const Reservation = (props) => {
     setName,
     id,
     setId,
-    mail,
-    setMail,
+    email,
+    setEmail,
     useNTUMail,
     date,
     setDatetime,
@@ -53,8 +53,8 @@ export const Reservation = (props) => {
         setName={setName}
         id={id}
         setId={setId}
-        mail={mail}
-        setMail={setMail}
+        email={email}
+        setEmail={setEmail}
         useNTUMail={useNTUMail}
         date={date}
         setDate={setDate}
