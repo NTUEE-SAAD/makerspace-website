@@ -16,11 +16,17 @@ export const StaffHeader = () => {
 
   const checkLogin = async () => {
     const status = await instance.get("/staff/signin");
-    //console.log(remember.data);
     if (status.data.data === "success") {
       setSignedIn(true);
     }
   };
+
+  const signOut = () => {
+    instance.delete("/staff/signout");
+    checkLogin();
+    window.location.reload();
+  };
+  checkLogin();
 
   return (
     <Row justify="space-around" align="center">
@@ -44,7 +50,7 @@ export const StaffHeader = () => {
             <Menu.Item
               key="4"
               icon={<UserOutlined></UserOutlined>}
-              onClick={instance.post("/staff/signout")}
+              onClick={signOut}
             >
               Sign Out
             </Menu.Item>

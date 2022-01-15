@@ -38,7 +38,9 @@ export const Staff = () => {
       setSignedIn(true);
     }
   };
+
   handleLogin();
+
   const displayStatus = (payload) => {
     if (payload.msg) {
       const { type, msg } = payload;
