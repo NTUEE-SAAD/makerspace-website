@@ -1,0 +1,8 @@
+.item {
+  padding: 2vh 1vw;
+  transition: all ease-in-out 0.2s;
+}
+
+.item:hover{
+  background-color: #F0F0F0
+}

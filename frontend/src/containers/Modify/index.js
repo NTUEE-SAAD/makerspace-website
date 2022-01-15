@@ -1,24 +1,34 @@
-import React, { useEffect, useState } from "react";
+import {
+  Row,
+  Col,
+  Typography,
+  DatePicker,
+  TimePicker,
+  Divider,
+  Button,
+} from "antd";
+import React, { useState } from "react";
 import ReactCodeInput from "react-code-input";
 import { request } from "../../instance";
+import moment from "moment";
 
 export const Modify = () => {
   const [pinCode, setPinCode] = useState("");
   const [date, setDate] = useState("");
   const [status, setStatus] = useState("");
-  const handlePinChange = async (e) => {
-    console.log(e);
-    setPinCode(e);
-    if (pinCode.length === 6) {
-      console.log(666);
+
+  const handlePinChange = async (newPin) => {
+    console.log(newPin);
+    setPinCode(newPin);
+    if (newPin.length === 6) {
       const res = await handleFull();
       console.log(res);
-      if (res.message === "uuid not found") {
-        console.log("uuid not found");
+      if (res === "uuid not found") {
         setStatus("id not found");
       }
     }
   };
+
   const handleFull = async () => {
     try {
       setPinCode("");
@@ -37,17 +47,50 @@ export const Modify = () => {
   };
 
   return (
-    <>
-      <ReactCodeInput
-        id="pinCode"
-        isValid={true}
-        fields={6}
-        onChange={(e) => {
-          handlePinChange(e);
-        }}
-        value={pinCode}
-      />
-      <label>{status !== undefined && status}</label>
-    </>
+    <div style={{ width: "70%", margin: "7vh auto" }}>
+      <Row gutter={[16, 64]}>
+        <Typography.Title>更改預約記錄</Typography.Title>
+      </Row>
+      <Row gutter={[16, 32]} justify="center" align="middle">
+        <Col span={5}>
+          <Typography.Title level={3}>請輸入預約id</Typography.Title>
+        </Col>
+        <Col span={10} align="center">
+          <ReactCodeInput
+            id="pinCode"
+            isValid={true}
+            fields={6}
+            onChange={handlePinChange}
+            value={pinCode}
+            touch={() => console.log("touch")}
+          />
+        </Col>
+        <Col span={5}></Col>
+      </Row>
+      <Row gutter={[16, 24]}>
+        <Divider />
+      </Row>
+      <Row gutter={[16, 60]} justify="center" align="middle">
+        <Col span={5}>
+          <Typography.Title level={3}>請輸入預約id</Typography.Title>
+        </Col>
+        <Col span={10} align="center">
+          <DatePicker
+            defaultValue={date}
+            format={"YYYY-MM-DD"}
+            style={{ width: "40%", margin: "0 10% 1vh 10%" }}
+          />
+          <TimePicker
+            defaultValue={moment()}
+            format={"hh:mm"}
+            style={{ width: "40%", margin: "1vh 10% 0 10%" }}
+          />
+        </Col>
+        <Col span={5}></Col>
+      </Row>
+      <Row gutter={[16, 24]} justify="center">
+        <Button type="primary">送出</Button>
+      </Row>
+    </div>
   );
 };
