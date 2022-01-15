@@ -35,7 +35,6 @@ export default class Header extends React.PureComponent {
 
   render() {
     const { prev, next } = this.props;
-    console.log()
     return (
       <div className={styles.calendarHeader}>
         <h1>{this.returnTitle()}</h1>

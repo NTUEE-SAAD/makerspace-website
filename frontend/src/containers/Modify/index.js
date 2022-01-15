@@ -18,7 +18,6 @@ export const Modify = () => {
   const [status, setStatus] = useState("");
 
   const handlePinChange = async (newPin) => {
-    console.log(newPin);
     setPinCode(newPin);
     if (newPin.length === 6) {
       const res = await handleFull();
@@ -62,7 +61,6 @@ export const Modify = () => {
             fields={6}
             onChange={handlePinChange}
             value={pinCode}
-            touch={() => console.log("touch")}
           />
         </Col>
         <Col span={5}></Col>

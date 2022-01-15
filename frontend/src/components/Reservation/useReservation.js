@@ -52,16 +52,11 @@ const useReservation = () => {
   };
 
   const clearData = () => {
-    console.log(1);
     setName("");
-    console.log(1);
     setId("");
-    console.log(1);
     setPrivateMail("");
     setUseNTUMail(false);
-    console.log(1);
     setDatetime("");
-    console.log(1);
   };
 
   return {
