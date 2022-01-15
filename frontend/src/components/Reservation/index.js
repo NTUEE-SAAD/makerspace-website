@@ -1,25 +1,34 @@
 import { Button, Modal } from "antd";
-import { useState} from "react";
+import { useState } from "react";
 import React from "react";
-import {ReservationForm} from "./ReservationForm";
+import { ReservationForm } from "./ReservationForm";
+import useReservation from "./useReservation";
 
 export const Reservation = (props) => {
   const { instrument, onCancel, visible } = props;
   const [modalLoading, setModalLoading] = useState(false);
 
-  const onChange = (date, dateString) => {
-    console.log(date, dateString);
-  };
-
-  const formRef = React.createRef();
-  const handleSubmit = () => formRef.current.submit();
+  const {
+    name,
+    setName,
+    id,
+    setId,
+    mail,
+    setMail,
+    useNTUMail,
+    date,
+    setDatetime,
+    setDate,
+    onUseNTUMail,
+    handleChange,
+    handleSubmit,
+  } = useReservation();
 
   return (
     <Modal
       title={`${instrument} Reservation`}
       visible={visible}
       onCancel={onCancel}
-      onChange={onChange}
       confirmLoading={modalLoading}
       footer={
         <>
@@ -30,7 +39,20 @@ export const Reservation = (props) => {
         </>
       }
     >
-      <ReservationForm formRef={formRef} />
+      <ReservationForm
+        name={name}
+        setName={setName}
+        id={id}
+        setId={setId}
+        mail={mail}
+        setMail={setMail}
+        useNTUMail={useNTUMail}
+        date={date}
+        setDate={setDate}
+        setDatetime={setDatetime}
+        onUseNTUMail={onUseNTUMail}
+        handleChange={handleChange}
+      />
     </Modal>
   );
 };

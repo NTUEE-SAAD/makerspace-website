@@ -3,11 +3,7 @@ import {
   DatePicker,
   TimePicker,
   Checkbox,
-  Form,
   Typography,
-  Space,
-  Tooltip,
-  Select,
   Button,
   Row,
   Col,
@@ -19,9 +15,7 @@ import moment from "moment";
 import useReservation from "./useReservation";
 
 export const ReservationForm = (props) => {
-  const { formRef } = props;
 
-  const dateFormat = "YYYY-MM-DD";
   const {
     name,
     setName,
@@ -30,19 +24,18 @@ export const ReservationForm = (props) => {
     mail,
     setMail,
     useNTUMail,
-    date,
+    datetime,
     setDate,
+    setTime,
+    setDatetime,
     onUseNTUMail,
     handleChange,
-  } = useReservation();
+  } = props;
 
   const onFinish = (value) => {
     console.log("Success:", value);
   };
 
-  function onChange(value, dateString) {
-    console.log("Formatted Selected Time: ", value.format());
-  }
 
   return (
     <>
@@ -86,13 +79,15 @@ export const ReservationForm = (props) => {
         <Col span={1} />
         <Col span={15}>
           <DatePicker
-            defaultValue={date}
+            value={datetime}
+            onChange={setDate}
             format={"YYYY-MM-DD"}
             style={{ width: "80%" }}
           />
           <TimePicker
-            defaultValue={moment()}
-            format={"hh:mm:ss"}
+            value={datetime}
+            onChange={setDate}
+            format={"hh:mm"}
             style={{ width: "80%" }}
           />
         </Col>
@@ -136,7 +131,7 @@ export const ReservationForm = (props) => {
         <Col span={1} />
         <Col span={15}>
           <Typography.Text type="secondary">
-            Fill to receive Token via mail
+            Fill to receive Reservation Token also
           </Typography.Text>
         </Col>
         <Col span={3}></Col>
