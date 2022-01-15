@@ -9,7 +9,7 @@ import { NewPostModal } from "../NewPostModal";
 import { useState } from "react";
 import { request } from "../../instance";
 
-export const PostList = ({ isStaff = true }) => {
+export const PostList = ({ isStaff = false }) => {
   const [showModal, setShowModal] = useState(false);
   const { posts } = usePost();
   const navigate = useNavigate();
