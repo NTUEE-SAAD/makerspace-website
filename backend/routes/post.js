@@ -29,8 +29,9 @@ router.post("/createPost", async (req, res) => {
   if (r.message === "success") {
     res.status(200).send({ message: "post created", id: r.id });
     return;
-  } else if (r.message === "failed") {
-    res.status(406).send({ message: r.error });
+  } else if (r === "failed") {
+    console.log(r);
+    res.status(406).send({ message: r });
   } else {
     res.status(500).send({ message: "error happenes when creating post" });
   }
