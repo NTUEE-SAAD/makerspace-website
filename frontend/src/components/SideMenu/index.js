@@ -1,30 +1,26 @@
-import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, Typography } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styles from "./styles.module.css";
 
-let Item = styled(Menu.Item)`
-  width: 10vw;
-  height: 7vh;
-`;
-
-const menu = (
-  <Menu>
-    <Item>
-      <Link to="/home/items">借用/查詢</Link>
-    </Item>
-    <Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.luohanacademy.com"
-      >
-        活動
-      </a>
-    </Item>
-    <Item>管理員</Item>
-  </Menu>
-);
+const menu = () => {
+  const items = [
+    <Link to="/home/items">
+      <Typography.Text>借用/查詢</Typography.Text>
+    </Link>,
+    <Link to="/home/modify">
+      <Typography.Text>更改預約記錄</Typography.Text>
+    </Link>,
+    <Typography.Text>管理員</Typography.Text>,
+  ];
+  return (
+    <Menu>
+      {items.map((item) => (
+        <div className={styles.item}>{item}</div>
+      ))}
+    </Menu>
+  );
+};
 
 export const SideMenu = () => {
   return (
