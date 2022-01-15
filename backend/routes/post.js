@@ -22,18 +22,18 @@ router.post("/init", async (_, res) => {
     res.status(200).send({ message: "initialize successful" });
   else res.status(500).send({ message: "initialize failed" });
 });
-router.post("/createPost", (req, res) => {
+router.post("/createPost", async (req, res) => {
   console.log(req.body.data);
-  createPost(req.body.data).then((r) => {
-    if (r.message === "success") {
-      res.status(200).send({ message: "post created", id: r.id });
-      return;
-    } else if (r.message === "failed") {
-      res.status(406).send({ message: r.error });
-    } else {
-      res.status(500).send({ message: "error happenes when creating post" });
-    }
-  });
+  const r = await createPost(req.body.data);
+  console.log(r);
+  if (r.message === "success") {
+    res.status(200).send({ message: "post created", id: r.id });
+    return;
+  } else if (r.message === "failed") {
+    res.status(406).send({ message: r.error });
+  } else {
+    res.status(500).send({ message: "error happenes when creating post" });
+  }
 });
 router.put("/", async (req, res) => {
   console.log(req.body);
