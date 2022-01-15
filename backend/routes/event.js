@@ -4,7 +4,7 @@ import {
   handleCreate,
   deleteAll,
   handleModify,
-} from "../utility/event";
+} from "../utility/event.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {

@@ -11,7 +11,8 @@ import {
   itemQuery,
 } from "../utility/staff.js";
 const router = express.Router();
-const { google } = require("googleapis");
+import { google } from "googleapis";
+
 router.get("/", (req, res) => {
   findAll(res);
 });

@@ -1,7 +1,7 @@
 import Staff from "../models/staff.js";
 import bcrypt from "bcryptjs";
 import Item from "../models/item.js";
-import { GoogleAuth } from "./googleauth";
+import { GoogleAuth } from "./googleauth.js";
 
 const findAll = async (res) => {
   try {

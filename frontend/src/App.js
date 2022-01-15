@@ -12,7 +12,6 @@ import {
   Items,
   StaffRoot,
   PostRoutes,
-  Reservation
 } from "./containers";
 import { PostProvider } from "./contexts";
 

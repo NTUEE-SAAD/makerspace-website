@@ -5,7 +5,7 @@ import {
   testDataInit,
   modify,
   deletePost,
-} from "../utility/post";
+} from "../utility/post.js";
 const router = express.Router();
 router.get("/", (req, res) => {
   console.log(req.body);

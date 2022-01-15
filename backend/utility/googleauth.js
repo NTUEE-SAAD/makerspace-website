@@ -1,4 +1,4 @@
-const { google } = require("googleapis");
+import { google } from "googleapis";
 
 export const GoogleAuth = async () => {
   const auth = await google.auth.getClient({

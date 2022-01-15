@@ -7,7 +7,7 @@ import {
   reservationModify,
   reservationDelete,
   healthy,
-} from "../utility/insturment";
+} from "../utility/instrument.js";
 const router = express.Router();
 
 router.get("/status", (req, res) => {

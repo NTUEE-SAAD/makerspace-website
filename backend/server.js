@@ -5,11 +5,13 @@ import instrumentRoute from "./routes/instrument.js";
 import eventRoute from "./routes/event.js";
 import mongoose from "mongoose";
 import { dataFind, dataInit } from "./upload.js";
-import { init } from "./utility/insturment.js";
+import { init } from "./utility/instrument.js";
 import postRoute from "./routes/post.js";
 import bodyParser from "body-parser";
-require("dotenv").config();
-const session = require("express-session");
+import dotenv from "dotenv";
+import session from "express-session";
+
+dotenv.config();
 const app = express();
 
 app.use(express.json());
@@ -50,6 +52,7 @@ app.use("/api/instrument", instrumentRoute);
 app.use("/api/event", eventRoute);
 
 if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, "../frontend", "build")));
   app.get("/*", function (req, res) {
     res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
