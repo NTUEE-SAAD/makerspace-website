@@ -1,6 +1,5 @@
 import Event from "../models/event.js";
-import uuid from "uuid";
-const { v4: uuidv4 } = uuid;
+import { v4 as uuidv4 } from "uuid/v4";
 const findAll = async (res) => {
   try {
     const datas = await Event.find();

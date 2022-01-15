@@ -1,6 +1,5 @@
 import instrument from "../models/instrument.js";
-import uuid from "uuid";
-const { v4: uuidv4 } = uuid;
+import { v4 as uuidv4 } from "uuid/v4";
 import emailsender from "./mailer.js";
 import { contentGenerator, subjectGenerator } from "./reservationTemplate.js";
 //[must] initialize data

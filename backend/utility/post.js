@@ -1,6 +1,6 @@
 import posts from "../models/post.js";
-import uuid from "uuid";
-const { v4: uuidv4 } = uuid;
+import { v4 as uuidv4 } from "uuid/v4";
+
 const getPost = async (data) => {
   console.log(data);
   if (data !== {}) {
