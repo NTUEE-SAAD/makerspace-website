@@ -85,8 +85,8 @@ const getStatus = async () => {
     obj[value.name] = {
       available: value.busyUntil !== undefined ? false : true,
       healthy: value.healthy,
-      busyUntil: value.busyUntil !== undefined ? value.busyUntil : undefined,
-      busyBegin: value.busyBegin !== undefined ? value.busyBegin : undefined,
+      busyUntil: value.busyUntil !== undefined ? value.busyUntil : null,
+      busyBegin: value.busyBegin !== undefined ? value.busyBegin : null,
       reservation: value.reservation.map((r) => {
         return {
           name: r.name,

@@ -26,7 +26,7 @@ router.get("/status", (req, res) => {
 });
 router.post("/busy", (req, res) => {
   console.log(req.body);
-  setBusyTime({ name: req.body.name, duration: req.body.duration }).then(
+  setBusyTime({ name: req.body.instrument, duration: req.body.duration }).then(
     (r) => {
       if (r === "success") {
         res.status(200).send({ message: "timesetting success" });
