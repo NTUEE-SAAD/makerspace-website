@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { instance } from "../instance";
 import styled from "styled-components";
 import { useState } from "react";
-
 const LogoImage = styled.img`
   height: 54px;
   width: auto;
