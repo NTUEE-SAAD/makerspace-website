@@ -5,15 +5,43 @@ import { usePost } from "../../contexts";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-export const PostList = () => {
+import { NewPostModal } from "../NewPostModal";
+import { useState } from "react";
+import { request } from "../../instance";
+
+export const PostList = ({ isStaff = true }) => {
+  const [showModal, setShowModal] = useState(false);
   const { posts } = usePost();
   const navigate = useNavigate();
 
+  const handleNewPost = () => {
+    setShowModal(true);
+  };
+
+  const handleSubmit = async (data) => {
+    await request({
+      method: "POST",
+      url: "/post/createPost",
+      data: {
+        data,
+      },
+    });
+  };
+
   return (
     <>
+      <NewPostModal
+        visible={showModal}
+        setVisible={setShowModal}
+        handleSubmit={handleSubmit}
+      />
       <Row justify="space-between">
         <Text.SectionTitle.Black>Posts</Text.SectionTitle.Black>
-        <Button type="primary">new</Button>
+        {isStaff && (
+          <Button type="primary" onClick={handleNewPost}>
+            new
+          </Button>
+        )}
       </Row>
       <List
         className={styles.listWrapper}
@@ -47,7 +75,7 @@ export const PostList = () => {
                 </Tag>
               ))}
             />
-            {item.content}
+            {item.content.replace(/<[^>]*>/g, "").substring(0, 100) + " ..."}
           </List.Item>
         )}
       />

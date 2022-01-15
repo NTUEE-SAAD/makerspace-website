@@ -1,0 +1,10 @@
+.contentWrapper {
+  height: 50vh;
+  padding: 0 5vw;
+}
+
+.bounds {
+  width: 100%;
+  height: 30vh;
+  margin-top: 3vh;
+}
