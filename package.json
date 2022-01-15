@@ -8,5 +8,8 @@
   "scripts": {
     "start": "cd backend && yarn && yarn deploy",
     "heroku-postbuild": "cd frontend && yarn && yarn build"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
