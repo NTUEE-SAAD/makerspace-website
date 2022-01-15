@@ -3,32 +3,18 @@ import { v4 } from "uuid";
 import emailsender from "./mailer";
 import { contentGenerator, subjectGenerator } from "./reservationTemplate";
 //[must] initialize data
-const InstrumentList = {
-  "X1E-Plus": {
+const InstrumentList = [
+  {
+    name: "X1E-Plus",
     type: "3DP",
     healthy: true,
   },
-  HyperCube: {
-    type: "3DP",
-    healthy: true,
-  },
-  Formlab: {
-    type: "3DP",
-    healthy: true,
-  },
-  Anycubic: {
-    type: "3DP",
-    healthy: true,
-  },
-  ThunderLaser: {
-    type: "LazerCut",
-    healthy: true,
-  },
-  GreenLaser: {
-    type: "LazerCut",
-    healthy: true,
-  },
-};
+  { name: "HyperCube", type: "3DP", healthy: true },
+  { name: "Formlab", type: "3DP", healthy: true },
+  { name: "Anycubic", type: "3DP", healthy: true },
+  { name: "ThunderLaser", type: "LazerCut", healthy: true },
+  { name: "GreenLaser", type: "LazerCut", healthy: true },
+];
 const re = /^[A-Za-z1-9]+$/;
 const checkId = async (id) => {
   var data = await instrument.find();
@@ -46,15 +32,16 @@ const checkId = async (id) => {
 };
 const init = async () => {
   await instrument.deleteMany({});
-  for (const [key, value] of Object.entries(InstrumentList)) {
+  InstrumentList.forEach(async (v) => {
+    console.log(v.name);
     const obj = new instrument({
-      name: key,
-      type: value.type,
+      name: v.name,
+      type: v.type,
       healthy: true,
       reservation: [],
     });
     await obj.save();
-  }
+  });
 };
 const getStatus = async () => {
   const res = await instrument.find();
@@ -81,6 +68,7 @@ const getStatus = async () => {
     });
   });
   const obj = res.map((value) => {
+    console.log(value.name);
     return {
       name: value.name,
       available: value.busyUntil !== undefined ? false : true,
