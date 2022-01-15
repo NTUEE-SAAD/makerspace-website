@@ -6,6 +6,7 @@ import {
   reserve,
   reservationModify,
   reservationDelete,
+  healthy,
 } from "../utility/insturment";
 const router = express.Router();
 
@@ -91,6 +92,16 @@ router.delete("/reservation", async (req, res) => {
         .status(500)
         .send({ message: "error happenes during reservation deletion" });
   }
+});
+router.put("/healthy", async (req, res) => {
+  console.log(req.body);
+  const ret = await healthy({
+    ins: req.body.instrument,
+    state: req.body.state,
+  });
+  if (ret === "success")
+    res.status(200).send({ message: "healthy modify success" });
+  else res.status(500).send({ message: "error happenes when setting health" });
 });
 
 export default router;

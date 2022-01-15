@@ -221,6 +221,17 @@ const reservationDelete = async ({ uuid }) => {
     //const target=await instrument.findOne({check[1]})
   }
 };
+const healthy = async ({ ins, state }) => {
+  console.log(ins, state);
+  const target = await instrument.findOne({ name: ins });
+  if (target === {}) {
+    return "falied";
+  }
+  target.healthy = state;
+  console.log(target);
+  await target.save();
+  return "success";
+};
 export {
   init,
   getStatus,
@@ -229,4 +240,5 @@ export {
   reserve,
   reservationModify,
   reservationDelete,
+  healthy,
 };
