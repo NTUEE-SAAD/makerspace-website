@@ -1,4 +1,4 @@
-import Staff from "./models/staff";
+import Staff from "./models/staff.js";
 import bcrypt from "bcryptjs";
 
 const saltRounds = 10;

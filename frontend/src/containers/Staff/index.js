@@ -31,11 +31,15 @@ export const Staff = () => {
       localStorage.setItem(LOCALSTORAGE_KEY, me);
     }
   }, [signedIn]); // useEffect(func, change_var)
-  asyncHandler(async () => {
+
+  const handleLogin = async () => {
     const remember = await instance.get("/staff/signin");
     console.log(remember.data);
-  });
-
+    if (remember.data.data === "success") {
+      setSignedIn(true);
+    }
+  };
+  handleLogin();
   const displayStatus = (payload) => {
     if (payload.msg) {
       const { type, msg } = payload;
