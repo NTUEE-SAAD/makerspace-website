@@ -29,7 +29,7 @@ export const Staff = () => {
     if (signedIn) {
       localStorage.setItem(LOCALSTORAGE_KEY, me);
     }
-  }, [signedIn]); // useEffect(func, change_var)
+  }, [signedIn]);
 
   const handleLogin = async () => {
     const remember = await instance.get("/staff/signin");
@@ -56,8 +56,6 @@ export const Staff = () => {
           break;
       }
     }
-
-    setSignedIn(true);
   };
 
   return (

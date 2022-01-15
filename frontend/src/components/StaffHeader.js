@@ -2,6 +2,7 @@ import { Menu, Row, Col } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { LogoLink } from ".";
 import { Link } from "react-router-dom";
+import instance from "../instance";
 
 export const StaffHeader = () => {
   return (
@@ -20,7 +21,7 @@ export const StaffHeader = () => {
           <Menu.Item key="3">
             <Link to="/staff/items">Item</Link>
           </Menu.Item>
-          <Menu.Item key="4" icon={<UserOutlined />}>
+          <Menu.Item key="4" icon={<UserOutlined onClick = {instance.post("/staff/signout")}/>}>
             Sign Out
           </Menu.Item>
         </Menu>
