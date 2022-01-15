@@ -2,7 +2,7 @@ import { Menu, Row, Col } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { LogoLink } from ".";
 import { Link } from "react-router-dom";
-import instance from "../instance";
+import { instance } from "../instance";
 import styled from "styled-components";
 
 const LogoImage = styled.img`
@@ -30,7 +30,11 @@ export const StaffHeader = () => {
           <Menu.Item key="3">
             <Link to="/staff/items">Item</Link>
           </Menu.Item>
-          <Menu.Item key="4" icon={<UserOutlined onClick = {instance.post("/staff/signout")}/>}>
+          <Menu.Item
+            key="4"
+            icon={<UserOutlined></UserOutlined>}
+            onClick={instance.post("/staff/signout")}
+          >
             Sign Out
           </Menu.Item>
         </Menu>
