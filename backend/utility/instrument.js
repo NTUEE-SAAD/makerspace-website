@@ -1,5 +1,5 @@
 import instrument from "../models/instrument.js";
-import { v4 as uuidv4 } from "uuid/v4";
+import { v4 } from "uuid";
 import emailsender from "./mailer.js";
 import { contentGenerator, subjectGenerator } from "./reservationTemplate.js";
 //[must] initialize data
@@ -122,7 +122,7 @@ const reserve = async ({ user, targetInstrument, date }) => {
   const target = await instrument.findOne({ name: targetInstrument });
   var reservationId;
   do {
-    reservationId = uuidv4().slice(0, 6).toLowerCase();
+    reservationId = v4().slice(0, 6).toLowerCase();
   } while (!(await checkId(reservationId))[0]);
   try {
     target.reservation.push({
