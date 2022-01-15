@@ -3,7 +3,10 @@ import { UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { instance } from "../instance";
 import styled from "styled-components";
+<<<<<<< HEAD
 import { useState } from "react";
+=======
+>>>>>>> 7311ca4 (test)
 
 const LogoImage = styled.img`
   height: 54px;
