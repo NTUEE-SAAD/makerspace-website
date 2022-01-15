@@ -1,11 +1,7 @@
 import { Input, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-<<<<<<< HEAD
-import styled from "styled-components";
-=======
 import { Link } from "react-router-dom";
 import styled from "styled-components"
->>>>>>> signUp
 const StyledSignIn = styled.div`
   display: flex;
   flex-direction: column;
