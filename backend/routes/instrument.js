@@ -56,10 +56,10 @@ router.put("/reservation", async (req, res) => {
     });
     console.log(ret);
     if (ret === "success")
-      res.status(200).send({ message: "reservation modify success" });
+      res.status(200).send({ message: "reservation modification success" });
     else if (ret === "uuid not found")
       res.status(406).send({
-        message: "uuid not found, the reservation has expired or wrong uuid",
+        message: "uuid not found",
       });
     else if (ret === "input invalid") {
       res.status(406).send({ message: "input error" });
