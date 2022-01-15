@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Table } from "antd";
-import { Text } from "."
+import { Table, Button, message } from "antd";
+import { Text } from ".";
+import { instance } from "../instance";
 
 const columns = [
   {
@@ -58,11 +59,64 @@ const rowSelection = {
   }),
 };
 
-export const Todos = () => {
+const onDuty = async (name) => {
+  const date = new Date();
+  try {
+    console.log(date);
+    const message = await instance.post("/staff/onduty", {
+      name: name.name.name,
+      date: date,
+    });
+    return "success";
+  } catch {
+    return "error";
+  }
+};
+
+const displayStatus = (payload) => {
+  if (payload.msg) {
+    const { type, msg } = payload;
+    const content = {
+      content: msg,
+      duration: 0.5,
+    };
+    switch (type) {
+      case "success":
+        message.success(content);
+        break;
+      case "error":
+      default:
+        message.error(content);
+        break;
+    }
+  }
+};
+
+export const Todos = (name) => {
   const [selectionType, setSelectionType] = useState("checkbox");
   return (
     <div>
       <Text.SectionTitle.Black>Todos</Text.SectionTitle.Black>
+      <Button
+        onClick={async (event) => {
+          event.preventDefault();
+          const message = await onDuty(name);
+          console.log(message);
+          if (message !== "error") {
+            displayStatus({
+              type: "success",
+              msg: "簽到成功",
+            });
+          } else {
+            displayStatus({
+              type: "error",
+              msg: "fail",
+            });
+          }
+        }}
+      >
+        簽到
+      </Button>
       <div>
         <Table
           rowSelection={{

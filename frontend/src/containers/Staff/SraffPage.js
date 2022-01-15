@@ -4,7 +4,7 @@ import { Todos } from "../../components/Todos";
 import { Layout } from "antd";
 import { Leave } from "../../components/Leave";
 
-export const StaffPage = () => {
+export const StaffPage = (name) => {
   return (
     <Layout>
       <Layout.Content style={{ width: "80%", margin: "auto" }}>
@@ -13,7 +13,7 @@ export const StaffPage = () => {
             <Progress />
           </Col>
           <Col span={12}>
-            <Todos />
+            <Todos name={name} />
           </Col>
         </Row>
         <Row gutter={[16, 24]} style={{ marginTop: "3vh" }}>

@@ -46,6 +46,7 @@ export const Leave = () => {
       //something to the backend
       console.log("success");
       console.log(date, time, reason);
+      setReason("");
     }
   }
 

@@ -63,7 +63,7 @@ export const Staff = () => {
   return (
     <div className="App">
       {signedIn ? (
-        <StaffPage />
+        <StaffPage name={me} />
       ) : (
         <SignIn
           me={me}
