@@ -1,7 +1,7 @@
 import { Input, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import styled from "styled-components"
+import styled from "styled-components";
 const StyledSignIn = styled.div`
   display: flex;
   flex-direction: column;
@@ -74,20 +74,19 @@ const SignIn = ({
                 setSignedIn(true);
               }
             }
-          } 
-        }
-      ></Input.Search>
-      <Input.Password
-        prefix={<LockOutlined />}
-        value={password}
-        enterButton="Sign In"
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        size="large"
-        sytle={{ width: 300, margin: 50 }}
-      ></Input.Password>
-      <Link to="staff/signUp">Sign  Up</Link>
-    </StyledSignIn>
+          }}
+        ></Input.Search>
+        <Input.Password
+          prefix={<LockOutlined />}
+          value={password}
+          enterButton="Sign In"
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          size="large"
+          sytle={{ width: 300, margin: 50 }}
+        ></Input.Password>
+        <Link to="staff/signUp">Sign Up</Link>
+      </StyledSignIn>
     </>
   );
 };
