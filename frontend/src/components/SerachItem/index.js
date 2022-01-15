@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
-import { PlusOutlined, EllipsisOutlined } from "@ant-design/icons";
-import { Button, Tag, Space, Menu, Dropdown } from "antd";
 import ProTable, { TableDropdown } from "@ant-design/pro-table";
+import instance from "../../instance";
 import { Text } from "../../components";
 const addItem = (e) => {
   console.log(e.target);
@@ -25,7 +24,7 @@ const columns = [
     dataIndex: "type",
     valueType: "select",
     valueEnum: {
-      all: { text: "全部", status: "Default" },
+      // all: { text: "全部", status: "Default" },
       board: {
         text: "開發板",
         status: "Error",
@@ -45,7 +44,7 @@ const columns = [
     dataIndex: "location",
     valueType: "select",
     valueEnum: {
-      all: { text: "全部", status: "Default" },
+      // all: { text: "全部", status: "Default" },
       A: {
         text: "樹德櫃",
       },
@@ -104,18 +103,17 @@ export const SearchItem = () => {
         columns={columns}
         actionRef={actionRef}
         request={async (params = {}, sort, filter) => {
-          console.log(params);
-          return {
-            data: [
-              {
-                key: 1,
-                name: "STM32",
-                type: "board",
-                location: "A",
-                quantity: 10,
-              },
-            ],
-          };
+          const { search, type, location } = params;
+          const {
+            data: { data },
+          } = await instance.get("/staff/search", {
+            params: {
+              search,
+              type,
+              location,
+            },
+          });
+          return { data: data };
         }}
         rowKey="id"
         search={{
