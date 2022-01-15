@@ -3,6 +3,7 @@ import { Text } from "..";
 import styles from "./styles.module.css";
 import { usePost } from "../../contexts";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
 export const PostList = () => {
   const { posts } = usePost();
@@ -41,7 +42,9 @@ export const PostList = () => {
             <List.Item.Meta
               title={<a href={item.href}>{item.title}</a>}
               description={item.description.map((tag) => (
-                <Tag color="#66bac6">{tag}</Tag>
+                <Tag color="#66bac6" key={uuid()}>
+                  {tag}
+                </Tag>
               ))}
             />
             {item.content}

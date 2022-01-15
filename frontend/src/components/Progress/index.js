@@ -1,41 +1,42 @@
 import { Row, Col } from "antd";
 import { Instrument } from "./Instrument";
 import { Text } from "../../components";
+import { request } from "../../instance";
+import { useEffect, useState } from "react";
+import { v4 as uuid } from "uuid";
 const vgut = 10;
 
 export const Progress = () => {
+  const [instruments, setInstruments] = useState([]);
   const desktopMode = true;
 
+  const refreashInstruments = async () => {
+    const data = await request({
+      method: "get",
+      url: "/instrument/status",
+    });
+    setInstruments(data);
+  };
+
+  useEffect(() => refreashInstruments(), []);
 
   return (
     <>
       {desktopMode ? (
         <>
           <Text.SectionTitle.Black>Instruments</Text.SectionTitle.Black>
-          <Row gutter={[16, vgut]}>
-            <Col span={24}>
-              <Instrument
-                name="X1E-Plus"
-                begin={new Date().toISOString()}
-                end={new Date(2022, 0, 14, 19, 50, 0).toISOString()}
-              />
-            </Col>
-          </Row>
-          <Row gutter={[16, vgut]}>
-            <Col span={24}>
-              <Instrument name="HyperCube" />
-            </Col>
-          </Row>
-          <Row gutter={[16, vgut]}>
-            <Col span={24}>
-              <Instrument name="Formlab" />
-            </Col>
-          </Row>
-          <Row gutter={[16, vgut]}>
-            <Col span={24}>
-              <Instrument name="ThunderLaser" />
-            </Col>
-          </Row>
+          {instruments.map(({ name, busyBegin, busyUntil, healthy }) => (
+            <Row gutter={[16, vgut]} key={uuid()}>
+              <Col span={24}>
+                <Instrument
+                  name={name}
+                  begin={busyBegin}
+                  end={busyUntil}
+                  healthy={healthy}
+                />
+              </Col>
+            </Row>
+          ))}
         </>
       ) : (
         <>

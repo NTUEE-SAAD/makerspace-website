@@ -17,7 +17,7 @@ import { Reservation } from "../Reservation";
  * @param {string} begin - a date ISOstring like '1995-12-17T13:24:00
  * @param {string} end - a date ISOstring like '1995-12-17T13:24:00
  **/
-export const Instrument = ({ name, begin, end }) => {
+export const Instrument = ({ name, begin, end, healthy }) => {
   const [percent, setPercent] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const beginTimeRef = useRef(null);
@@ -36,11 +36,15 @@ export const Instrument = ({ name, begin, end }) => {
 
   if (durationRef.current <= 0) isFree = true;
 
-  const StatusTag = isFree ? (
-    <Tag color="green">free</Tag>
-  ) : (
-    <Tag color="red">printing</Tag>
-  );
+  let StatusTag;
+  if(!healthy) StatusTag = <Tag color="red">out of order</Tag>
+  else if (isFree) StatusTag = <Tag color="green">free</Tag>;
+  else StatusTag = <Tag color="orange">printing</Tag>;
+
+  let progressStatus;
+  if (!healthy) progressStatus = "exception";
+  else if (isComplete) progressStatus = "complete";
+  else progressStatus = "active";
 
   const handleTick = () => {
     const elapsed = Date.now() - beginTimeRef.current.getTime();
@@ -82,7 +86,11 @@ export const Instrument = ({ name, begin, end }) => {
               <Typography className={styles.title}>{name}</Typography>
             </Col>
             <Col span={9} align="right">
-              <Button shape="round" disabled={!isFree} onClick={handleBook}>
+              <Button
+                shape="round"
+                disabled={!isFree || !healthy}
+                onClick={handleBook}
+              >
                 book
               </Button>
             </Col>
@@ -91,7 +99,7 @@ export const Instrument = ({ name, begin, end }) => {
       >
         <Row justify="center">
           <Col span={12}>
-            <Progress percent={percent} size="small" />
+            <Progress percent={percent} size="small" status={progressStatus} />
           </Col>
           <Col span={6}>
             <div className={styles.counterWrapper}>
