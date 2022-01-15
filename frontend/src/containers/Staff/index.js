@@ -34,7 +34,7 @@ export const Staff = () => {
 
   const handleLogin = async () => {
     const remember = await instance.get("/staff/signin");
-    console.log(remember.data);
+    //console.log(remember.data);
     if (remember.data.data === "success") {
       setSignedIn(true);
     }

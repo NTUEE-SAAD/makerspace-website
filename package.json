@@ -1,0 +1,8 @@
+{
+  "name": "makerspace-website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/NTUEE-SAAD/makerspace-website.git",
+  "author": "elesonchuang <b08901093@ntu.edu.tw>",
+  "license": "MIT"
+}
