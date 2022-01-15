@@ -12,6 +12,10 @@ import {
   Items,
   StaffRoot,
   PostRoutes,
+<<<<<<< HEAD
+=======
+  Modify,
+>>>>>>> a0b1efb (modify reservation)
 } from "./containers";
 import { PostProvider } from "./contexts";
 
@@ -25,6 +29,7 @@ function App() {
             <Route path="/home" element={<HomeContent />} />
             <Route path="/home/about" element={<About />} />
             <Route path="/home/items" element={<Items />} />
+            <Route path="/home/modify" element={<Modify />} />
           </Route>
           <Route path="/staff" element={<StaffRoot />}>
             <Route path="/staff" element={<Staff />} />
