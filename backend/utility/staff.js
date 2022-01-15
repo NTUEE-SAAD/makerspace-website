@@ -76,12 +76,21 @@ const handleSignUp = async (Name, Password, Time, res) => {
   }
 };
 
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
 const handleBorrow = async (body, res) => {
   try {
+    var d = new Date();
+    d = addDays(d, 14);
+    console.log(d);
     const newBorrow = new Item({
       studentid: body.studentid,
       items: body.items,
-      duedate: new Date(),
+      duedate: d,
     });
     console.log("create", newBorrow);
     await newBorrow.save();
