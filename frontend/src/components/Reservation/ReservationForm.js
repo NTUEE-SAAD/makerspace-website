@@ -119,7 +119,7 @@ export const ReservationForm = (props) => {
         <Col span={1} />
         <Col span={15}>
           <Typography.Text type="secondary">
-            填寫以接收預約更改代碼
+            填寫以接收預約id
           </Typography.Text>
         </Col>
         <Col span={3}></Col>

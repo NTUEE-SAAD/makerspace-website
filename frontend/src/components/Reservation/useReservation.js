@@ -11,6 +11,7 @@ const useReservation = () => {
   const handleChange = (setState) => {
     return (e) => {
       setState(e.target.value);
+      console.log(e.target)
     };
   };
 
@@ -51,12 +52,19 @@ const useReservation = () => {
   };
 
   const clearData = () => {
+    console.log(1);
     setName("");
+    console.log(1);
     setId("");
+    console.log(1);
     setPrivateMail("");
+    console.log(setEmail);
     setEmail("");
+    console.log(1);
     setUseNTUMail(false);
+    console.log(1);
     setDatetime("");
+    console.log(1);
   };
 
   return {

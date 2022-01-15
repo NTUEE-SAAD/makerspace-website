@@ -53,7 +53,7 @@ export const Modify = () => {
       </Row>
       <Row gutter={[16, 32]} justify="center" align="middle">
         <Col span={5}>
-          <Typography.Title level={3}>預約更改代碼</Typography.Title>
+          <Typography.Title level={3}>預約id</Typography.Title>
         </Col>
         <Col span={10} align="center">
           <ReactCodeInput
