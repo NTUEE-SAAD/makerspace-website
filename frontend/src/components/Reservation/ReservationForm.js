@@ -4,13 +4,10 @@ import {
   TimePicker,
   Checkbox,
   Typography,
-  Button,
   Row,
   Col,
   Divider,
 } from "antd";
-import { useState } from "react";
-import React from "react";
 import moment from "moment";
 import useReservation from "./useReservation";
 
@@ -27,15 +24,9 @@ export const ReservationForm = (props) => {
     datetime,
     setDate,
     setTime,
-    setDatetime,
     onUseNTUMail,
     handleChange,
   } = props;
-
-  const onFinish = (value) => {
-    console.log("Success:", value);
-  };
-
 
   return (
     <>
@@ -86,7 +77,7 @@ export const ReservationForm = (props) => {
           />
           <TimePicker
             value={datetime}
-            onChange={setDate}
+            onChange={setTime}
             format={"hh:mm"}
             style={{ width: "80%" }}
           />
@@ -95,9 +86,7 @@ export const ReservationForm = (props) => {
       </Row>
       <Divider style={{ margin: "12 0" }} />
       <Row gutters={[15, 32]} align="middle">
-        <Col span={6} align="right" justify="center">
-          
-        </Col>
+        <Col span={6} align="right" justify="center"></Col>
         <Col span={1} />
         <Col span={15}>
           <Checkbox
@@ -126,8 +115,7 @@ export const ReservationForm = (props) => {
         <Col span={3}></Col>
       </Row>
       <Row gutters={[15, 32]} align="middle">
-        <Col span={6} align="right" justify="center">
-        </Col>
+        <Col span={6} align="right" justify="center"></Col>
         <Col span={1} />
         <Col span={15}>
           <Typography.Text type="secondary">

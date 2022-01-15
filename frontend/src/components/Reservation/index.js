@@ -6,7 +6,6 @@ import useReservation from "./useReservation";
 
 export const Reservation = (props) => {
   const { instrument, onCancel, visible } = props;
-  const [modalLoading, setModalLoading] = useState(false);
 
   const {
     name,
@@ -22,18 +21,29 @@ export const Reservation = (props) => {
     onUseNTUMail,
     handleChange,
     handleSubmit,
+    setTime,
+    clearData,
   } = useReservation();
+  
+  const handleCancel = () => {
+    clearData();
+    onCancel();
+  };
+
+  const handleClick = async () => {
+    await handleSubmit(instrument);
+    handleCancel();
+  };
 
   return (
     <Modal
       title={`${instrument} Reservation`}
       visible={visible}
-      onCancel={onCancel}
-      confirmLoading={modalLoading}
+      onCancel={handleCancel}
       footer={
         <>
           <Button onClick={onCancel}>cancel</Button>
-          <Button type="primary" onClick={handleSubmit}>
+          <Button type="primary" onClick={handleClick}>
             submit
           </Button>
         </>
@@ -49,6 +59,7 @@ export const Reservation = (props) => {
         useNTUMail={useNTUMail}
         date={date}
         setDate={setDate}
+        setTime={setTime}
         setDatetime={setDatetime}
         onUseNTUMail={onUseNTUMail}
         handleChange={handleChange}

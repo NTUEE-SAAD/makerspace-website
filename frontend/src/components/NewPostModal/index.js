@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Modal, Input, Row, Col, Typography } from "antd";
+import { Modal, Input, Row, Col, Typography, message } from "antd";
 import styles from "./styles.module.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -29,6 +29,7 @@ export const NewPostModal = ({ visible, setVisible, handleSubmit }) => {
       description,
     });
     setLoading(false);
+    message.success("發文成功！");
     handleCancel();
   };
 
