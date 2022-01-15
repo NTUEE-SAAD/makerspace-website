@@ -10,5 +10,3 @@
 #/.pnp.*
 /node_modules
 .env
-
-yarn.lock
