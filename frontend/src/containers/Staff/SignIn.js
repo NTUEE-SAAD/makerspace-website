@@ -2,8 +2,11 @@ import { Input, message, Button, Select } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+<<<<<<< HEAD
 import { useState } from "react";
 import { instance } from "../../instance";
+=======
+>>>>>>> bug fix
 const StyledSignIn = styled.div`
   display: flex;
   flex-direction: column;

@@ -35,6 +35,7 @@ export const StaffHeader = () => {
         </Link>
       </Col>
       <Col span={18}>
+<<<<<<< HEAD
         {signedIn ? (
           <Menu mode="horizontal" theme="dark" style={{ float: "right" }}>
             <Menu.Item key="1">
@@ -57,6 +58,26 @@ export const StaffHeader = () => {
         ) : (
           <></>
         )}
+=======
+        <Menu mode="horizontal" theme="dark" style={{ float: "right" }}>
+          <Menu.Item key="1">
+            <Link to="/staff/3dp">3DP</Link>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <Link to="/staff/laser">Laser</Link>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <Link to="/staff/items">Item</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="4"
+            icon={<UserOutlined></UserOutlined>}
+            onClick={instance.post("/staff/signout")}
+          >
+            Sign Out
+          </Menu.Item>
+        </Menu>
+>>>>>>> bug fix
       </Col>
     </Row>
   );
