@@ -5,6 +5,9 @@ import {
   staffOnDuty,
   handleSignIn,
   handleSignUp,
+  handleBorrow,
+  handleReturn,
+  handleGet,
 } from "../utility/staff";
 const router = express.Router();
 router.get("/", (req, res) => {
@@ -139,6 +142,21 @@ router.get("/search", (req, res) => {
   }
   console.log({ data: Result });
   res.send({ data: Result });
+});
+
+router.post("/borrow", (req, res) => {
+  handleBorrow(req.body, res).catch((e) => {
+    res.status(500).send({ data: "can't borrow" });
+  });
+});
+router.delete("/return", (req, res) => {
+  handleReturn(req.body, res).catch((e) => {
+    res.status(500).send({ data: "can't return" });
+  });
+});
+
+router.get("/borrow", (req, res) => {
+  handleGet(req.query.studentid, res);
 });
 
 export default router;

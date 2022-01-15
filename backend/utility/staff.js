@@ -1,6 +1,6 @@
 import Staff from "../models/staff";
 import bcrypt from "bcryptjs";
-
+import Item from "../models/item";
 const findAll = async (res) => {
   try {
     const datas = await Staff.find({}, { name: 1, time: 1 });
@@ -74,4 +74,54 @@ const handleSignUp = async (Name, Password, Time, res) => {
   }
 };
 
-export { findAll, notifyReserve, staffOnDuty, handleSignIn, handleSignUp };
+const handleBorrow = async (body, res) => {
+  try {
+    const newBorrow = new Item({
+      studentid: body.studentid,
+      items: body.items,
+      duedate: new Date(),
+    });
+    console.log("create", newBorrow);
+    await newBorrow.save();
+    res.status(200).send({
+      data: { _id: newBorrow._id, duedate: newBorrow.duedate },
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(403).send({
+      data: "failed",
+    });
+  }
+};
+
+const handleReturn = async (body, res) => {
+  const deletion = await Item.findByIdAndDelete(body._id);
+  if (deletion) {
+    res.status(200).send({ data: "successfully delete" });
+  } else {
+    res.status(406).send({ data: "borrow not found" });
+  }
+};
+
+const handleGet = async (id, res) => {
+  const borrows = await Item.find({ studentid: id });
+  if (borrows.length === 0) {
+    res.status(406).send({
+      data: "no borrows",
+    });
+  } else
+    res.status(200).send({
+      data: borrows,
+    });
+};
+
+export {
+  findAll,
+  notifyReserve,
+  staffOnDuty,
+  handleSignIn,
+  handleSignUp,
+  handleBorrow,
+  handleReturn,
+  handleGet,
+};
