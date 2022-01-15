@@ -3,7 +3,6 @@ import SignIn from "./SignIn";
 import { StaffPage } from "./SraffPage";
 import { message } from "antd";
 import { instance } from "../../instance";
-const asyncHandler = require("express-async-handler");
 const LOCALSTORAGE_KEY = "save-me";
 
 export const Staff = () => {
