@@ -1,8 +1,6 @@
-import { Modal, Input, DatePicker, Checkbox, Form, Button } from "antd";
-import { useState } from "react";
+import { Input, DatePicker, Checkbox, Form, Button } from "antd";
 
 const ReservationForm = () => {
-
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -13,7 +11,7 @@ const ReservationForm = () => {
   return (
     <Form
       name="basic"
-      labelCol={{ span: 8 }}
+      labelCol={{ span: 6 }}
       wrapperCol={{ span: 16 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
@@ -34,16 +32,8 @@ const ReservationForm = () => {
       >
         <Input />
       </Form.Item>
-      <Form.Item
-        label="Use NTU Mail"
-        name="use NTU Mail"
-      >
+      <Form.Item label="Use NTU Mail" name="use NTU Mail">
         <Checkbox />
-      </Form.Item>
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
       </Form.Item>
     </Form>
   );
