@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import staffRoute from "./routes/staff.js";
 import instrumentRoute from "./routes/instrument.js";
@@ -43,10 +44,17 @@ const sessionOptions = {
   unset: "destroy",
 };
 app.use(session(sessionOptions));
-app.use("/post", postRoute);
-app.use("/staff", staffRoute);
-app.use("/instrument", instrumentRoute);
-app.use("/event", eventRoute);
+app.use("/api/post", postRoute);
+app.use("/api/staff", staffRoute);
+app.use("/api/instrument", instrumentRoute);
+app.use("/api/event", eventRoute);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend", "build")));
+  app.get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
+  });
+}
 
 app.listen(port, () => {
   console.log(`Server is up on port ${port}.`);

@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const API_ROOT = "http://localhost:4000";
+const API_ROOT =
+  process.env.REACT_APP_MODE === "development"
+    ? "http://localhost:4000/api"
+    : "/api";
 
 const instance = axios.create({
   baseURL: API_ROOT,

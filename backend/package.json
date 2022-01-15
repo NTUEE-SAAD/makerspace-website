@@ -7,10 +7,12 @@
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dotenv-defaults": "^3.0.0",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
     "googleapis": "39",
     "mailer": "^0.6.6",
+    "mongoose": "^6.1.6",
     "node-mailer": "^0.1.1",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
@@ -23,11 +25,10 @@
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-object-rest-spread": "^7.16.7",
     "@babel/plugin-transform-arrow-functions": "^7.16.7",
-    "@babel/preset-env": "^7.16.8",
-    "dotenv-defaults": "^3.0.0",
-    "mongoose": "^6.1.6"
+    "@babel/preset-env": "^7.16.8"
   },
   "scripts": {
-    "server": "nodemon server.js --ext js --exec babel-node"
+    "server": "nodemon server.js --ext js --exec babel-node",
+    "deploy": "NODE_ENV=production nodemon server.js --ext js --exec babel-node"
   }
 }
