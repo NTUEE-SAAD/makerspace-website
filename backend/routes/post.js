@@ -28,8 +28,10 @@ router.post("/createPost", (req, res) => {
     if (r.message === "success") {
       res.status(200).send({ message: "post created", id: r.id });
       return;
+    } else if (r.message === "failed") {
+      res.status(406).send({ message: r.error });
     } else {
-      res.status(500);
+      res.status(500).send({ message: "error happenes when creating post" });
     }
   });
 });

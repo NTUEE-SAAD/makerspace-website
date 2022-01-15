@@ -124,36 +124,40 @@ const reserve = async ({ user, targetInstrument, date }) => {
   do {
     reservationId = v4().slice(0, 6).toLowerCase();
   } while (!(await checkId(reservationId))[0]);
-  target.reservation.push({
-    name: user.name,
-    id: user.id,
-    email: user.email,
-    uuid: reservationId,
-    date: new Date(date),
-  });
-  await target.save();
-  emailsender({
-    target: user.email,
-    content: contentGenerator({
-      data: {
-        user: user.name,
-        date: new Date(),
-        reservationDate: new Date(date),
-        instrument: targetInstrument,
-        id: reservationId,
-      },
-    }),
-    subject: subjectGenerator(),
-  });
-  return {
-    message: "success",
-    data: {
+  try {
+    target.reservation.push({
       name: user.name,
       id: user.id,
+      email: user.email,
       uuid: reservationId,
       date: new Date(date),
-    },
-  };
+    });
+    await target.save();
+    emailsender({
+      target: user.email,
+      content: contentGenerator({
+        data: {
+          user: user.name,
+          date: new Date(),
+          reservationDate: new Date(date),
+          instrument: targetInstrument,
+          id: reservationId,
+        },
+      }),
+      subject: subjectGenerator(),
+    });
+    return {
+      message: "success",
+      data: {
+        name: user.name,
+        id: user.id,
+        uuid: reservationId,
+        date: new Date(date),
+      },
+    };
+  } catch (e) {
+    return e;
+  }
 };
 const inputValidation = (str) => {
   console.log(str.match(re));
@@ -173,17 +177,21 @@ const reservationModify = async ({ uuid, date }) => {
     console.log("uuid not found");
     return "uuid not found";
   } else {
-    check[1].reservation.forEach((r) => {
-      if (r.uuid === uuid) {
-        console.log(d);
-        r.date = d;
-      }
-    });
-    const model = await instrument.findOne({ name: check[1].name });
-    console.log(model.reservation, check[1].reservation);
-    model.reservation = check[1].reservation;
-    await model.save();
-    return "success";
+    try {
+      check[1].reservation.forEach((r) => {
+        if (r.uuid === uuid) {
+          console.log(d);
+          r.date = d;
+        }
+      });
+      const model = await instrument.findOne({ name: check[1].name });
+      console.log(model.reservation, check[1].reservation);
+      model.reservation = check[1].reservation;
+      await model.save();
+      return "success";
+    } catch (e) {
+      return e;
+    }
 
     //const target=await instrument.findOne({check[1]})
   }
@@ -197,15 +205,20 @@ const reservationDelete = async ({ uuid }) => {
     console.log("uuid not found");
     return "uuid not found";
   } else {
-    res = check[1].reservation.filter((r) => {
-      if (r.uuid === uuid) {
-        return false;
-      } else return true;
-    });
-    const model = await instrument.findOne({ name: check[1].name });
-    model.reservation = res;
-    await model.save();
-    return "success";
+    try {
+      res = check[1].reservation.filter((r) => {
+        if (r.uuid === uuid) {
+          return false;
+        } else return true;
+      });
+      const model = await instrument.findOne({ name: check[1].name });
+      model.reservation = res;
+      await model.save();
+      return "success";
+    } catch (e) {
+      return e;
+    }
+
     //const target=await instrument.findOne({check[1]})
   }
 };

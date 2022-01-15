@@ -49,15 +49,19 @@ const createPost = async (data) => {
   do {
     postId = v4().slice(0, 6).toLowerCase();
   } while (!(await checkId(postId)));
+  try {
+    const newPost = new posts({
+      title: data.title,
+      content: data.content,
+      description: data.description || [],
+      image: data.image || [],
+      uuid: postId,
+    });
+    await newPost.save();
+  } catch (e) {
+    return { message: "failed", error: e };
+  }
 
-  const newPost = new posts({
-    title: data.title,
-    content: data.content,
-    description: data.description || [],
-    image: data.image || [],
-    uuid: postId,
-  });
-  await newPost.save();
   return { message: "success", id: postId };
 };
 

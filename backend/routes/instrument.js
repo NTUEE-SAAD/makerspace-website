@@ -10,14 +10,6 @@ import {
 } from "../utility/insturment";
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  getAll().then((r) => {
-    if (r != undefined) {
-      res.status(200).send(r);
-    }
-  });
-});
-
 router.get("/status", (req, res) => {
   getStatus().then((r) => {
     if (r != undefined) {
@@ -48,7 +40,7 @@ router.post("/reservation", (req, res) => {
     if (r.message === "success") {
       res.status(200).send({ message: "reservation success", data: r.data });
     } else {
-      res.status(500).send({ message: "reservation failed", data: {} });
+      res.status(500).send({ message: r });
     }
   });
 });
@@ -71,7 +63,7 @@ router.put("/reservation", async (req, res) => {
       });
     else if (ret === "input invalid") {
       res.status(406).send({ message: "input error" });
-    } else res.status(500).send({ message: "something wrong during modifing" });
+    } else res.status(500).send({ message: ret });
   }
 });
 router.delete("/reservation", async (req, res) => {
@@ -87,10 +79,7 @@ router.delete("/reservation", async (req, res) => {
       res.status(200).send({ message: "reservation delete success" });
     else if (ret === "input invalid")
       res.status(406).send({ message: "input error" });
-    else
-      res
-        .status(500)
-        .send({ message: "error happenes during reservation deletion" });
+    else res.status(500).send({ message: ret });
   }
 });
 router.put("/healthy", async (req, res) => {
