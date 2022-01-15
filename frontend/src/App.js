@@ -12,10 +12,7 @@ import {
   Items,
   StaffRoot,
   PostRoutes,
-<<<<<<< HEAD
-=======
   Modify,
->>>>>>> a0b1efb (modify reservation)
 } from "./containers";
 import { PostProvider } from "./contexts";
 
