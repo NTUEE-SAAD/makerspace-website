@@ -1,24 +1,28 @@
 import { useState } from "react";
-import { Layout, ConfigProvider } from "antd";
+import { Row, Col, ConfigProvider } from "antd";
 import { SearchItem, BorrowItem, ReturnItem } from "../../components";
 import zh_TW from "antd/lib/locale/zh_TW";
-export const Items = () => {
+import styles from "./styles.module.css";
+
+export const Items = ({ isStaff = false }) => {
   const [toborrow, setToborrow] = useState([]);
   return (
     <ConfigProvider locale={zh_TW}>
-      <Layout>
-        <Layout.Content
-          style={{
-            width: "70%",
-            margin: "5vh auto",
-            justifyContent: "center",
-          }}
-        >
+      <div style={{ margin: "7vh 0" }}>
+        <Row justify="space-around" className={styles.row}>
           <SearchItem toborrow={toborrow} setToborrow={setToborrow} />
-          <BorrowItem toborrow={toborrow} setToborrow={setToborrow} />
-          <ReturnItem />
-        </Layout.Content>
-      </Layout>
+        </Row>
+        {isStaff && (
+          <>
+            <Row justify="space-around" className={styles.row}>
+              <BorrowItem toborrow={toborrow} setToborrow={setToborrow} />
+            </Row>
+            <Row justify="space-around" className={styles.row}>
+              <ReturnItem />
+            </Row>
+          </>
+        )}
+      </div>
     </ConfigProvider>
   );
 };

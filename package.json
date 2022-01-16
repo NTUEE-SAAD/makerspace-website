@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/NTUEE-SAAD/makerspace-website.git",
-  "author": "elesonchuang <b08901093@ntu.edu.tw>",
+  "author": "zhuang-jia-xu <76544194+zhuang-jia-xu@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
     "start": "cd backend && yarn && yarn deploy",
-    "heroku-postbuild": "cd frontend && yarn && yarn build"
+    "heroku-postbuild": "cd frontend && yarn && yarn build",
+    "build": "cd frontend && yarn && yarn build"
   },
   "engines": {
     "node": "16.x"

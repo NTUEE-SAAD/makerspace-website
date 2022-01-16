@@ -1,7 +1,7 @@
 import express from "express";
 import {
   findAll,
-  notifyReserve,
+  handleNotify,
   staffOnDuty,
   handleSignIn,
   handleSignUp,
@@ -9,6 +9,8 @@ import {
   handleReturn,
   handleGet,
   itemQuery,
+  handleToDo,
+  handleLeave,
   handleLaser,
   handleThreeDP,
 } from "../utility/staff.js";
@@ -20,9 +22,9 @@ router.get("/", (req, res) => {
 });
 
 // TODO
-router.post(`/notify`, (req, res) => {
-  const Time = req.body.time;
-  notifyReserve(Time, res).catch((e) => {
+router.get(`/notify`, (req, res) => {
+  const Name = req.query.name;
+  handleNotify(Name, res).catch((e) => {
     console.log(e);
     res.status(403).send({
       data: "fail",
@@ -43,9 +45,9 @@ router.post("/onduty", (req, res) => {
 router.get("/signin", (req, res) => {
   const token = req.session.user;
   if (token) {
-    res.status(200).send({ data: "success" });
+    res.status(200).send({ message: "success", data: req.session.user });
   } else {
-    res.status(200).send({ data: "no" });
+    res.status(200).send({ message: "no" });
   }
 });
 
@@ -112,6 +114,16 @@ router.delete("/return", (req, res) => {
 
 router.get("/borrow", (req, res) => {
   handleGet(req.query.studentid, res);
+});
+
+router.get("/todos", (req, res) => {
+  handleToDo(req.query.time, res);
+});
+
+router.post("/leave", (req, res) => {
+  handleLeave(req.body, res).catch((e) => {
+    res.status(500).send({ data: "can't leave" });
+  });
 });
 
 router.post("/sendLaser", (req, res) => {

@@ -23,15 +23,15 @@ export const Reservation = (props) => {
     setTime,
     clearData,
   } = useReservation();
-  
+
   const handleCancel = () => {
     clearData();
     onCancel();
   };
 
   const handleClick = async () => {
-    await handleSubmit(instrument);
-    handleCancel();
+    const close = await handleSubmit(instrument);
+    if(close) handleCancel();
   };
 
   return (
@@ -42,7 +42,7 @@ export const Reservation = (props) => {
       footer={
         <>
           <Button onClick={onCancel}>關閉</Button>
-          <Button type="primary" onClick={handleSubmit}>
+          <Button type="primary" onClick={handleClick}>
             預約
           </Button>
         </>

@@ -5,10 +5,15 @@ import { GoogleAuth } from "./googleauth.js";
 import { LaserAuth } from "./lasersheet.js";
 import { threeDPAuth } from "./threeDPsheet.js";
 
+import Instrument from "../models/instrument.js";
 let sheetdata = [];
+import { LaserAuth } from "./lasersheet.js";
+import { threeDPAuth } from "./threeDPsheet.js";
+
 const findAll = async (res) => {
   try {
     const datas = await Staff.find({}, { name: 1, time: 1 });
+    console.log(datas);
     if (datas.length !== 0) {
       datas.sort();
       res.status(200).send({ data: datas });
@@ -20,11 +25,68 @@ const findAll = async (res) => {
   }
 };
 
-const notifyReserve = async (Time, res) => {
-  console.log(Time); // TODO
-  res.status(200).send({
-    data: "success",
+const handleLeave = async (body, res) => {
+  const newDayOff = {
+    date: new Date(body.date),
+    reason: body.reason,
+    time: body.time,
+    day: body.day,
+  };
+  const staff = await Staff.findOneAndUpdate(
+    { name: body.name },
+    { dayoff: newDayOff }
+  );
+  if (staff) res.status(200).send({ data: "successfully leave" });
+  else res.status(406).send({ data: "failed" });
+};
+
+const handleNotify = async (Name, res) => {
+  const staff = await Staff.findOne({ name: Name }, { time: 1 });
+  if (staff === null) {
+    res.status(406).send({ data: `no staff: ${Name}` });
+    return;
+  }
+  //console.log(staff.time);
+  const staffs = await Staff.find(
+    { dayoff: { $exists: true } },
+    { name: 1, dayoff: 1 }
+  );
+  let returnformat = [];
+  staffs.forEach((data) => {
+    const timeslot = { day: data.dayoff.day, time: data.dayoff.time };
+    staff.time.forEach((t) => {
+      if (t.time === timeslot.time && t.day === timeslot.day) {
+        if (data.name !== Name)
+          returnformat.push({
+            name: data.name,
+            date: data.dayoff.date,
+            reason: data.dayoff.reason,
+            time: data.dayoff.time,
+            day: data.dayoff.day,
+          });
+      }
+    });
   });
+  res.status(200).send({
+    data: returnformat,
+  });
+};
+
+const handleToDo = async (Time, res) => {
+  const instruments = Instrument.find({});
+  let todolist = [];
+  (await instruments).forEach((i) => {
+    i.reservation.forEach((r) => {
+      console.log(r.date - new Date());
+      if (r.date - new Date() > 60 * 60 * 2 * 1000)
+        todolist.push({
+          name: r.name,
+          time: r.date,
+          instrument: i.name,
+        });
+    });
+  });
+  res.status(200).send({ data: todolist });
 };
 
 const staffOnDuty = async (Name, date, res) => {
@@ -38,7 +100,6 @@ const staffOnDuty = async (Name, date, res) => {
 const handleSignIn = async (Name, Password, res, token) => {
   if (token) {
     console.log("remember");
-
     return true;
   }
   const user = await Staff.findOne({ name: Name });
@@ -185,7 +246,6 @@ const itemQuery = async (search, type, location, res) => {
         });
       });
     }
-    // console.log({ data: Result });
     res.send({ data: Result });
   } catch (err) {
     console.error(err);
@@ -266,10 +326,71 @@ const updateSheet = async (items, type) => {
     });
   });
 };
+const handleLaser = async (body, res) => {
+  try {
+    const { sheet, request } = await LaserAuth();
+    const response = (await sheet.spreadsheets.values.get(request)).data;
+    const sheetdata = response.values;
+    console.log(request);
+    console.log(body.id, body.name, body.date, body.laser, body.cost);
+    const message = await sheet.spreadsheets.values.append({
+      spreadsheetId: "12zMiEx0sic-Un4ewlWqSOOuYWAvNu6_9jct9paKWHTs",
+      valueInputOption: "USER_ENTERED",
+      range: "A:F", //sheet name and range of cells
+      resource: {
+        values: [
+          [
+            body.date,
+            body.name,
+            body.id,
+            body.laser,
+            body.fileName,
+            body.cost,
+            body.ps,
+          ],
+        ],
+      },
+    });
+    console.log(message);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const handleThreeDP = async (body, res) => {
+  try {
+    const { sheet, request } = await threeDPAuth();
+    const response = (await sheet.spreadsheets.values.get(request)).data;
+    const sheetdata = response.values;
+    console.log(request);
+    console.log(body.id, body.name, body.date, body.laser, body.cost);
+    const message = await sheet.spreadsheets.values.append({
+      spreadsheetId: "1R1reHQqborbc8wqWD-M7U9i8tNFgOLmks2FvpdFBSBQ",
+      valueInputOption: "USER_ENTERED",
+      range: "A:F", //sheet name and range of cells
+      resource: {
+        values: [
+          [
+            body.date,
+            body.name,
+            body.id,
+            body.laser,
+            body.fileName,
+            body.cost,
+            body.ps,
+          ],
+        ],
+      },
+    });
+    console.log(message);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export {
   findAll,
-  notifyReserve,
+  handleNotify,
   staffOnDuty,
   handleSignIn,
   handleSignUp,
@@ -277,6 +398,11 @@ export {
   handleReturn,
   handleGet,
   itemQuery,
+<<<<<<< HEAD
+=======
+  handleToDo,
+  handleLeave,
+>>>>>>> 32bb8809caedfa1e46d748a901382de9db82b17b
   handleLaser,
   handleThreeDP,
 };
