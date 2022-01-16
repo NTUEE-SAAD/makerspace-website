@@ -6,9 +6,6 @@ import { Text } from "../../components";
 
 export const ReturnItem = () => {
   const [borrowList, setBorrowList] = useState([]);
-  useEffect(() => {
-    console.log("UseEffect", borrowList);
-  }, [borrowList]);
   const handleReturn = async (id) => {
     console.log(id);
     const {
@@ -94,45 +91,30 @@ export const ReturnItem = () => {
                 studentid,
               },
             });
-            await data.forEach((values) => {
-              // console.log(Object.keys(values.items).length);
-              // setBorrowList([...borrowList, values.items]);
-              // console.log(values.items);
-            });
             if (data !== "no borrows") {
               setBorrowList(data);
             } else {
               setBorrowList([]);
             }
 
-            return { data: borrowList };
+            return { data: data };
           } catch (e) {
             console.log(e);
             setBorrowList([]);
             return { data: borrowList };
           }
-          //   await data.forEach((values) => {
-          //     // console.log(Object.keys(values.items).length);
-          //     // setBorrowList([...borrowList, values.items]);
-          //     // console.log(values.items);
-          //   });
-          //   if (data !== "no borrows") {
-          //     setBorrowList(data);
-          //   } else {
-          //     setBorrowList([]);
-          //   }
-
-          //   return { data: borrowList };
         }}
-        rowKey="id"
+        rowKey="key"
         search={{
           labelWidth: "auto",
         }}
-        onChange={setBorrowList}
+        dataSource={borrowList}
+        onDataSourceChange={setBorrowList}
         expandable={{ expandedRowRender }}
         headerTitle="查詢結果"
         pagination={{
           pageSize: 10,
+          showQuickJumper: true,
         }}
       />
     </>

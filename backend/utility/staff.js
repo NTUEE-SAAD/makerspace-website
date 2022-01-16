@@ -262,6 +262,7 @@ const updateSheet = async (items, type) => {
       }
     });
   });
+};
 const handleLaser = async (body, res) => {
   try {
     const { sheet, request } = await LaserAuth();
