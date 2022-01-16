@@ -15,7 +15,7 @@ const InstrumentList = [
   { name: "ThunderLaser", type: "LazerCut", healthy: true },
   { name: "GreenLaser", type: "LazerCut", healthy: true },
 ];
-const re = /^[A-Za-z1-9]+$/;
+const re = /^[A-Za-z0-9]+$/;
 const checkId = async (id) => {
   var data = await instrument.find();
   const ret = data.filter((instrument) => {
@@ -160,6 +160,7 @@ const reserve = async ({ user, targetInstrument, date }) => {
   }
 };
 const inputValidation = (str) => {
+  console.log("aaaaaaaaaaaaaaaa", str, str.match(re))
   console.log(str.match(re));
   if (str.match(re)) {
     return true;

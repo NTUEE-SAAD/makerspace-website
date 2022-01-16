@@ -6,42 +6,45 @@ import {
   TimePicker,
   Divider,
   Button,
+  message,
 } from "antd";
 import React, { useState } from "react";
 import ReactCodeInput from "react-code-input";
 import { request } from "../../instance";
-import moment from "moment";
 
 export const Modify = () => {
   const [pinCode, setPinCode] = useState("");
-  const [date, setDate] = useState("");
-  const [status, setStatus] = useState("");
+  const [datetime, setDatetime] = useState(new Date().toISOString());
 
-  const handlePinChange = async (newPin) => {
-    setPinCode(newPin);
-    if (newPin.length === 6) {
-      const res = await handleFull();
-      console.log(res);
-      if (res === "uuid not found") {
-        setStatus("id not found");
-      }
-    }
+  const setDate = (value) => {
+    const time = datetime.split("T")[1];
+    const date = value.format().split("T")[0];
+    setDatetime(`${date}T${time}`);
   };
 
-  const handleFull = async () => {
+  const setTime = (value) => {
+    const time = value.format().split("T")[1];
+    const date = datetime.split("T")[0];
+    setDatetime(`${date}T${time}`);
+  };
+
+  const handlePinChange = (newPin) => {
+    setPinCode(newPin);
+  };
+
+  const handleSubmit = async () => {
     try {
-      setPinCode("");
       await request({
         method: "PUT",
         url: "/instrument/reservation",
         data: {
           id: pinCode,
-          date: "1642176969653",
+          date: new Date(datetime).getTime(),
         },
       });
-      return "success";
+      message.success("時段更改成功");
     } catch (e) {
-      return "uuid not found";
+      message.error("預約id不存在或預約已過期");
     }
   };
 
@@ -74,20 +77,22 @@ export const Modify = () => {
         </Col>
         <Col span={10} align="center">
           <DatePicker
-            defaultValue={date}
+            onChange={setDate}
             format={"YYYY-MM-DD"}
-            style={{ width: "40%", margin: "0 10% 1vh 10%" }}
+            style={{ width: "80%", marginBottom: "1vh" }}
           />
           <TimePicker
-            defaultValue={moment()}
-            format={"hh:mm"}
-            style={{ width: "40%", margin: "1vh 10% 0 10%" }}
+            onChange={setTime}
+            format={"HH:mm"}
+            style={{ width: "80%", marginTop: "1vh" }}
           />
         </Col>
         <Col span={5}></Col>
       </Row>
       <Row gutter={[16, 24]} justify="center">
-        <Button type="primary">送出</Button>
+        <Button type="primary" onClick={handleSubmit}>
+          送出
+        </Button>
       </Row>
     </div>
   );

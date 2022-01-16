@@ -48,7 +48,7 @@ router.post("/reservation", (req, res) => {
 router.put("/reservation", async (req, res) => {
   console.log(req.body);
   if (req.body.id === undefined) {
-    res.status(406).send({ message: "input error" });
+    res.status(406).send({ message: "id undefined" });
   } else {
     var ret = await reservationModify({
       uuid: req.body.id.trim(),

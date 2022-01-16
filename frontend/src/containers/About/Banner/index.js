@@ -2,7 +2,6 @@ import QueueAnim from "rc-queue-anim";
 import TweenOne from "rc-tween-one";
 import { DownOutlined } from "@ant-design/icons";
 import styles from "./banner.module.css";
-import faker from "faker";
 
 export const Banner = () => {
   return (
@@ -14,7 +13,11 @@ export const Banner = () => {
           alt="logo"
           key="logo"
         />
-        <div className={styles.textWrapper}>{faker.lorem.paragraph()}</div>
+        <div className={styles.textWrapper}>
+          {
+            "NTUEE MakerSpace不只是個空間，他更像個品牌。"
+          }
+        </div>
       </QueueAnim>
       <TweenOne
         animation={{

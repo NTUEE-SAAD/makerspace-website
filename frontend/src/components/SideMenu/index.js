@@ -2,6 +2,7 @@ import { Menu, Dropdown, Typography } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import { v4 as uuid } from "uuid";
 
 const menu = () => {
   const items = [
@@ -18,7 +19,9 @@ const menu = () => {
   return (
     <Menu>
       {items.map((item) => (
-        <div className={styles.item}>{item}</div>
+        <div className={styles.item} key={uuid()}>
+          {item}
+        </div>
       ))}
     </Menu>
   );
