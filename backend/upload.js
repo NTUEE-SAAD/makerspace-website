@@ -29,7 +29,7 @@ const dataInit = async () => {
       onduty: new Date("2021-12-02T05:51:04.360Z"),
     },
     {
-      name: "莊詠翔1",
+      name: "eleson1",
       password: hashes[1],
       time: [
         {
@@ -38,7 +38,7 @@ const dataInit = async () => {
         },
         {
           day: "Mon",
-          time: "B",
+          time: "C",
         },
       ],
     },
@@ -52,7 +52,7 @@ const dataInit = async () => {
         },
         {
           day: "Mon",
-          time: "B",
+          time: "C",
         },
       ],
     },
@@ -71,7 +71,7 @@ const dataInit = async () => {
       ],
     },
   ];
-  if (checkData.length !== 4) {
+  if (true) {
     await Staff.deleteMany({});
     await Staff.insertMany(example);
   }

@@ -2,6 +2,35 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
+const Dayoff = Schema({
+  date: {
+    type: Date,
+    required: [true, "dayoff date is required."],
+  },
+  reason: {
+    type: String,
+  },
+  time: {
+    type: String,
+    enum: ["A", "B", "C", "D"],
+  },
+  day: {
+    type: String,
+    enum: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+  },
+});
+
+const Time = Schema({
+  day: {
+    type: String,
+    enum: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+  },
+  time: {
+    type: String,
+    enum: ["A", "B", "C", "D"],
+  },
+});
+
 const StaffSchema = Schema(
   {
     name: {
@@ -14,24 +43,12 @@ const StaffSchema = Schema(
       type: String,
       required: [true, "Password field is required."],
     },
-    time: [
-      {
-        day: {
-          type: String,
-          enum: ["Mon", "Tue", "Wed", "Thu", "Fri"],
-          required: false,
-        },
-        time: {
-          type: String,
-          enum: ["A", "B", "C", "D"],
-          required: false,
-        },
-      },
-    ],
+    time: [Time],
     onduty: {
       type: Date,
       required: false,
     },
+    dayoff: Dayoff,
   },
 
   {
