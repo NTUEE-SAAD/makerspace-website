@@ -1,4 +1,4 @@
-import { DatePicker, Input, Button, message } from "antd";
+import { DatePicker, Input, Button, message, Row, Col } from "antd";
 import { useState } from "react";
 import { Text } from ".";
 
@@ -54,15 +54,23 @@ export const Leave = () => {
     <div>
       <Text.SectionTitle.Black>管理員請假</Text.SectionTitle.Black>
       <div>
-        <DatePicker onChange={dateChange} />
-        <DatePicker onChange={timeChange} picker="time" />
-        <Input
-          placeholder="Reason"
-          onChange={(e) => setReason(e.target.value)}
-        ></Input>
-        <Button type="primary" onClick={submit}>
-          提交
-        </Button>
+        <Row gutter={16}>
+          <Col span={6}>
+            <DatePicker onChange={dateChange} />
+          </Col>
+          <Col span={6}>
+            <DatePicker onChange={timeChange} picker="time" />
+          </Col>
+          <Col>
+            <Input
+              placeholder="Reason"
+              onChange={(e) => setReason(e.target.value)}
+            ></Input>
+          </Col>
+          <Button type="primary" onClick={submit}>
+            提交
+          </Button>
+        </Row>
       </div>
     </div>
   );

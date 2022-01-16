@@ -60,6 +60,16 @@ export const ThreeDPrinter = () => {
 
   const { Option } = Select;
 
+  const checkLogin = async () => {
+    const status = await instance.get("/staff/signin");
+    if (status.data.data === "success") {
+    } else {
+      window.location.href = "/staff";
+    }
+  };
+
+  checkLogin();
+
   function submit() {
     if (!id || !name || !date || !laser || !cost || !fileName) {
       displayStatus({
@@ -103,50 +113,47 @@ export const ThreeDPrinter = () => {
               <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQop_k9XsJxqS9j3tbTnlfvyf4Yml9h02owG5C11VVUr1E4-ti41I_N9hxzdJbt3fjZPQQLfjR6Hsev/pubhtml?widget=true&amp;headers=false"></iframe>
             </div>
           </Fa>
-          <Input.Group>
-            <Row gutter={16}>
-              <DatePicker onChange={dateChange} />
-              <Col span={3}>
-                <Input
-                  placeholder="name"
-                  onChange={(e) => setName(e.target.value)}
-                ></Input>
-              </Col>
-              <Col span={3}>
-                <Input
-                  placeholder="id"
-                  onChange={(e) => setId(e.target.value)}
-                ></Input>
-              </Col>
-              <Select placeholder="3DP Machine" onChange={(e) => setLaser(e)}>
-                <Option value="X1E-Plus<">X1E-Plus</Option>
-                <Option value="HyperCube">HyperCube</Option>
-                <Option value="FormLab">FormLab</Option>
-              </Select>
-              <Col>
-                <Input
-                  placeholder="fileName"
-                  onChange={(e) => setFile(e.target.value)}
-                ></Input>
-              </Col>
-              <Col span={2}>
-                <Input
-                  placeholder="cost"
-                  onChange={(e) => setCost(e.target.value)}
-                ></Input>
-              </Col>
-              <Col>
-                <Input
-                  placeholder="備註"
-                  onChange={(e) => setPs(e.target.value)}
-                ></Input>
-              </Col>
-              <Button type="primary" onClick={submit}>
-                Submit
-              </Button>
-              <Col></Col>
-            </Row>
-          </Input.Group>
+          <Row gutter={16}>
+            <DatePicker onChange={dateChange} />
+            <Col span={3}>
+              <Input
+                placeholder="name"
+                onChange={(e) => setName(e.target.value)}
+              ></Input>
+            </Col>
+            <Col span={3}>
+              <Input
+                placeholder="id"
+                onChange={(e) => setId(e.target.value)}
+              ></Input>
+            </Col>
+            <Select placeholder="3DP Machine" onChange={(e) => setLaser(e)}>
+              <Option value="X1E-Plus<">X1E-Plus</Option>
+              <Option value="HyperCube">HyperCube</Option>
+              <Option value="FormLab">FormLab</Option>
+            </Select>
+            <Col span={3}>
+              <Input
+                placeholder="fileName"
+                onChange={(e) => setFile(e.target.value)}
+              ></Input>
+            </Col>
+            <Col span={2}>
+              <Input
+                placeholder="cost"
+                onChange={(e) => setCost(e.target.value)}
+              ></Input>
+            </Col>
+            <Col span={3}>
+              <Input
+                placeholder="備註"
+                onChange={(e) => setPs(e.target.value)}
+              ></Input>
+            </Col>
+            <Button type="primary" onClick={submit}>
+              Submit
+            </Button>
+          </Row>
         </Layout.Content>
       </Layout>
     </ConfigProvider>

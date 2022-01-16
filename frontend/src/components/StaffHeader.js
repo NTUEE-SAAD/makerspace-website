@@ -51,7 +51,7 @@ export const StaffHeader = () => {
               icon={<UserOutlined></UserOutlined>}
               onClick={signOut}
             >
-              Sign Out
+              <Link to="/staff">Sign Out</Link>
             </Menu.Item>
           </Menu>
         ) : (

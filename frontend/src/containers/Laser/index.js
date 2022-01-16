@@ -60,6 +60,16 @@ export const Laser = () => {
 
   const { Option } = Select;
 
+  const checkLogin = async () => {
+    const status = await instance.get("/staff/signin");
+    if (status.data.data === "success") {
+    } else {
+      window.location.href = "/staff";
+    }
+  };
+
+  checkLogin();
+
   function submit() {
     if (!id || !name || !date || !laser || !cost || !fileName) {
       displayStatus({
@@ -103,49 +113,46 @@ export const Laser = () => {
               <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1xtPF_2k1yyLvsWeBZMMKrdqEkY5_saDk2gCU8mruhXq7gLX7ue6DLL7WL4QYCGATt2PMKi6m7yDb/pubhtml?widget=true&amp;headers=false"></iframe>
             </div>
           </Fa>
-          <Input.Group>
-            <Row gutter={16}>
-              <DatePicker onChange={dateChange} />
-              <Col span={3}>
-                <Input
-                  placeholder="name"
-                  onChange={(e) => setName(e.target.value)}
-                ></Input>
-              </Col>
-              <Col span={3}>
-                <Input
-                  placeholder="id"
-                  onChange={(e) => setId(e.target.value)}
-                ></Input>
-              </Col>
-              <Select placeholder="Laser Machine" onChange={(e) => setLaser(e)}>
-                <Option value="Thunder Laser">Thunder Laser</Option>
-                <Option value="Green Laser">Green Laser</Option>
-              </Select>
-              <Col>
-                <Input
-                  placeholder="fileName"
-                  onChange={(e) => setFile(e.target.value)}
-                ></Input>
-              </Col>
-              <Col span={2}>
-                <Input
-                  placeholder="cost"
-                  onChange={(e) => setCost(e.target.value)}
-                ></Input>
-              </Col>
-              <Col>
-                <Input
-                  placeholder="備註"
-                  onChange={(e) => setPs(e.target.value)}
-                ></Input>
-              </Col>
-              <Button type="primary" onClick={submit}>
-                Submit
-              </Button>
-              <Col></Col>
-            </Row>
-          </Input.Group>
+          <Row gutter={16}>
+            <DatePicker onChange={dateChange} />
+            <Col span={3}>
+              <Input
+                placeholder="name"
+                onChange={(e) => setName(e.target.value)}
+              ></Input>
+            </Col>
+            <Col span={3}>
+              <Input
+                placeholder="id"
+                onChange={(e) => setId(e.target.value)}
+              ></Input>
+            </Col>
+            <Select placeholder="Laser Machine" onChange={(e) => setLaser(e)}>
+              <Option value="Thunder Laser">Thunder Laser</Option>
+              <Option value="Green Laser">Green Laser</Option>
+            </Select>
+            <Col span={3}>
+              <Input
+                placeholder="fileName"
+                onChange={(e) => setFile(e.target.value)}
+              ></Input>
+            </Col>
+            <Col span={2}>
+              <Input
+                placeholder="cost"
+                onChange={(e) => setCost(e.target.value)}
+              ></Input>
+            </Col>
+            <Col span={3}>
+              <Input
+                placeholder="備註"
+                onChange={(e) => setPs(e.target.value)}
+              ></Input>
+            </Col>
+            <Button type="primary" onClick={submit}>
+              Submit
+            </Button>
+          </Row>
         </Layout.Content>
       </Layout>
     </ConfigProvider>
