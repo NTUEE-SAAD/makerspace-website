@@ -29,7 +29,7 @@ export const ReservationForm = (props) => {
     <>
       <Row gutters={[15, 32]} align="middle">
         <Col span={6} align="right" justify="center">
-          Your Name:
+        <b style={{color: "red"}}> * </b>Your Name:
         </Col>
         <Col span={1} />
         <Col span={15}>
@@ -45,7 +45,7 @@ export const ReservationForm = (props) => {
       </Row>
       <Row gutters={[15, 32]} align="middle">
         <Col span={6} align="right" justify="center">
-          Student ID:
+          <b style={{color: "red"}}> * </b>Student ID:
         </Col>
         <Col span={1} />
         <Col span={15}>
@@ -62,7 +62,7 @@ export const ReservationForm = (props) => {
       <Divider />
       <Row gutters={[15, 32]} align="middle">
         <Col span={6} align="right" justify="center">
-          Date & Time:
+        <b style={{color: "red"}}> * </b>Date & Time:
         </Col>
         <Col span={1} />
         <Col span={15}>
@@ -75,7 +75,7 @@ export const ReservationForm = (props) => {
           <TimePicker
             value={datetime}
             onChange={setTime}
-            format={"hh:mm"}
+            format={"HH:mm"}
             style={{ width: "80%" }}
           />
         </Col>
@@ -98,7 +98,7 @@ export const ReservationForm = (props) => {
       </Row>
       <Row gutters={[15, 32]} align="middle">
         <Col span={6} align="right" justify="center">
-          Email:
+        <b style={{color: "red"}}> * </b>Email:
         </Col>
         <Col span={1} />
         <Col span={15}>

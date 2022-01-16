@@ -34,6 +34,22 @@ const useReservation = () => {
   };
 
   const handleSubmit = async (instrument) => {
+    if(new Date(datetime).toISOString() < (new Date().toISOString())){
+      message.error("請預約一個未來的時間"); 
+      return false;
+    }
+    else if(!name){
+      message.error("請輸入姓名"); 
+      return false;
+    }
+    else if(!id){
+      message.error("請輸入學號"); 
+      return false;
+    }
+    else if(!email){
+      message.error("請輸入信箱"); 
+      return false;
+    }
     await request({
       method: "POST",
       url: "/instrument/reservation",
@@ -47,7 +63,8 @@ const useReservation = () => {
         date: datetime,
       },
     });
-    message.success("預約成功");
+    message.success("id已寄出！請查收");
+    return true;
   };
 
   const clearData = () => {
