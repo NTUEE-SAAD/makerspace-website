@@ -16,7 +16,7 @@ const contentGenerator = ({ data }) => {
       </tr>
       <tr>
         <th>預約id</th>
-        <td><a href="http://localhost:3000/">${data.id}</a></td>
+        <td><a href="http://localhost:3000/home/modify">${data.id}</a></td>
       </tr>
       </table>
       如需更改預約時間請利用預約id進行更改

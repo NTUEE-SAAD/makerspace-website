@@ -10,6 +10,7 @@ import postRoute from "./routes/post.js";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import session from "express-session";
+import { postsInit, eventInit } from "./init.js";
 
 dotenv.config();
 const app = express();
@@ -74,4 +75,6 @@ dataInit();
 
 (async () => {
   await init();
+  await postsInit();
+  await eventInit();
 })();
