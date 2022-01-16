@@ -3,6 +3,8 @@ import { message, Input, Form, Button, Row, notification } from "antd";
 import { EditableProTable } from "@ant-design/pro-table";
 import { Text } from "../../components";
 import { instance } from "../../instance";
+import "@ant-design/pro-table/dist/table.css";
+
 const waitTime = (time = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -141,62 +143,60 @@ export const BorrowItem = ({ toborrow, setToborrow }) => {
     },
   ];
   return (
-    <>
+    <div>
       <Text.SectionTitle.Black>借用品項</Text.SectionTitle.Black>
-      <Row
-        type="flex"
-        justify="center"
-        align="middle"
-        style={{ margin: "1vh auto" }}
-      >
-        <Form
-          form={form}
-          name="basic"
-          layout="inline"
-          onFinish={handleBorrow}
-          // onFinishFailed={onFinishFailed}
-        >
-          <Form.Item label="姓名" name="name">
-            <Input />
-          </Form.Item>
-          <Form.Item label="學號" name="studentid">
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              借出
-            </Button>
-          </Form.Item>
-        </Form>
-      </Row>
-      <EditableProTable
-        recordCreatorProps={
-          position !== "hidden"
-            ? {
-                position: position,
-                record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
-              }
-            : false
-        }
-        rowKey="id"
-        // headerTitle="借用品項"
-        maxLength={5}
-        columns={columns}
-        request={async () => ({
-          data: toborrow,
-        })}
-        value={toborrow}
-        onChange={setToborrow}
-        editable={{
-          type: "multiple",
-          editableKeys,
-          onSave: async (rowKey, data, row) => {
-            console.log(rowKey, data, row);
-            await waitTime(2000);
-          },
-          onChange: setEditableRowKeys,
-        }}
-      />
-    </>
+      <div style={{ backgroundColor: "white", paddingTop: "1vh" }}>
+        <Row justify="center" align="middle" style={{ margin: "1vh auto" }}>
+          <Form
+            form={form}
+            name="basic"
+            layout="inline"
+            onFinish={handleBorrow}
+            // onFinishFailed={onFinishFailed}
+          >
+            <Form.Item label="姓名" name="name">
+              <Input />
+            </Form.Item>
+            <Form.Item label="學號" name="studentid">
+              <Input />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                借出
+              </Button>
+            </Form.Item>
+          </Form>
+        </Row>
+        <EditableProTable
+          style={{ width: "70vw" }}
+          recordCreatorProps={
+            position !== "hidden"
+              ? {
+                  position: position,
+                  record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
+                }
+              : false
+          }
+          rowKey="id"
+          // headerTitle="借用品項"
+          maxLength={5}
+          columns={columns}
+          request={async () => ({
+            data: toborrow,
+          })}
+          value={toborrow}
+          onChange={setToborrow}
+          editable={{
+            type: "multiple",
+            editableKeys,
+            onSave: async (rowKey, data, row) => {
+              console.log(rowKey, data, row);
+              await waitTime(2000);
+            },
+            onChange: setEditableRowKeys,
+          }}
+        />
+      </div>
+    </div>
   );
 };

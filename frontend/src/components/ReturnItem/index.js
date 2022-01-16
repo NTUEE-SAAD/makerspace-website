@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { message } from "antd";
-import ProTable, { TableDropdown } from "@ant-design/pro-table";
+import { message, Row } from "antd";
+import ProTable from "@ant-design/pro-table";
 import { instance } from "../../instance";
 import { Text } from "../../components";
+import "@ant-design/pro-table/dist/table.css";
 
 export const ReturnItem = () => {
   const [borrowList, setBorrowList] = useState([]);
@@ -79,62 +80,67 @@ export const ReturnItem = () => {
   };
   const actionRef = useRef();
   return (
-    <>
-      <Text.SectionTitle.Black>歸還物品</Text.SectionTitle.Black>
-      <ProTable
-        columns={columns}
-        actionRef={actionRef}
-        request={async (params = {}, sort, filter) => {
-          const { studentid } = params;
-          try {
-            const {
-              data: { data },
-            } = await instance.get("/staff/borrow", {
-              params: {
-                studentid,
-              },
-            });
-            await data.forEach((values) => {
-              // console.log(Object.keys(values.items).length);
-              // setBorrowList([...borrowList, values.items]);
-              // console.log(values.items);
-            });
-            if (data !== "no borrows") {
-              setBorrowList(data);
-            } else {
+    <div>
+      <Row>
+        <Text.SectionTitle.Black>歸還物品</Text.SectionTitle.Black>
+      </Row>
+      <Row>
+        <ProTable
+          style={{ width: "70vw" }}
+          columns={columns}
+          actionRef={actionRef}
+          request={async (params = {}, sort, filter) => {
+            const { studentid } = params;
+            try {
+              const {
+                data: { data },
+              } = await instance.get("/staff/borrow", {
+                params: {
+                  studentid,
+                },
+              });
+              await data.forEach((values) => {
+                // console.log(Object.keys(values.items).length);
+                // setBorrowList([...borrowList, values.items]);
+                // console.log(values.items);
+              });
+              if (data !== "no borrows") {
+                setBorrowList(data);
+              } else {
+                setBorrowList([]);
+              }
+
+              return { data: borrowList };
+            } catch (e) {
+              console.log(e);
               setBorrowList([]);
+              return { data: borrowList };
             }
+            //   await data.forEach((values) => {
+            //     // console.log(Object.keys(values.items).length);
+            //     // setBorrowList([...borrowList, values.items]);
+            //     // console.log(values.items);
+            //   });
+            //   if (data !== "no borrows") {
+            //     setBorrowList(data);
+            //   } else {
+            //     setBorrowList([]);
+            //   }
 
-            return { data: borrowList };
-          } catch (e) {
-            console.log(e);
-            setBorrowList([]);
-            return { data: borrowList };
-          }
-          //   await data.forEach((values) => {
-          //     // console.log(Object.keys(values.items).length);
-          //     // setBorrowList([...borrowList, values.items]);
-          //     // console.log(values.items);
-          //   });
-          //   if (data !== "no borrows") {
-          //     setBorrowList(data);
-          //   } else {
-          //     setBorrowList([]);
-          //   }
-
-          //   return { data: borrowList };
-        }}
-        rowKey="id"
-        search={{
-          labelWidth: "auto",
-        }}
-        onChange={setBorrowList}
-        expandable={{ expandedRowRender }}
-        headerTitle="查詢結果"
-        pagination={{
-          pageSize: 10,
-        }}
-      />
-    </>
+            //   return { data: borrowList };
+          }}
+          rowKey="id"
+          search={{
+            labelWidth: "auto",
+          }}
+          onChange={setBorrowList}
+          expandable={{ expandedRowRender }}
+          headerTitle="查詢結果"
+          pagination={{
+            pageSize: 10,
+          }}
+        />
+      </Row>
+    </div>
   );
 };

@@ -30,7 +30,7 @@ function App() {
           </Route>
           <Route path="/staff" element={<StaffRoot />}>
             <Route path="/staff" element={<Staff />} />
-            <Route path="/staff/items" element={<Items />} />
+            <Route path="/staff/items" element={<Items isStaff={true} />} />
           </Route>
         </Routes>
         <PostRoutes />
