@@ -4,7 +4,7 @@ const emailsender = async (data) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "ntueemakerspace@gmail.com",
+      user: "ntueemks.forwp1101.2022@gmail.com",
       pass: process.env.EMAIL_PASSWORD,
     },
   });
