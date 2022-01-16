@@ -32,7 +32,7 @@ function App() {
           </Route>
           <Route path="/staff" element={<StaffRoot />}>
             <Route path="/staff" element={<Staff />} />
-            <Route path="/staff/items" element={<Items />} />
+            <Route path="/staff/items" element={<Items isStaff={true} />} />
             <Route path="/staff/laser" element={<Laser />} />
             <Route path="/staff/threeDPrinter" element={<ThreeDPrinter />} />
           </Route>

@@ -30,8 +30,8 @@ export const Reservation = (props) => {
   };
 
   const handleClick = async () => {
-    await handleSubmit(instrument);
-    handleCancel();
+    const close = await handleSubmit(instrument);
+    if(close) handleCancel();
   };
 
   return (

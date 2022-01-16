@@ -243,7 +243,6 @@ const itemQuery = async (search, type, location, res) => {
         });
       });
     }
-    // console.log({ data: Result });
     res.send({ data: Result });
   } catch (err) {
     console.error(err);

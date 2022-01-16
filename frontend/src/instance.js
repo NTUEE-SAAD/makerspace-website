@@ -23,7 +23,7 @@ const request = (options) => {
   };
 
   const onError = (error) => {
-    console.error("Request Failed:", error.config);
+    console.error("Request Failed:", error);
 
     if (error.response) {
       // Request was made but server responded with something
@@ -37,7 +37,7 @@ const request = (options) => {
       console.error("Error Message:", error.message);
     }
 
-    return Promise.reject(error.response?.data?.result?.error || error.message);
+    return Promise.reject(error);
   };
 
   return instance(options).then(onSuccess).catch(onError);
