@@ -16,7 +16,7 @@ import { Text } from "..";
 export const Calendar = ({events}) => {
   return (
     <>
-      <Text.SectionTitle.Black>Calendar</Text.SectionTitle.Black>
+      <Text.SectionTitle.Black>月曆</Text.SectionTitle.Black>
       <div
         style={{
           backgroundColor: "#fff",

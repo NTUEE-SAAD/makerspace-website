@@ -9,7 +9,7 @@ import { NewPostModal } from "../NewPostModal";
 import { useState } from "react";
 import { request } from "../../instance";
 
-export const PostList = ({ isStaff = true }) => {
+export const PostList = ({ isStaff = false }) => {
   const [showModal, setShowModal] = useState(false);
   const { posts } = usePost();
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export const PostList = ({ isStaff = true }) => {
         handleSubmit={handleSubmit}
       />
       <Row justify="space-between">
-        <Text.SectionTitle.Black>Posts</Text.SectionTitle.Black>
+        <Text.SectionTitle.Black>貼文</Text.SectionTitle.Black>
         {isStaff && (
           <Button type="primary" onClick={handleNewPost}>
             new

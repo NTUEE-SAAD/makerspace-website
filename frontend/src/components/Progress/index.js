@@ -4,7 +4,6 @@ import { Text } from "../../components";
 import { request } from "../../instance";
 import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { Button } from "antd";
 const vgut = 10;
 
 export const Progress = () => {
@@ -18,22 +17,14 @@ export const Progress = () => {
     });
     setInstruments(data);
   };
+
   useEffect(() => refreashInstruments(), []);
 
   return (
     <>
       {desktopMode ? (
         <>
-          <Text.SectionTitle.Black>
-            Instruments
-            <Button
-              type="primary"
-              danger
-              href="http://localhost:3000/home/modify"
-            >
-              modify reservation
-            </Button>
-          </Text.SectionTitle.Black>
+          <Text.SectionTitle.Black>機台</Text.SectionTitle.Black>
           {instruments.map(({ name, busyBegin, busyUntil, healthy }) => (
             <Row gutter={[16, vgut]} key={uuid()}>
               <Col span={24}>
@@ -50,7 +41,7 @@ export const Progress = () => {
       ) : (
         <>
           <Text.SectionTitle.Black level={2}>
-            Instruments
+            機台
           </Text.SectionTitle.Black>
           <Row gutter={[16, vgut]}>
             <Col span={12}>

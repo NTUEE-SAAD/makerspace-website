@@ -105,7 +105,7 @@ router.post("/borrow", (req, res) => {
   });
 });
 router.delete("/return", (req, res) => {
-  handleReturn(req.body, res).catch((e) => {
+  handleReturn(req.query, res).catch((e) => {
     res.status(500).send({ data: "can't return" });
   });
 });
