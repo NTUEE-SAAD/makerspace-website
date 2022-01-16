@@ -19,7 +19,7 @@ export const SearchItem = ({ toborrow, setToborrow }) => {
       width: "30%",
     },
     {
-      title: "Search",
+      title: "以名稱搜尋",
       dataIndex: "search",
       copyable: true,
       tip: "輸入欲查詢的物品",
@@ -33,15 +33,19 @@ export const SearchItem = ({ toborrow, setToborrow }) => {
         // all: { text: "全部", status: "Default" },
         board: {
           text: "開發板",
-          status: "Error",
+          status: "Default",
         },
         module: {
           text: "模組",
-          status: "Error",
+          status: "Default",
         },
         motor: {
           text: "馬達",
-          status: "Error",
+          status: "Default",
+        },
+        power: {
+          text: "電源",
+          status: "Default",
         },
       },
     },
@@ -52,24 +56,34 @@ export const SearchItem = ({ toborrow, setToborrow }) => {
       valueEnum: {
         // all: { text: "全部", status: "Default" },
         A: {
-          text: "樹德櫃",
+          text: "樹德櫃 A區",
+          status: "Processing",
         },
         B: {
-          text: "白板櫃",
-          status: "Success",
-          disabled: true,
+          text: "3DP B區",
+          status: "Processing",
         },
         C: {
-          text: "層價區",
-          status: "Processing",
+          text: "C區",
+          status: "Error",
           disabled: true,
         },
         D: {
-          text: "拍拍手",
-          status: "Processing",
+          text: "白板櫃 D區",
+          status: "Error",
+          disabled: true,
         },
         E: {
-          text: "HeHe",
+          text: "層價櫃 E區",
+          status: "Error",
+          disabled: true,
+        },
+        F: {
+          text: "拍拍手 F區",
+          status: "Processing",
+        },
+        G: {
+          text: "重加工 G區",
           status: "Processing",
         },
       },
