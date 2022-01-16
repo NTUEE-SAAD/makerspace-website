@@ -9,6 +9,8 @@ import {
   handleReturn,
   handleGet,
   itemQuery,
+  handleLaser,
+  handleThreeDP,
 } from "../utility/staff.js";
 const router = express.Router();
 import { google } from "googleapis";
@@ -112,4 +114,17 @@ router.get("/borrow", (req, res) => {
   handleGet(req.query.studentid, res);
 });
 
+router.post("/sendLaser", (req, res) => {
+  const { body } = req;
+  handleLaser(body, res).catch((e) => {
+    res.status(403).send({ data: "error" });
+  });
+});
+
+router.post("/send3DP", (req, res) => {
+  const { body } = req;
+  handleThreeDP(body, res).catch((e) => {
+    res.status(403).send({ data: "error" });
+  });
+});
 export default router;

@@ -135,7 +135,7 @@ const SignIn = ({
               <Option value="Mon">Mon</Option>
               <Option value="Tue">Tue</Option>
               <Option value="Wed">Wed</Option>
-              <Option value="Thru">Thry</Option>
+              <Option value="Thu">Thru</Option>
               <Option value="Fri">Fri</Option>
             </Select>
             <Select placeholder="Time1" onChange={(e) => setTime1(e)}>
