@@ -62,7 +62,7 @@ export const Laser = () => {
 
   const checkLogin = async () => {
     const status = await instance.get("/staff/signin");
-    if (status.data.data === "success") {
+    if (status.data.message === "success") {
     } else {
       window.location.href = "/staff";
     }

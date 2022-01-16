@@ -1,7 +1,7 @@
 import { Menu, Row, Col } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { instance } from "../instance";
+import { request } from "../instance";
 import styled from "styled-components";
 import { useState } from "react";
 const LogoImage = styled.img`
@@ -14,14 +14,16 @@ export const StaffHeader = () => {
   const [signedIn, setSignedIn] = useState(false);
 
   const checkLogin = async () => {
-    const status = await instance.get("/staff/signin");
-    if (status.data.data === "success") {
+    const { message } = await request({ method: "GET", url: "/staff/signin" });
+    if (message === "success") {
       setSignedIn(true);
+    } else {
+      setSignedIn(false);
     }
   };
 
-  const signOut = () => {
-    instance.delete("/staff/signout");
+  const signOut = async () => {
+    await request({ method: "delete", url: "/staff/signout" });
     checkLogin();
     window.location.reload();
   };
@@ -46,12 +48,10 @@ export const StaffHeader = () => {
             <Menu.Item key="3">
               <Link to="/staff/items">Item</Link>
             </Menu.Item>
-            <Menu.Item
-              key="4"
-              icon={<UserOutlined></UserOutlined>}
-              onClick={signOut}
-            >
-              <Link to="/staff">Sign Out</Link>
+            <Menu.Item key="4" icon={<UserOutlined></UserOutlined>}>
+              <Link to="/staff" onClick={signOut}>
+                Sign Out
+              </Link>
             </Menu.Item>
           </Menu>
         ) : (

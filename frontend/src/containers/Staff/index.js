@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SignIn from "./SignIn";
 import { StaffPage } from "./SraffPage";
 import { message } from "antd";
-import { instance } from "../../instance";
+import { request } from "../../instance";
 const LOCALSTORAGE_KEY = "save-me";
 
 export const Staff = () => {
@@ -10,17 +10,20 @@ export const Staff = () => {
   const [signedIn, setSignedIn] = useState(false);
   const [me, setMe] = useState(savedMe || "");
   const [password, setPassword] = useState("");
+
   const checkPassword = async (password, me) => {
     try {
-      const {
-        data: { data },
-      } = await instance.post("/staff/signin", {
-        name: me,
-        password: password,
+      const { data } = await request({
+        method: "post",
+        url: "/staff/signin",
+        data: {
+          name: me,
+          password: password,
+        },
       });
       return data;
     } catch (error) {
-      const data = JSON.stringify(error.response.data.data);
+      const data = JSON.stringify(error);
       return data;
     }
   };
@@ -29,17 +32,21 @@ export const Staff = () => {
     if (signedIn) {
       localStorage.setItem(LOCALSTORAGE_KEY, me);
     }
-  }, [signedIn]);
+  }, [signedIn, me]);
 
   const handleLogin = async () => {
-    const remember = await instance.get("/staff/signin");
+    const { message } = await request({ method: "GET", url: "/staff/signin" });
     //console.log(remember.data);
-    if (remember.data.data === "success") {
+    if (message === "success") {
       setSignedIn(true);
+    } else {
+      setSignedIn(false);
     }
   };
 
-  handleLogin();
+  useEffect(() => {
+    handleLogin();
+  });
 
   const displayStatus = (payload) => {
     if (payload.msg) {

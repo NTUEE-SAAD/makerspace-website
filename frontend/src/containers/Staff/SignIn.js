@@ -1,9 +1,8 @@
-import { Input, message, Button, Select } from "antd";
+import { Input, Button, Select } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
-import { instance } from "../../instance";
+import { request } from "../../instance";
 const StyledSignIn = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,15 +52,17 @@ const SignIn = ({
 
   const signUpPassword = async (password, me, day1, time1, day2, time2) => {
     try {
-      const {
-        data: { data },
-      } = await instance.post("/staff/signup", {
-        name: me,
-        password: password,
-        time: [
-          { day: day1, time: time1 },
-          { day: day2, time: time2 },
-        ],
+      const { data } = await request({
+        method: "POST",
+        url: "/staff/signup",
+        data: {
+          name: me,
+          password: password,
+          time: [
+            { day: day1, time: time1 },
+            { day: day2, time: time2 },
+          ],
+        },
       });
       return data;
     } catch (error) {

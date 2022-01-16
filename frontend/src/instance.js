@@ -23,7 +23,7 @@ const request = (options) => {
   };
 
   const onError = (error) => {
-    console.error("Request Failed:", error);
+    console.warn("Request Failed:", error);
 
     if (error.response) {
       // Request was made but server responded with something
