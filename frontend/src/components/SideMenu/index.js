@@ -11,7 +11,9 @@ const menu = () => {
     <Link to="/home/modify">
       <Typography.Text>更改預約記錄</Typography.Text>
     </Link>,
-    <Typography.Text>管理員</Typography.Text>,
+    <a href="https://ntueesaad.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fceef6614-54e5-40c9-9978-6a24efe074fd%2F%E6%88%AA%E5%9C%96_2021-10-20_22.11.08.png?table=block&id=e14ced81-2891-438d-bc91-3777ce820b7d&spaceId=1d6782d1-eb07-4742-bad4-751da39ad55a&width=2000&userId=&cache=v2">
+      <Typography.Text>管理員</Typography.Text>,
+    </a>,
   ];
   return (
     <Menu>

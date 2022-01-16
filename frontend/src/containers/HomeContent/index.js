@@ -7,13 +7,13 @@ import { instance } from "../../instance";
 export const HomeContent = () => {
   const [events, setEvents] = useState([]);
 
-  // useEffect(() => {
-  //   const refreshEvents = async () => {
-  //     setEvents(await instance.get("/event"));
-  //   };
-  //   refreshEvents();
-  // }, []);
-
+  useEffect(() => {
+    const refreshEvents = async () => {
+      console.log(await instance.get("/event"));
+      setEvents((await instance.get("/event")).data.data);
+    };
+    refreshEvents();
+  }, []);
   return (
     <div style={{ width: "70%", margin: "auto" }}>
       <Row gutter={[16, 32]}>
