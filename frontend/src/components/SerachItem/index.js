@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
-import { message } from "antd";
+import { message, Row, Typography } from "antd";
 import ProTable, { TableDropdown } from "@ant-design/pro-table";
 import { instance } from "../../instance";
 import { Text } from "../../components";
+import "@ant-design/pro-table/dist/table.css";
+
 const addItem = (e) => {
   console.log(e.target);
 };
@@ -108,33 +110,38 @@ export const SearchItem = ({ toborrow, setToborrow }) => {
   ];
   const actionRef = useRef();
   return (
-    <>
-      <Text.SectionTitle.Black>物品搜尋</Text.SectionTitle.Black>
-      <ProTable
-        columns={columns}
-        actionRef={actionRef}
-        request={async (params = {}, sort, filter) => {
-          const { search, type, location } = params;
-          const {
-            data: { data },
-          } = await instance.get("/staff/search", {
-            params: {
-              search,
-              type,
-              location,
-            },
-          });
-          return { data: data };
-        }}
-        rowKey="id"
-        search={{
-          labelWidth: "auto",
-        }}
-        headerTitle="查詢結果"
-        pagination={{
-          pageSize: 10,
-        }}
-      />
-    </>
+    <div>
+      <Row>
+        <Text.SectionTitle.Black>物品搜尋</Text.SectionTitle.Black>
+      </Row>
+      <Row justify="center">
+        <ProTable
+          style={{ width: "70vw" }}
+          columns={columns}
+          actionRef={actionRef}
+          request={async (params = {}, sort, filter) => {
+            const { search, type, location } = params;
+            const {
+              data: { data },
+            } = await instance.get("/staff/search", {
+              params: {
+                search,
+                type,
+                location,
+              },
+            });
+            return { data: data };
+          }}
+          rowKey="id"
+          search={{
+            labelWidth: "auto",
+          }}
+          headerTitle="查詢結果"
+          pagination={{
+            pageSize: 10,
+          }}
+        />
+      </Row>
+    </div>
   );
 };

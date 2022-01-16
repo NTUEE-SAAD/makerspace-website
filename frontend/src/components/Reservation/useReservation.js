@@ -11,7 +11,6 @@ const useReservation = () => {
   const handleChange = (setState) => {
     return (e) => {
       setState(e.target.value);
-      console.log(e.target)
     };
   };
 
