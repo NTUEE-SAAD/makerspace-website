@@ -13,6 +13,8 @@ import {
   StaffRoot,
   PostRoutes,
   Modify,
+  Laser,
+  ThreeDPrinter,
 } from "./containers";
 import { PostProvider } from "./contexts";
 
@@ -31,6 +33,8 @@ function App() {
           <Route path="/staff" element={<StaffRoot />}>
             <Route path="/staff" element={<Staff />} />
             <Route path="/staff/items" element={<Items />} />
+            <Route path="/staff/laser" element={<Laser />} />
+            <Route path="/staff/threeDPrinter" element={<ThreeDPrinter />} />
           </Route>
         </Routes>
         <PostRoutes />

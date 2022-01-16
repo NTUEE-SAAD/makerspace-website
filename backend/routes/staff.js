@@ -11,6 +11,8 @@ import {
   itemQuery,
   handleToDo,
   handleLeave,
+  handleLaser,
+  handleThreeDP,
 } from "../utility/staff.js";
 const router = express.Router();
 import { google } from "googleapis";
@@ -124,4 +126,17 @@ router.post("/leave", (req, res) => {
   });
 });
 
+router.post("/sendLaser", (req, res) => {
+  const { body } = req;
+  handleLaser(body, res).catch((e) => {
+    res.status(403).send({ data: "error" });
+  });
+});
+
+router.post("/send3DP", (req, res) => {
+  const { body } = req;
+  handleThreeDP(body, res).catch((e) => {
+    res.status(403).send({ data: "error" });
+  });
+});
 export default router;

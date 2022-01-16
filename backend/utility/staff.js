@@ -4,6 +4,9 @@ import Item from "../models/item.js";
 import { GoogleAuth } from "./googleauth.js";
 import Instrument from "../models/instrument.js";
 let sheetdata = [];
+import { LaserAuth } from "./lasersheet.js";
+import { threeDPAuth } from "./threeDPsheet.js";
+
 const findAll = async (res) => {
   try {
     const datas = await Staff.find({}, { name: 1, time: 1 });
@@ -259,6 +262,66 @@ const updateSheet = async (items, type) => {
       }
     });
   });
+const handleLaser = async (body, res) => {
+  try {
+    const { sheet, request } = await LaserAuth();
+    const response = (await sheet.spreadsheets.values.get(request)).data;
+    const sheetdata = response.values;
+    console.log(request);
+    console.log(body.id, body.name, body.date, body.laser, body.cost);
+    const message = await sheet.spreadsheets.values.append({
+      spreadsheetId: "12zMiEx0sic-Un4ewlWqSOOuYWAvNu6_9jct9paKWHTs",
+      valueInputOption: "USER_ENTERED",
+      range: "A:F", //sheet name and range of cells
+      resource: {
+        values: [
+          [
+            body.date,
+            body.name,
+            body.id,
+            body.laser,
+            body.fileName,
+            body.cost,
+            body.ps,
+          ],
+        ],
+      },
+    });
+    console.log(message);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const handleThreeDP = async (body, res) => {
+  try {
+    const { sheet, request } = await threeDPAuth();
+    const response = (await sheet.spreadsheets.values.get(request)).data;
+    const sheetdata = response.values;
+    console.log(request);
+    console.log(body.id, body.name, body.date, body.laser, body.cost);
+    const message = await sheet.spreadsheets.values.append({
+      spreadsheetId: "1R1reHQqborbc8wqWD-M7U9i8tNFgOLmks2FvpdFBSBQ",
+      valueInputOption: "USER_ENTERED",
+      range: "A:F", //sheet name and range of cells
+      resource: {
+        values: [
+          [
+            body.date,
+            body.name,
+            body.id,
+            body.laser,
+            body.fileName,
+            body.cost,
+            body.ps,
+          ],
+        ],
+      },
+    });
+    console.log(message);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export {
@@ -273,4 +336,6 @@ export {
   itemQuery,
   handleToDo,
   handleLeave,
+  handleLaser,
+  handleThreeDP,
 };

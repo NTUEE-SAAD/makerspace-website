@@ -38,7 +38,7 @@ export const StaffHeader = () => {
         {signedIn ? (
           <Menu mode="horizontal" theme="dark" style={{ float: "right" }}>
             <Menu.Item key="1">
-              <Link to="/staff/3dp">3DP</Link>
+              <Link to="/staff/threeDPrinter">3DP</Link>
             </Menu.Item>
             <Menu.Item key="2">
               <Link to="/staff/laser">Laser</Link>
