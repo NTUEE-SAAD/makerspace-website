@@ -6,7 +6,7 @@ const saltRounds = 10;
 const dataInit = async () => {
   const checkData = await Staff.find();
   var hashes = [];
-  const passwords = ["123123123", "234234234", "345345345", "456456456"];
+  const passwords = ["123123123", "234234234", "345345345", "456456456"]; // this is for testing only
   //console.log(bcrypt.compareSync(passwords[0], bcrypt.hashSync(passwords[0])));
   for (var i = 0; i < passwords.length; i++) {
     const hash = await bcrypt.hash(passwords[i], saltRounds);
@@ -30,7 +30,7 @@ const dataInit = async () => {
     },
     {
       name: "eleson1",
-      password: hashes[1],
+      password: bcrypt.hashSync(passwords[1]),
       time: [
         {
           day: "Mon",
@@ -43,8 +43,8 @@ const dataInit = async () => {
       ],
     },
     {
-      name: "莊詠翔2",
-      password: hashes[2],
+      name: "eleson2",
+      password: bcrypt.hashSync(passwords[2]),
       time: [
         {
           day: "Mon",
@@ -57,8 +57,8 @@ const dataInit = async () => {
       ],
     },
     {
-      name: "莊詠翔3",
-      password: hashes[3],
+      name: "eleson3",
+      password: bcrypt.hashSync(passwords[3]),
       time: [
         {
           day: "Mon",
